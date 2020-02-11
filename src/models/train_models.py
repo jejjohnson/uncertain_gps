@@ -1,10 +1,12 @@
 import sys
+import time
+
+import numpy as np
+
+from rbig import RBIG, RBIGKLD, RBIGMI
 
 sys.path.insert(0, "/home/emmanuel/code/rbig")
 
-from rbig import RBIG, RBIGMI, RBIGKLD
-import numpy as np
-import time
 
 
 def run_rbig_models(X1, X2=None, measure="t", verbose=None, random_state=123):
@@ -110,4 +112,3 @@ def run_rbig_models(X1, X2=None, measure="t", verbose=None, random_state=123):
 
     else:
         raise ValueError(f"Unrecognized measure: {measure}.")
-

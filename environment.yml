@@ -1,0 +1,25 @@
+name: egp
+channels:
+- defaults
+- conda-forge
+dependencies:
+- scipy
+- numpy
+- scikit-learn
+- matplotlib
+- GPy
+- pandas
+- numba
+- h5py
+- xarray
+- pytables
+- dask
+- cartopy
+# GP Libraries
+- pytorch::pytorch
+- pytorch::torchvision
+- pytorch::cpuonly
+- pip
+- pip:
+    - pyro-ppl
+    - emukit
