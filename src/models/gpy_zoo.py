@@ -196,6 +196,8 @@ class GPRegressor(BaseEstimator, RegressorMixin):
                 return X_variance * np.identity(n_dims)
             elif X_variance.shape == n_dims:
                 return np.diag(X_variance)
+            elif X_variance.shape == (n_dims, n_dims):
+                return X_variance
             else:
                 raise ValueError(
                     f"Shape of 'X_variance' ({X_variance.shape}) "
@@ -535,6 +537,8 @@ class SparseGPRegressor(BaseEstimator, RegressorMixin):
                 return X_variance * np.identity(n_dims)
             elif X_variance.shape == n_dims:
                 return np.diag(X_variance)
+            elif X_variance.shape == (n_dims, n_dims):
+                return X_variance
             else:
                 raise ValueError(
                     f"Shape of 'X_variance' ({X_variance.shape}) "
@@ -862,21 +866,23 @@ class UncertainSGPRegressor(BaseEstimator, RegressorMixin):
         X_variance : np.ndarray, (n_features, n_features)
             The final matrix for the uncertain inputs.
         """
-        if X_variance is None:
+       if X_variance is None:
             return X_variance
 
         elif isinstance(X_variance, float):
             return X_variance * np.ones(shape=X_shape)
-
+        
         elif isinstance(X_variance, np.ndarray):
             if X_variance.shape == 1:
                 return X_variance * np.ones(shape=X_shape)
-            elif X_variance.shape == X.shape[1]:
+            elif X_variance.shape[0] == X_shape[1]:
                 return np.tile(self.X_variance, (X_shape[0], 1))
+            elif X_variance.shape == (X_shape[0], X_shape[1]):
+                return X_variance
             else:
                 raise ValueError(
-                    f"Shape of 'X_variance' ({X_variance.shape}) "
-                    f"doesn't match X ({X_shape})"
+                    f"Shape of 'X_variance' {X_variance.shape} "
+                    f"doesn't match X {X_shape}"
                 )
         else:
             raise ValueError(f"Unrecognized type of X_variance.")
