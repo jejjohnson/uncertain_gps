@@ -7,7 +7,6 @@ dependencies:
 - numpy
 - scikit-learn
 - matplotlib
-- GPy
 - pandas
 - numba
 - h5py
@@ -23,3 +22,7 @@ dependencies:
 - pip:
     - pyro-ppl
     - emukit
+    - GPy
+    - tensorflow
+    - tensorflow_probability
+    - git+https://github.com/GPflow/GPflow.git@develop#egg=gpflow

@@ -302,7 +302,7 @@ class GPRegressor(BaseEstimator, RegressorMixin):
         return var_add
 
 
-class SparseGPRegression(BaseEstimator, RegressorMixin):
+class SparseGPRegressor(BaseEstimator, RegressorMixin):
     """Sparse Gaussian process regression algorithm. This algorithm 
     implements the GPR algorithm with considerations for uncertain inputs.
     
@@ -634,7 +634,7 @@ class SparseGPRegression(BaseEstimator, RegressorMixin):
         return var_add
 
 
-class UncertainSGPRegression(BaseEstimator, RegressorMixin):
+class UncertainSGPRegressor(BaseEstimator, RegressorMixin):
     """Sparse Gaussian process regression algorithm. This algorithm 
     implements the GPR algorithm with considerations for uncertain inputs.
     
@@ -885,7 +885,7 @@ class UncertainSGPRegression(BaseEstimator, RegressorMixin):
         return self.gp_model
 
     def predict(
-        self, X, return_std=False, full_cov=False, noiseless=True, linearized=False
+        self, X, return_std=False, full_cov=False, noiseless=True,
     ) -> Tuple[np.ndarray, np.ndarray]:
         """Predict using the GP Model. Returns the mean and standard deviation 
         (optional) or the full covariance matrix (optional). Also includes an
@@ -905,10 +905,6 @@ class UncertainSGPRegression(BaseEstimator, RegressorMixin):
         noiseless : bool, default=True
             flag to return the noise likelihood term with the 
             standard deviation
-        
-        linearized : bool, default=False
-            flag to return the standard deviation with the 
-            corrected input error.
         
         Returns
         -------
@@ -985,14 +981,14 @@ def demo_linearized_gpr():
     import matplotlib.pyplot as plt
     import matplotlib
 
-    matplotlib.use("Agg")
+    # matplotlib.use("Agg")
 
     rng = np.random.RandomState(0)
 
     # Generate sample data
     noise = 1.0
     input_noise = 0.2
-    n_train = 10_000
+    n_train = 1_000
     n_test = 1_000
     n_inducing = 100
     batch_size = None
@@ -1037,8 +1033,62 @@ def demo_linearized_gpr():
     n_restarts = 0
     verbose = 1
     normalize_y = False
-    max_iters = 1_000
-    gpr_clf = UncertainSGPRegression(
+    max_iters = 500
+
+    # ==================================
+    # Standard GPR
+    # ==================================
+    gpr_clf = GPRegressor(
+        verbose=verbose,
+        n_restarts=n_restarts,
+        X_variance=X_variance,
+        normalize_y=normalize_y,
+    )
+
+    gpr_clf.fit(X, y)
+
+    y_gpr, y_std = gpr_clf.predict(
+        X_plot, return_std=True, noiseless=False, linearized=False
+    )
+    print(gpr_clf.display_model())
+    plot_results("GPR")
+
+    y_gpr, y_std = gpr_clf.predict(
+        X_plot, return_std=True, noiseless=False, linearized=True
+    )
+    print(gpr_clf.display_model())
+    plot_results("GPR")
+
+    # ==================================
+    # Sparse GPR
+    # ==================================
+    gpr_clf = SparseGPRegressor(
+        verbose=verbose,
+        n_restarts=n_restarts,
+        X_variance=X_variance,
+        normalize_y=normalize_y,
+        max_iters=max_iters,
+        n_inducing=n_inducing,
+    )
+
+    gpr_clf.fit(X, y)
+
+    y_gpr, y_std = gpr_clf.predict(
+        X_plot, return_std=True, noiseless=False, linearized=False
+    )
+    print(gpr_clf.display_model())
+    plot_results("SGPR")
+
+    y_gpr, y_std = gpr_clf.predict(
+        X_plot, return_std=True, noiseless=False, linearized=True
+    )
+    print(gpr_clf.display_model())
+    plot_results("SGPR")
+
+    # ==================================
+    # Sparse GPR
+    # ==================================
+    gpr_clf = UncertainSGPRegressor(
         verbose=verbose,
         n_restarts=n_restarts,
         X_variance=X_variance,
@@ -1051,10 +1101,14 @@ def demo_linearized_gpr():
     gpr_clf.fit(X, y)
 
     y_gpr, y_std = gpr_clf.predict(
-        X_plot, return_std=True, noiseless=False, linearized=False
+        X_plot, return_std=True, noiseless=False, linearized=True
     )
     print(gpr_clf.display_model())
-    plot_results("GPR")
+    plot_results("SVGPR")
+
+    y_gpr, y_std = gpr_clf.predict(X_plot, return_std=True, noiseless=False,)
+    print(gpr_clf.display_model())
+    plot_results("SVGPR")
 
     return None
 
