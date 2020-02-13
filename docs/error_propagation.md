@@ -47,7 +47,26 @@ $$
 <details>
 <summary><font color="red">Proof:</font> Variance Function</summary>
 
+Given the variance function 
+
+$$\mathbb{V}[\mathbf{x}] = \mathbb{E}\left[ \mathbf{x} - \mu_\mathbf{x} \right]^2$$
+
+$$
+\begin{aligned}
+\sigma_\mathbf{z}^2
+&=
+\mathbb{E} \left[ f(\mu_\mathbf{x}) - \frac{\partial f}{\partial \mathbf{x}} \bigg\vert_{\mathbf{x}=\mu_\mathbf{x}} (\mathbf{x} - \mu_\mathbf{x}) - \mu_\mathbf{x} \right] \\
+&=
+\mathbb{E} \left[ \frac{\partial f}{\partial \mathbf{x}} \bigg\vert_{\mathbf{x}=\mu_\mathbf{x}}  (\mathbf{x} - \mu_\mathbf{x})\right]^2 \\
+&=
+\left( \frac{\partial f}{\partial \mathbf{x}} \bigg\vert_{\mathbf{x}=\mu_\mathbf{x}} \right)^2 \mathbb{E}\left[  \mathbf{x} - \mu_\mathbf{x}\right]^2\\
+&= \left( \frac{\partial f}{\partial \mathbf{x}} \bigg\vert_{\mathbf{x}=\mu_\mathbf{x}} \right)^2 \Sigma_\mathbf{x}
+\end{aligned}
+$$
+
 </details>
+
+
 
 I've linked a nice tutorial for propagating variances below if you would like to go through the derivations yourself. We can relate the above formula to the logic of the NIGP by thinking in terms of the derivatives (slopes) and the input error. We can actually calculate how much the slope contributes to the noise in the error in our inputs because the derivative of a GP is still a GP. Like above, assume that our noise $\epsilon_x$ comes from a normal distribution with variance $\Sigma_x$, $\epsilon_x \sim \mathcal{N}(0, \Sigma_x)$. We also assume that the slope of our function is given by $\frac{\partial f}{\partial x}$. At every infinitesimal point we have a tangent line to the slope, so multiplying the derivative by the error will give us an estimate of how much our variance estimate should change, $\epsilon_x\frac{\partial f}{\partial x}$. We've assumed a constant slope so we will have a mean of 0, 
 
