@@ -1,24 +1,40 @@
 # Linearization (Taylor Expansions)
 
+- [Linearization (Taylor Expansions)](#linearization-taylor-expansions)
+  - [Gaussian Processes](#gaussian-processes)
+    - [Model](#model)
+    - [Predictions with stochastic inputs](#predictions-with-stochastic-inputs)
+    - [Analytical Moments](#analytical-moments)
+    - [Taylor Approximation](#taylor-approximation)
+    - [Linearized Predictive Mean and Variance](#linearized-predictive-mean-and-variance)
+      - [Practical Equations](#practical-equations)
+  - [Taylor Expansion](#taylor-expansion)
+  - [Approximate the Model](#approximate-the-model)
+  - [Approximate The Posterior](#approximate-the-posterior)
+    - [Expectation](#expectation)
+    - [Variance](#variance)
+    - [I: Additive Noise Model ($x,f$)](#i-additive-noise-model-mathsemanticsmrowmixmimo-separator%22true%22momifmimrowannotation-encoding%22applicationx-tex%22xfannotationsemanticsmathxf)
+        - [Other GP Methods](#other-gp-methods)
+    - [II: Non-Additive Noise Model](#ii-non-additive-noise-model)
+    - [III: Quadratic Approximation](#iii-quadratic-approximation)
+  - [Parallels to the Kalman Filter](#parallels-to-the-kalman-filter)
+  - [Connections](#connections)
+    - [KL-Divergence](#kl-divergence)
+  - [Code](#code)
+  - [Literature](#literature)
+  - [Supplementary](#supplementary)
+      - [Error Propagation](#error-propagation)
+      - [Fubini's Theorem](#fubinis-theorem)
+      - [Law of Iterated Expecations](#law-of-iterated-expecations)
+      - [Conditional Variance](#conditional-variance)
 
+## Gaussian Processes
 
-## Formulation
+---
 
-$$\begin{aligned}
-m(\mu_{x_*}, \Sigma_{x_*}) &= \mu(\mu_{x_*})\\
-v(\mu_{x_*}, \Sigma_{x_*}) &= \nu^2(\mu_{x_*}) + 
-\frac{\partial \mu(\mu_{x_*})}{\partial x_*}^\top
-\Sigma_{x_*}
-\frac{\partial \mu(\mu_{x_*})}{\partial x_*} +
-\frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
-\end{aligned}
-$$
+### Model
 
-In this document, I will be showing how we can use the Taylor Expansion approach to the posterior of Gaussian process algorithm
-
-## GP Model
-
-We have a standard GP model.
+Let's assume we have inputs with an additive noise term $\epsilon_x$ and let's assume that it is Gaussian distributed. We can write some expressions which are very similar to the GP model equations specified above. So we have a standard GP model.
 $$
 \begin{aligned}
 y &= f(x) + \epsilon_y\\
@@ -34,15 +50,130 @@ And the predictive functions $\mu_{GP}$ and $\nu^2_{GP}$ are:
 
 $$
 \begin{aligned}
-    \mu_{GP} &= K_{*} K_{GP}^{-1}y=K_{*} \alpha \\
-    \nu^2_{GP} &= K_{**} - K_{*} K_{GP}^{-1}K_{*}^{\top}
+    \mu_\text{GP}(\mathbf{x_*}) &= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha \\
+    \nu^2_\text{GP}(\mathbf{x_*}) &= k(\mathbf{x_*}, \mathbf{x_*}) - k(\mathbf{x_*}) \,\mathbf{K}_{GP}^{-1} \, k(\mathbf{x_*})^{\top}
 \end{aligned}
 $$
+
+where $\mathbf{K}_\text{GP}=k(\mathbf{x,x}) + \sigma_y^2 \mathbf{I}$.
+
+### Predictions with stochastic inputs
+
+
+---
+
+### Analytical Moments
+
+We can compute the analytical Gaussian approximation by only computing the mean and the variance of the 
+
+**Mean Function**
+
+$$
+\begin{aligned}
+m(\mu_\mathbf{x}, \Sigma_\mathbf{x})
+&=
+\mathbb{E}_\mathbf{f_*}
+\left[ f_* \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right] \\
+&=
+\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_{f_*} \left[ f_* \,p(f_* | \mathbf{x_*}) \right]\right]\\
+&=
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]
+\end{aligned}
+$$
+
+**Variance Function**
+
+$$
+\begin{aligned}
+v(\mu_\mathbf{x}, \Sigma_\mathbf{x})
+&=
+\mathbb{E}_\mathbf{f_*}
+\left[ f_*^2 \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right] -
+\left(\mathbb{E}_\mathbf{f_*}
+\left[ f_* \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right]\right)^2\\
+&=
+\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_\mathbf{x_*} \left[ f_*^2 \, p(f_*|\mathbf{x}_*) \right] \right] -
+\left(\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_\mathbf{x_*} \left[ f_* \, p(f_*|\mathbf{x}_*) \right] \right]\right)^2\\
+&=
+\mathbb{E}_\mathbf{x_*}
+\left[  \sigma_\text{GP}^2(\mathbf{x}_*) + \mu_\text{GP}^2(\mathbf{x}_*) \right] -
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]^2 \\
+&=
+\mathbb{E}_\mathbf{x_*}
+\left[  \sigma_\text{GP}^2(\mathbf{x}_*) \right] + \mathbb{E}_\mathbf{x_*} \left[ \mu_\text{GP}^2(\mathbf{x}_*) \right] -
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]^2\\
+&=
+\mathbb{E}_\mathbf{x_*} \left[  \sigma_\text{GP}^2(\mathbf{x}_*) \right] +
+\mathbb{V}_\mathbf{x_*} \left[\mu_\text{GP}(\mathbf{x}_*) \right]
+\end{aligned}
+$$
+
+---
+
+### Taylor Approximation
+
+We will approximate our mean and variance function via a Taylor Expansion. First the mean function:
+
+$$
+\begin{aligned}
+\mathbf{z}_\mu =
+\mu_\text{GP}(\mathbf{x_*})=
+\mu_\text{GP}(\mu_\mathbf{x_*}) +
+\nabla \mu_\text{GP}\bigg\vert_{\mathbf{x}_* = \mu_\mathbf{x}}
+(\mathbf{x}_* - \mu_\mathbf{x_*})
++ \mathcal{O} (\mathbf{x_*}^2)
+\end{aligned}
+$$
+
+and then the variance function:
+
+$$
+\begin{aligned}
+\mathbf{z}_\sigma =
+\nu^2_\text{GP}(\mathbf{x_*})=
+\nu^2_\text{GP}(\mu_\mathbf{x_*}) +
+\nabla \nu^2_\text{GP}\bigg\vert_{\mathbf{x}_* = \mu_\mathbf{x}}
+(\mathbf{x}_* - \mu_\mathbf{x_*})
++ \mathcal{O} (\mathbf{x_*}^2)
+\end{aligned}
+$$
+
+---
+
+### Linearized Predictive Mean and Variance
+
+$$\begin{aligned}
+m(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
+&=
+\mu_\text{GP}(\mu_\mathbf{x_*})\\
+v(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
+&= \nu^2_\text{GP}(\mu_{x_*}) +
+\nabla_\mathbf{x_*} \mu_\text{GP}(\mu_{x_*})^\top
+\Sigma_{x_*}
+\nabla_\mathbf{x_*} \mu_\text{GP}(\mu_{x_*}) +
+\frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
+\end{aligned}
+$$
+
+#### Practical Equations
+
+
+$$
+\begin{aligned}
+\mu_\text{GP}(\mathbf{x_*}) &= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha  \\
+\nu_{GP}^2(\mathbf{x_*}) &= \sigma_y^2 + {\color{red}{\nabla_{\mu_\text{GP}}\,\Sigma_\mathbf{x_*} \,\nabla_{\mu_\text{GP}}^\top} }+ k_{**}- {\bf k}_* ({\bf K}+\sigma_y^2 \mathbf{I}_N )^{-1} {\bf k}_{*}^{\top}
+\end{aligned}
+$$
+
+As seen above, the only extra term we need to include is the derivative of the mean function.
 
 
 ## Taylor Expansion
 
-Let's assume we have inputs with an additive noise term $\epsilon_x$ and let's assume that it is Gaussian distributed. We can write some expressions which are very similar to the GP model equations specified above:
+
 $$
 \begin{aligned}
 y &= f(x) + \epsilon_y \\
@@ -211,6 +342,23 @@ $$
 
 ## Literature
 
+* Gaussian Process Priors with Uncertain Inputs: Multiple-Step-Ahead Prediction - Girard et. al. (2002) - Technical Report
+  > Does the derivation for taking the expectation and variance for the  Taylor series expansion of the predictive mean and variance. 
+* Expectation Propagation in Gaussian Process Dynamical Systems: Extended Version - Deisenroth & Mohamed (2012) - NeuRIPS
+  > First time the moment matching **and** linearized version appears in the GP literature.
+* Learning with Uncertainty-Gaussian Processes and Relevance Vector Machines - Candela (2004) - Thesis
+  > Full law of iterated expectations and conditional variance.
+
+---
+
 ## Supplementary
 
-### Error Propagation
+
+
+#### Error Propagation
+
+#### Fubini's Theorem
+
+#### Law of Iterated Expecations
+
+#### Conditional Variance
