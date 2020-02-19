@@ -14,3 +14,6 @@
 **Applications**
 * [Next Steps](next.md)
 * [Software](software.md)
+
+**Talks**
+* [KERMES 2020](talks/2020_kermes.md)
