@@ -1,72 +1,26 @@
 # Linearization (Taylor Expansions)
 
-- [Linearization (Taylor Expansions)](#linearization-taylor-expansions)
-  - [Gaussian Processes](#gaussian-processes)
-    - [Model](#model)
-    - [Predictions with stochastic inputs](#predictions-with-stochastic-inputs)
-    - [Analytical Moments](#analytical-moments)
-    - [Taylor Approximation](#taylor-approximation)
-    - [Linearized Predictive Mean and Variance](#linearized-predictive-mean-and-variance)
-      - [Practical Equations](#practical-equations)
-  - [Taylor Expansion](#taylor-expansion)
-  - [Approximate the Model](#approximate-the-model)
-  - [Approximate The Posterior](#approximate-the-posterior)
-    - [Expectation](#expectation)
-    - [Variance](#variance)
-    - [I: Additive Noise Model ($x,f$)](#i-additive-noise-model-mathsemanticsmrowmixmimo-separator%22true%22momifmimrowannotation-encoding%22applicationx-tex%22xfannotationsemanticsmathxf)
-        - [Other GP Methods](#other-gp-methods)
-    - [II: Non-Additive Noise Model](#ii-non-additive-noise-model)
-    - [III: Quadratic Approximation](#iii-quadratic-approximation)
-  - [Parallels to the Kalman Filter](#parallels-to-the-kalman-filter)
-  - [Connections](#connections)
-    - [KL-Divergence](#kl-divergence)
-  - [Code](#code)
-  - [Literature](#literature)
-  - [Supplementary](#supplementary)
-      - [Error Propagation](#error-propagation)
-      - [Fubini's Theorem](#fubinis-theorem)
-      - [Law of Iterated Expecations](#law-of-iterated-expecations)
-      - [Conditional Variance](#conditional-variance)
+- [Conditional Gaussian Distributions](#conditional-gaussian-distributions)
+  - [I: Additive Noise Model ($x,f$)](#i-additive-noise-model-mathsemanticsmrowmixmimo-separator%22true%22momifmimrowannotation-encoding%22applicationx-tex%22xfannotationsemanticsmathxf)
+      - [Other GP Methods](#other-gp-methods)
+  - [II: Non-Additive Noise Model](#ii-non-additive-noise-model)
+  - [III: Quadratic Approximation](#iii-quadratic-approximation)
+- [Literature](#literature)
+- [Supplementary](#supplementary)
+    - [Error Propagation](#error-propagation)
+    - [Fubini's Theorem](#fubinis-theorem)
+    - [Law of Iterated Expecations](#law-of-iterated-expecations)
+    - [Conditional Variance](#conditional-variance)
 
-## Gaussian Processes
-
----
-
-### Model
-
-Let's assume we have inputs with an additive noise term $\epsilon_x$ and let's assume that it is Gaussian distributed. We can write some expressions which are very similar to the GP model equations specified above. So we have a standard GP model.
-$$
-\begin{aligned}
-y &= f(x) + \epsilon_y\\
-\epsilon_y &\sim \mathcal{N}(0, \sigma_y^2) \\
-\end{aligned}
-$$
-
-* **GP Prior**: $p(f|X)\sim\mathcal{N}(m(X), \mathbf{K})$
-* **Gaussian Likelihood**: $p(y|f, X)=\mathcal{N}(y|f(x), \sigma_y^2\mathbf{I})$
-* **Posterior**: $f \sim \mathcal{GP}(f|\mu_{GP}, \nu^2_{GP})$ 
-
-And the predictive functions $\mu_{GP}$ and $\nu^2_{GP}$ are:
-
-$$
-\begin{aligned}
-    \mu_\text{GP}(\mathbf{x_*}) &= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha \\
-    \nu^2_\text{GP}(\mathbf{x_*}) &= k(\mathbf{x_*}, \mathbf{x_*}) - k(\mathbf{x_*}) \,\mathbf{K}_{GP}^{-1} \, k(\mathbf{x_*})^{\top}
-\end{aligned}
-$$
-
-where $\mathbf{K}_\text{GP}=k(\mathbf{x,x}) + \sigma_y^2 \mathbf{I}$.
-
-### Predictions with stochastic inputs
 
 
 ---
 
 ### Analytical Moments
 
-We can compute the analytical Gaussian approximation by only computing the mean and the variance of the 
+The posterior of this distribution is non-Gaussian because we have to propagate a probability distribution through a non-linear kernel function. So this integral becomes intractable. We can compute the analytical Gaussian approximation by only computing the mean and the variance of the 
 
-**Mean Function**
+#### Mean Function
 
 $$
 \begin{aligned}
@@ -82,7 +36,9 @@ m(\mu_\mathbf{x}, \Sigma_\mathbf{x})
 \end{aligned}
 $$
 
-**Variance Function**
+#### Variance Function
+
+The variance term is a bit more complex.
 
 $$
 \begin{aligned}
@@ -143,7 +99,7 @@ $$
 
 ---
 
-### Linearized Predictive Mean and Variance
+#### Linearized Predictive Mean and Variance
 
 $$\begin{aligned}
 m(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
@@ -158,8 +114,9 @@ v(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
 \end{aligned}
 $$
 
-#### Practical Equations
+where $\nabla_x$ is the gradient of the function $f(\mu_x)$ w.r.t. $x$ and $\nabla_x^2 f(\mu_x)$ is the second derivative (the Hessian) of the function $f(\mu_x)$ w.r.t. $x$. This is a second-order approximation which has that expensive Hessian term. There have have been studies that have shown that that term tends to be neglible in practice and a first-order approximation is typically enough. 
 
+Practically speaking, this leaves us with the following predictive mean and variance functions:
 
 $$
 \begin{aligned}
@@ -168,70 +125,10 @@ $$
 \end{aligned}
 $$
 
-As seen above, the only extra term we need to include is the derivative of the mean function.
+As seen above, the only extra term we need to include is the derivative of the mean function that is present in the predictive variance term.
 
 
-## Taylor Expansion
-
-
-$$
-\begin{aligned}
-y &= f(x) + \epsilon_y \\
-x &= \mu_x + \epsilon_x \\
-\epsilon_y &\sim \mathcal{N} (0, \sigma_y^2) \\
-\epsilon_x &\sim \mathcal{N} (0, \Sigma_x)
-\end{aligned}
-$$
-This is the transformation of a Gaussian random variable $x$ through another r.v. $y$ where we have some additive noise $\epsilon_y$. The biggest difference is that the GP model assumes that $x$ is deterministic whereas we assume here that $x$ is a random variable itself. Because we know that integrating out the $x$'s is quite difficult to do in practice (because of the nonlinear Kernel functions), we can make an approximation of $f(\cdot)$ via the Taylor expansion. We can take the a 2nd order Taylor expansion of $f$ to be:
-$$
-\begin{aligned}
-f(x) &\approx f(\mu_x + \epsilon_x) \\
-     &\approx f(\mu_x) + \nabla f(\mu_x) \epsilon_x 
-     + \sum_{i}\frac{1}{2} \epsilon_x^\top \nabla^2 f(\mu_x) \epsilon_x 
-\end{aligned}
-$$
-where $\nabla_x$ is the gradient of the function $f(\mu_x)$ w.r.t. $x$ and $\nabla_x^2 f(\mu_x)$ is the second derivative (the Hessian) of the function $f(\mu_x)$ w.r.t. $x$. This is a second-order approximation which has that expensive Hessian term. There have have been studies that have shown that that term tends to be neglible in practice and a first-order approximation is typically enough. Now the question is: where to put use the Taylor expansion within the GP model? There are two options: the model or the posterior. We will outline the two approaches below.
-
-
-
-## Approximate the Model
-
-
-
-## Approximate The Posterior
-
-
-
-
-
-We can compute the expectation $\mathbb{E}[\cdot]$ and variance $\mathbb{V}[\cdot]$ of this Taylor expansion to come up with an approximate mean and variance function for our posterior.
-
-### Expectation
-
-This calculation is straight-forward because we are taking the expected value of a mean function $f(\mu_x)$, the derivative of a mean function $f(\mu_x)$ and a Gaussian distribution noise term $\epsilon_x$ with mean 0. 
-$$
-\begin{aligned}
-\mathbb{E}[f(x)] &\approx \mathbb{E}[f(\mu_x) + \nabla f(\mu_x) \epsilon_x] \\
-								 &= f(\mu_x) + \nabla f(\mu_x) \mathbb{\epsilon_x} \\
-								 &= f(\mu_x)
-\end{aligned}
-$$
-
-### Variance
-
-The variance term is a bit more complex.
-$$
-\begin{aligned}
-\mathbb{E}\left[(f(x) - \mathbb{E}[f(x)])^\top(f(x) - \mathbb{E}[f(x)])\right] 
-			&\approx \mathbb{E}\left[(f(x) - f(\mu_x))^\top(f(x) - f(\mu_x))\right] \\
-			&\approx \mathbb{E} \left[ \left(f(\mu_x) + \nabla f(\mu_x)\epsilon_x \right) 
-			\left( f(\mu_x) + \nabla f(\mu_x)\epsilon_x\right)^\top\right] \\
-			&= \mathbb{E} \left[ \left(\nabla f(\mu_x)\: \epsilon_x  \right)^\top
-			\left( \nabla f(\mu_x)\: \epsilon_x \right) \right] \\
-			&= \nabla f(\mu_x) \mathbb{E}[\epsilon_x\epsilon_x^\top]\nabla f(\mu_x) \\
-			&= \nabla f(\mu_x)\: \Sigma_x \:\nabla f(\mu_x)
-\end{aligned}
-$$
+## Conditional Gaussian Distributions
 
 ### I: Additive Noise Model ($x,f$)
 
@@ -299,46 +196,7 @@ As shown above, this is a fairly extensible method that offers a cheap improved 
 
 ### III: Quadratic Approximation
 
-
-
-
-
-## Parallels to the Kalman Filter
-
-The Kalman Filter (KF) community use this exact formulation to motivate the Extended Kalman Filter (EKF) algorithm and some variants.
-
-
-
-
-$$
-\begin{bmatrix}
-    x \\
-    y
-    \end{bmatrix}
-    \sim \mathcal{N} \left( 
-    \begin{bmatrix}
-    \mu_{x} \\ 
-    \mu_y 
-    \end{bmatrix}, 
-    \begin{bmatrix}
-    \Sigma_x & C \\
-    C^\top & \Pi
-    \end{bmatrix}
-    \right)
-$$
-
-
-
-
-
-## Connections
-
-
-### KL-Divergence
-
-
-## Code
-
+---
 
 ## Literature
 
@@ -348,6 +206,10 @@ $$
   > First time the moment matching **and** linearized version appears in the GP literature.
 * Learning with Uncertainty-Gaussian Processes and Relevance Vector Machines - Candela (2004) - Thesis
   > Full law of iterated expectations and conditional variance.
+* Gaussian Process Training with Input Noise - McHutchon & Rasmussen et. al. (2012) - NeuRIPS 
+  > Used the same logic but instead of just approximated the posterior, they also applied this to the model which resulted in an iterative procedure.
+* Multi-class Gaussian Process Classification with Noisy Inputs - Villacampa-Calvo et. al. (2020) - [axriv]()
+  > Applied the first order approximation using the Taylor expansion for a classification problem. Compared this to the variational inference.
 
 ---
 
@@ -356,6 +218,8 @@ $$
 
 
 #### Error Propagation
+
+To see more about error propagation and the relation to the mean and variance, see [here](error_propagation.md).
 
 #### Fubini's Theorem
 

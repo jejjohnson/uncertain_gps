@@ -6,7 +6,7 @@ This post is a follow-up from my previous post where I walk through the literatu
 --- 
 
 - [Posterior Approximations](#posterior-approximations)
-- [Sparse Model](#sparse-model)
+  - [Variational GP Model with Latent Inputs](#variational-gp-model-with-latent-inputs)
   - [Evidence Lower Bound (ELBO)](#evidence-lower-bound-elbo)
 - [Uncertain Inputs](#uncertain-inputs)
   - [Case I - Strong Prior](#case-i---strong-prior)
@@ -25,42 +25,10 @@ What links all of the strategies from uncertain GPs is how they approach the pro
 
 This approach has similar strategies that stem from the wave of methods that appeared using variational inference (VI). VI consists of creating a variational approximation of the posterior distribution $q(\mathbf u)\approx \mathcal{P}(\mathbf x)$. Under some assumptions and a baseline distribution for $q(\mathbf u)$,  we can try to approximate the complex distribution $\mathcal{P}(\mathbf x)$ by minimizing the distance between the two distributions, $D\left[q(\mathbf u)||\mathcal{P}(\mathbf x)\right]$. Many practioners believe that approximating the posterior and not the model is the better option when doing Bayesian inference; especially for large data ([example blog](https://www.prowler.io/blog/sparse-gps-approximate-the-posterior-not-the-model), [VFE paper]()). The variational family of methods that are common for GPs use the Kullback-Leibler (KL) divergence criteria between the GP posterior approximation $q(\mathbf u)$ and the true GP posterior $\mathcal{P}(\mathbf x)$. From the literature, this has been extended to many different problems related to GPs for regression, classification, dimensionality reduction and more.
 
-**VGP Model**
-<details>
+---
 
-**Posterior Distribution:**
-$$p(Y|X) = \int_{\mathcal F} p(Y|F) P(F|X) dF$$
+### Variational GP Model with Latent Inputs
 
-**Derive the Lower Bound** (w/ Jensens Inequality):
-
-$$\log p(Y|X) = \log \int_{\mathcal F} p(Y|F) P(F|X) dF$$
-
-**importance sampling/identity trick**
-
-$$ = \log \int_{\mathcal F} p(Y|F) P(F|X) \frac{q(F)}{q(F)}dF$$
-
-**rearrange to isolate**: $p(Y|F)$ and shorten notation to $\langle \cdot \rangle_{q(F)}$.
-
-$$= \log \left\langle  \frac{p(Y|F)p(F|X)}{q(F)} \right\rangle_{q(F)}$$
-
-**Jensens inequality**
-
-$$\geq \left\langle \log \frac{p(Y|F)p(F|X)}{q(F)} \right\rangle_{q(F)}$$
-
-**Split the logs**
-
-
-$$\geq \left\langle \log p(Y|F) + \log \frac{p(F|X)}{q(F)} \right\rangle_{q(F)}$$
-
-**collect terms**
-
-$$\mathcal{L}_{1}(q)=\left\langle \log p(Y|F)\right\rangle_{q(F)} - D_{KL} \left( q(F) || p(F|X)\right) $$
-
-</details>
-
-
-**Variational GP Model w/ Prior**
-<details>
 
 **Posterior Distribution:**
 $$p(Y) = \int_{\mathcal X} p(Y|X) P(X) dX$$
@@ -94,44 +62,6 @@ $$\mathcal{L}_{2}(q)=\left\langle \log p(Y|X)\right\rangle_{q(F)} - D_{KL} \left
 
 $$\mathcal{L}_{2}(q)=\left\langle \mathcal{L}_{1}(q)\right\rangle_{q(F)} - D_{KL} \left( q(X) || p(X)\right) $$
 
-</details>
-
-
-
----
-## Sparse Model
-
-Let's build up the GP model from the variational inference perspective. We have the same GP prior as the standard GP regression model:
-
-$$\mathcal{P}(f) \sim \mathcal{GP}\left(\mathbf m_\theta, \mathbf K_\theta  \right)$$
-
-We have the same GP likelihood which stems from the relationship between the inputs and the outputs:
-
-$$y = f(\mathbf x) + \epsilon_y$$
-
-$$\mathcal{P}(y|f, \mathbf{x}) = \prod_{i=1}^{N}\mathcal{P}\left(y_i| f(\mathbf x_i) \right) \sim \mathcal{N}(f, \sigma_y^2\mathbf I)$$
-
-Now we just need an variational approximation to the GP posterior:
-
-$$q(f) = \mathcal{GP}\left( \mu, \nu^2 \right) $$
-
-where $q(f) \approx  \mathcal{P}(f|y, \mathbf X)$.
-
-
-
-$\mu$ and $\nu^2$ are functions that depend on the augmented space $\mathbf Z$ and possibly other parameters. Now, we can actually choose any $\mu$ and $\nu^2$ that we want. Typically people pick this to be Gaussian distributed which is augmented by some variable space $\mathcal{Z}$ with kernel functions to move us between spaces by a joint distribution; for example:
-
-$$\mu(\mathbf x) = \mathbf k(\mathbf{x, Z})\mathbf{k(Z,Z)}^{-1}\mathbf m$$
-$$\nu^2(\mathbf x) = \mathbf k(\mathbf{x,x}) - \mathbf k(\mathbf{x, Z})\left( \mathbf{k(Z,Z)}^{-1}  - \mathbf{k(Z,Z)}^{-1} \Sigma \mathbf{k(Z,Z)}^{-1}\right)\mathbf k(\mathbf{x, Z})^{-1}$$
-
-where $\theta = \{ \mathbf{m, \Sigma, Z} \}$ are all variational parameters. This formulation above is just the end result of using augmented values by using variational compression (see [here]() for more details). In the end, all of these variables can be adjusted to reduce the KL divergence criteria KL$\left[ q(f)||\mathcal{P}(f|y, \mathbf X)\right]$.
-
-There are some advantages to the approximate-prior approach for example:
-
-* The approximation is non-parametric and mimics the true posterior.
-* As the number of inducing points grow, we arrive closer to the real distribution
-* The pseudo-points $\mathbf Z$ and the amount are also parameters which can protect us from overfitting.
-* The predictions are clear as we just need to evaluate the approximate GP posterior.
 
 ---
 ### Evidence Lower Bound (ELBO)

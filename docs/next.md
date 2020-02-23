@@ -1,6 +1,5 @@
 # Next Steps
 
-
 So after all of this literature, what is the next step for the community? I have a few suggestions based on what I've seen:
 
 #### 1. Apply these algorithms to different problems (other than dynamical systems)

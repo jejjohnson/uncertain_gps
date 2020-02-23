@@ -1,7 +1,6 @@
 # Uncertain Inputs in Gaussian Processes
 
 
-- [- Key Equations](#ul-likey-equationsli-ul)
 - [Motivation](#motivation)
 - [Algorithms](#algorithms)
   - [Error-In-Variables Regression](#error-in-variables-regression)
@@ -25,6 +24,8 @@
     - [Extended Kalman Filter](#extended-kalman-filter)
   - [Uncertain Inputs in other ML fields](#uncertain-inputs-in-other-ml-fields)
   - [Key Equations](#key-equations)
+
+
 ---
 
 ## Motivation
@@ -308,20 +309,19 @@ This is the origination of the Unscented transformation applied to GPs. It takes
 ---
 ### Key Equations
 
-
-**Predictive Mean for latent function, $f$**
+<details>
+<summary>Predictive Mean and Variance for Latent Function, f</summary>
 
 $$\mu_f(x_*) = k_*^\top K^{-1}y$$
 $$\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*$$
 
-**Predictive Mean for outputs, $y$**
-
-$$\mu_y(x_*) = k_*^\top K^{-1}y$$
-$$\sigma^2_y(x_*) = \sigma^2 + k_{**} - k_*^\top K^{-1} k_*$$
-
-**Kernel Expectations**
+</details>
 
 
+<details>
+<summary>Predictive Mean and Variance for mean output, y</summary>
 
+$$\mu_f(x_*) = k_*^\top K^{-1}y$$
+$$\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*$$
 
-
+</details>
