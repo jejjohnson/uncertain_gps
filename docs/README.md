@@ -2,7 +2,7 @@
 
 * Author: J. Emmanuel Johnson
 * Email: jemanjohnson34@gmail.com
-* Repo: [Documents]
+* Repo: [github.com/jejjohnson/uncertain_gps](https://github.com/jejjohnson/uncertain_gps)
 
 
 
