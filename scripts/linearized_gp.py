@@ -138,7 +138,7 @@ def main(args):
         var_y.squeeze() + var_correction_o1.squeeze() + var_correction_o2.squeeze()
     )
 
-    fig, ax = plt.subplots(nrows=3, figsize=(5, 10))
+    fig, ax = plt.subplots(nrows=4, figsize=(5, 10))
     ax[0].scatter(X, y, c="red", label="Training Data")
     ax[0].plot(
         Xtest.squeeze(),
@@ -200,6 +200,37 @@ def main(args):
     )
     ax[2].set_ylim([-3.5, 3.5])
     ax[2].legend(fontsize=12)
+    # =======================
+    # CORRECTION (2nd Order)
+    # =======================
+    ax[3].scatter(
+        X, y, c="red",
+    )
+    ax[3].plot(
+        Xtest.squeeze(),
+        mu_y.squeeze(),
+        # label=r"Predictive Mean",
+        color="black",
+        linewidth=3,
+    )
+    ax[3].fill_between(
+        Xtest.squeeze(),
+        mu_y.squeeze() + uncertainty_t1,
+        mu_y.squeeze() - uncertainty_t1,
+        alpha=0.3,
+        color="blue",
+        label=f"Predictive Std Taylor 1st Order",
+    )
+    ax[3].fill_between(
+        Xtest.squeeze(),
+        mu_y.squeeze() + uncertainty_t2,
+        mu_y.squeeze() - uncertainty_t2,
+        alpha=0.4,
+        color="yellow",
+        label=f"Predictive Std Taylor 2nd Order",
+    )
+    ax[3].set_ylim([-3.5, 3.5])
+    ax[3].legend(fontsize=12)
     plt.tight_layout()
     fig.savefig("figures/jaxgp/examples/1d_example_egp.png")
     plt.show()
