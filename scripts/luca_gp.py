@@ -12,6 +12,21 @@ import numpy as onp
 import matplotlib.pyplot as plt
 
 
+def get_data(N=30, sigma_obs=0.15, N_test=400):
+    onp.random.seed(0)
+    Xtrain = np.linspace(-1, 1, N)
+    Ytrain = Xtrain + 0.2 * np.power(Xtrain, 3.0) + 0.5 * np.power(0.5 + Xtrain, 2.0) * np.sin(4.0 * Xtrain)
+    Ytrain += sigma_obs * onp.random.randn(N)
+    Ytrain -= np.mean(Ytrain)
+    Ytrain /= np.std(Ytrain)
+
+    assert Xtrain.shape == (N,)
+    assert Ytrain.shape == (N,)
+
+    X_test = np.linspace(-1.3, 1.3, N_test)
+
+    return Xtrain[:, None], Ytrain[:,None], X_test[:, None], None
+
 def mu(x):
     """ zero mean function: mean[f(x)] = 0
     Args:
@@ -74,8 +89,11 @@ def posterior(params, X, Y, x):
     """
     Kxx = K(params, x, x)
     KxX = K(params, x, X)
+    print("kerne", Kxx.shape, KxX.shape)
     L, alpha = cholfac(params, X, Y)  # calculate Gram matrices
+    print("L,alpha:", L.shape, alpha.shape)
     mu_y = mu(x) + KxX @ alpha
+    print("Mu", mu_y.shape)
     v = scipy.linalg.solve_triangular(L, KxX.T, lower=True)
     var_y = Kxx - v.T @ v
     return mu_y, var_y
@@ -133,15 +151,16 @@ def plotPosterior(ax, params, X, Y, x):
     # evaluate posterior
     muY, varY = posterior(params, X, Y, x)
     stdY = np.sqrt(varY).diagonal()
+    print(X.shape, Y.shape, x.shape, muY.shape, varY.shape)
     # plot
     if ax is None:
         ax = plt.gca()
     ax.scatter(X, Y)
     ax.plot(x, muY, color="purple")
     ax.fill_between(
-        x.flatten(),
-        muY.flatten() - 2 * stdY,
-        muY.flatten() + 2 * stdY,
+        x.squeeze(),
+        muY.squeeze() - 2 * stdY,
+        muY.squeeze() + 2 * stdY,
         facecolor="purple",
         alpha=0.3,
     )
@@ -154,9 +173,12 @@ def main():
     def truefun(x):
         return np.sin(x) + np.log(x)
 
-    Xo = np.array([[1, 2, 3, 5, 6, 7]]).T
-    Yo = truefun(Xo)
-
+#     Xo = np.array([[1, 2, 3, 5, 6, 7]]).T
+#     Yo = truefun(Xo)
+    Xo, Yo, Xtest, ytest = get_data()
+#     Xo = np.array([[1, 2, 3, 5, 6, 7]]).T
+#     Yo = truefun(Xo)
+#     Xtest = np.arange(1,7,0.1).reshape(-1,1)
     # init hyperparameters
     params = {
         "M": np.diag(np.array([3.0])),  # length scale}
@@ -165,11 +187,13 @@ def main():
     }  # measurement noise variance
 
     # predict GP posterior
-    x = np.arange(1, 7, 0.1).reshape(-1, 1)
-    muY, varY = prior(params, x)
-    muY, varY = posterior(params, Xo, Yo, x)
 
-    plotPosterior(None, params, Xo, Yo, x)
+    muY, varY = prior(params, Xtest)
+    print("TEST", muY.shape, varY.shape)
+    muY, varY = posterior(params, Xo, Yo, Xtest)
+    print("Train", muY.shape, varY.shape)
+
+    plotPosterior(None, params, Xo, Yo, Xtest)
     plt.savefig("luca_gp_plot_before.png")
     plt.tight_layout()
 
@@ -180,7 +204,7 @@ def main():
     print("Original hyperparameters: ", params)
     print("Optimized hyperparameters: ", paramsOpt)
 
-    plotPosterior(None, params, Xo, Yo, x)
+    plotPosterior(None, params, Xo, Yo, Xtest)
     plt.savefig("luca_gp_plot_after.png")
     plt.tight_layout()
 

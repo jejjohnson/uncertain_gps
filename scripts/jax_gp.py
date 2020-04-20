@@ -6,6 +6,7 @@ from functools import partial
 from jax import grad
 from jax import jit
 from jax import vmap
+import numpy as onp
 from jax.config import config
 import jax.numpy as np
 import jax.random as random
@@ -14,11 +15,25 @@ import matplotlib.pyplot as plt
 
 # FLAGS = flags.FLAGS
 
+def get_data(N=30, sigma_obs=0.15, N_test=400):
+    onp.random.seed(0)
+    Xtrain = np.linspace(-1, 1, N)
+    Ytrain = Xtrain + 0.2 * np.power(Xtrain, 3.0) + 0.5 * np.power(0.5 + Xtrain, 2.0) * np.sin(4.0 * Xtrain)
+    Ytrain += sigma_obs * onp.random.randn(N)
+    Ytrain -= np.mean(Ytrain)
+    Ytrain /= np.std(Ytrain)
+
+    assert Xtrain.shape == (N,)
+    assert Ytrain.shape == (N,)
+
+    X_test = np.linspace(-1.3, 1.3, N_test)
+
+    return Xtrain[:, None], Ytrain[:, None], X_test[:, None], None
 
 def main():
     print("here")
 
-    numpts = 7
+    numpts = 30
     key = random.PRNGKey(0)
     eye = np.eye(numpts)
 
@@ -99,14 +114,18 @@ def main():
             params[k] -= lr * momentums[k] / np.sqrt(scales[k] + 1e-5)
         return params, momentums, scales
 
-    # Create a really simple toy 1D function
+#     # Create a really simple toy 1D function
     y_fun = lambda x: np.sin(x) + 0.1 * random.normal(key, shape=(x.shape[0], 1))
     x = (random.uniform(key, shape=(numpts, 1)) * 4.0) + 1
     y = y_fun(x)
     xtest = np.linspace(0, 6.0, 200)[:, None]
     ytest = y_fun(xtest)
+    print(x.shape, y.shape, xtest.shape, ytest.shape)
+    x, y, xtest, ytest = get_data(numpts)
+    print(x.shape, y.shape, xtest.shape, )
+    print(x.min(), x.max(), xtest.min(), xtest.max())
 
-    for i in range(2000):
+    for i in range(1000):
         params, momentums, scales = train_step(params, momentums, scales, x, y)
         if i % 50 == 0:
             ml = marginal_likelihood(params, x, y)
