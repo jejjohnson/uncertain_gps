@@ -391,6 +391,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../3.0_unscented_gp/" title="3.0 unscented gp" class="md-nav__link">
+      3.0 unscented gp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../distances/" title="Distances" class="md-nav__link">
       Distances
     </a>
@@ -870,7 +882,8 @@ over the hyperparameters of a gaussian process.</p>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
     <span class="c1"># set uninformative log-normal priors on our three kernel hyperparameters</span>
     <span class="n">var</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">&quot;kernel_var&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">LogNormal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span>
     <span class="n">noise</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">&quot;kernel_noise&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">LogNormal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span>
@@ -882,7 +895,10 @@ over the hyperparameters of a gaussian process.</p>
     <span class="c1"># sample Y according to the standard gaussian process formula</span>
     <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
         <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
-        <span class="n">dist</span><span class="o">.</span><span class="n">MultivariateNormal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">covariance_matrix</span><span class="o">=</span><span class="n">k</span><span class="p">),</span>
+        <span class="n">dist</span><span class="o">.</span><span class="n">MultivariateNormal</span><span class="p">(</span>
+            <span class="n">loc</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+            <span class="n">covariance_matrix</span><span class="o">=</span><span class="n">k</span>
+        <span class="p">),</span>
         <span class="n">obs</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div>
@@ -932,6 +948,8 @@ over the hyperparameters of a gaussian process.</p>
 
 <div class="highlight"><pre><span></span><code><span class="c1"># do inference</span>
 <span class="n">rng_key</span><span class="p">,</span> <span class="n">rng_key_predict</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+
 <span class="n">samples</span> <span class="o">=</span> <span class="n">run_inference</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">rng_key</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </code></pre></div>
 
@@ -943,7 +961,31 @@ over the hyperparameters of a gaussian process.</p>
 
 <div class="output_area" markdown="1">
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>warmup:  18%|█▊        | 352/2000 [07:58&lt;34:37,  1.26s/it, 1023 steps of size 7.59e-06. acc. prob=0.72] </pre>
+<pre>sample: 100%|██████████| 2000/2000 [42:33&lt;00:00,  1.28s/it, 1023 steps of size 4.98e-06. acc. prob=0.95]
+</pre>
+</div>
+</div>
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+                     mean       std    median      5.0%     95.0%     n_eff     r_hat
+  kernel_length 1960118272.00    256.13 1960118528.00 1960118528.00 1960118528.00      0.50      1.00
+   kernel_noise      0.00      0.00      0.00      0.00      0.00       nan       nan
+     kernel_var      2.63      0.00      2.63      2.63      2.63      6.13      1.00
+
+Number of divergences: 0
+
+MCMC elapsed time: 2557.5514323711395
+</pre>
+</div>
+</div>
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/emmanuel/.conda/envs/egp/lib/python3.8/site-packages/numpyro/diagnostics.py:172: RuntimeWarning: invalid value encountered in true_divide
+  rho_k = 1. - (var_within - gamma_k_c.mean(axis=0)) / var_estimator
+</pre>
 </div>
 </div>
 
@@ -956,7 +998,6 @@ over the hyperparameters of a gaussian process.</p>
 <h2 id="predictions">Predictions<a class="headerlink" href="#predictions" title="Permanent link">&para;</a></h2>
 <p></div>
 </div></p>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -979,6 +1020,7 @@ over the hyperparameters of a gaussian process.</p>
 
 </div>
 
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -1069,8 +1111,12 @@ over the hyperparameters of a gaussian process.</p>
     <span class="n">k</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">noise</span><span class="p">)</span>
 
     <span class="c1"># sample Y according to the standard gaussian process formula</span>
-    <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">MultivariateNormal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">covariance_matrix</span><span class="o">=</span><span class="n">k</span><span class="p">),</span>
-                   <span class="n">obs</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
+        <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">MultivariateNormal</span><span class="p">(</span>
+        <span class="n">loc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+        <span class="n">covariance_matrix</span><span class="o">=</span><span class="n">k</span>
+    <span class="p">),</span>
+        <span class="n">obs</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
 </code></pre></div>
 
 </div>

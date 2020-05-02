@@ -177,6 +177,7 @@ def kernel(X, Z, var, length, noise, jitter=1.0e-6, include_noise=True):
 <div class="input">
 
 ```python
+@jax.jit
 def model(X, Y):
     # set uninformative log-normal priors on our three kernel hyperparameters
     var = numpyro.sample("kernel_var", dist.LogNormal(0.0, 10.0))
@@ -189,7 +190,10 @@ def model(X, Y):
     # sample Y according to the standard gaussian process formula
     numpyro.sample(
         "Y",
-        dist.MultivariateNormal(loc=jnp.zeros(X.shape[0]), covariance_matrix=k),
+        dist.MultivariateNormal(
+            loc=jnp.zeros(X.shape[0]), 
+            covariance_matrix=k
+        ),
         obs=Y,
     )
 ```
@@ -241,6 +245,8 @@ def run_inference(model, args, rng_key, X, Y):
 ```python
 # do inference
 rng_key, rng_key_predict = random.split(random.PRNGKey(0))
+
+
 samples = run_inference(model, args, rng_key, X, y)
 ```
 
@@ -252,7 +258,31 @@ samples = run_inference(model, args, rng_key, X, y)
 
 <div class="output_area" markdown="1">
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>warmup:  18%|█▊        | 352/2000 [07:58&lt;34:37,  1.26s/it, 1023 steps of size 7.59e-06. acc. prob=0.72] </pre>
+<pre>sample: 100%|██████████| 2000/2000 [42:33&lt;00:00,  1.28s/it, 1023 steps of size 4.98e-06. acc. prob=0.95]
+</pre>
+</div>
+</div>
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+                     mean       std    median      5.0%     95.0%     n_eff     r_hat
+  kernel_length 1960118272.00    256.13 1960118528.00 1960118528.00 1960118528.00      0.50      1.00
+   kernel_noise      0.00      0.00      0.00      0.00      0.00       nan       nan
+     kernel_var      2.63      0.00      2.63      2.63      2.63      6.13      1.00
+
+Number of divergences: 0
+
+MCMC elapsed time: 2557.5514323711395
+</pre>
+</div>
+</div>
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/emmanuel/.conda/envs/egp/lib/python3.8/site-packages/numpyro/diagnostics.py:172: RuntimeWarning: invalid value encountered in true_divide
+  rho_k = 1. - (var_within - gamma_k_c.mean(axis=0)) / var_estimator
+</pre>
 </div>
 </div>
 
@@ -383,8 +413,12 @@ def emodel(Xmu, Y):
     k = kernel(X, X, var, length, noise)
 
     # sample Y according to the standard gaussian process formula
-    numpyro.sample("Y", dist.MultivariateNormal(loc=np.zeros(X.shape[0]), covariance_matrix=k),
-                   obs=Y)
+    numpyro.sample(
+        "Y", dist.MultivariateNormal(
+        loc=np.zeros(X.shape[0]), 
+        covariance_matrix=k
+    ),
+        obs=Y)
 ```
 
 </div>
