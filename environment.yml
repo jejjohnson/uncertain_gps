@@ -3,26 +3,63 @@ channels:
 - defaults
 - conda-forge
 dependencies:
-- scipy
-- numpy
-- scikit-learn
-- matplotlib
-- pandas
+- python=3.8
+# Standard Libraries
+- numpy             # Numerical Linear Algebra
+- scipy             # Scientific Computing
+- xarray            # Data structures
+- pandas            # Data structure
+- scikit-learn      # Machine Learning
+- scikit-image      # Image Processing
+- statsmodels       # Statistical Learning
+# Scale
+- cython
 - numba
-- h5py
-- xarray
-- pytables
-- dask
-- cartopy
+- dask              # Out-of-Core processing
+- dask-ml           # Out-of-Core machine learning
+# Storage
+- hdf5              # standard large storage h5
+- pytables          # high-level storage h5
+- conda-forge::zarr
+# Plotting Libraries
+- matplotlib        # standard plotting library
+- seaborn           # Stats viz library
+- conda-forge::cartopy
+- plotly::plotly==4.6.0
+# GUI
+- conda-forge::tqdm              # 
 # GP Libraries
 - pytorch::pytorch
 - pytorch::torchvision
 - pytorch::cpuonly
 - pip
 - pip:
-    - pyro-ppl
-    - emukit
-    - GPy
-    - tensorflow
-    - tensorflow_probability
-    - git+https://github.com/GPflow/GPflow.git@develop#egg=gpflow
+    # JAX ECOSYSTEM
+    - jax                       # Jax
+    - jaxlib                    # Jax Library
+    - numpyro                   # probabilitistic Jax library
+    - flax                      # Jax Neural Networks
+    # PYTORCH ECOSYSTEM
+    - pyro-ppl                  # probabilistic programming library
+    - gpytorch                  # Gaussian Processes
+    - pytorch-lightning         # PyTorch Formatting
+    # GPY
+    - "git+https://github.com/SheffieldML/GPy.git#egg=GPy"
+    # Formatters
+    - black
+    - pylint
+    - isort
+    - flake8
+    - mypy
+    - pytest
+    # Jupyter
+    - ipykernel
+    - ipywidgets
+    # OTHER
+    - joblib          # Embarssingly parallel
+    # DOCUMENTATION
+    - pyprojroot
+    - mkdocs-material 
+    - mknotebooks
+    - pymdown-extensions 
+    - pdoc3
