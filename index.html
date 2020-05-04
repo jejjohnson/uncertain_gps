@@ -231,43 +231,30 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#taylor-approximation" class="md-nav__link">
     Taylor Approximation
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#unscented-transforms" class="md-nav__link">
     Unscented Transforms
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#variational-inference" class="md-nav__link">
     Variational Inference
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#monte-carlo-estimation" class="md-nav__link">
     Monte Carlo Estimation
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -812,43 +799,30 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#taylor-approximation" class="md-nav__link">
     Taylor Approximation
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#unscented-transforms" class="md-nav__link">
     Unscented Transforms
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#variational-inference" class="md-nav__link">
     Variational Inference
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#monte-carlo-estimation" class="md-nav__link">
     Monte Carlo Estimation
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -925,8 +899,7 @@
 <p></center></p>
 <p>In this repository, I am interested in exploring the capabilities and limits with Gaussian process regression algorithms when handling noisy inputs. Input uncertainty is often not talked about in the machine learning literature, so I will be exploring this in great detail for my thesis.</p>
 <hr />
-<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
-<h4 id="taylor-approximation">Taylor Approximation<a class="headerlink" href="#taylor-approximation" title="Permanent link">&para;</a></h4>
+<h2 id="taylor-approximation">Taylor Approximation<a class="headerlink" href="#taylor-approximation" title="Permanent link">&para;</a></h2>
 <div>
 <div class="MathJax_Preview">
 \begin{aligned}
@@ -1005,9 +978,7 @@
 </div>
 </div>
 </div>
-<div class="admonition details">
-<p class="admonition-title">Satellite Data</p>
-<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Absolute Error</label><div class="tabbed-content">
+<details class="details"><summary>Satellite Data</summary><div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Absolute Error</label><div class="tabbed-content">
 <p><img alt="png" src="Taylor/pics/iasi_abs_error.png" /></p>
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Exact GP</label><div class="tabbed-content">
@@ -1019,26 +990,37 @@
 <p>This is an example where we used the Taylor expanded GP. In this example, we only did the first order approximation.</p>
 </div>
 </div>
-</div>
+</details>
 <hr />
-<h4 id="unscented-transforms">Unscented Transforms<a class="headerlink" href="#unscented-transforms" title="Permanent link">&para;</a></h4>
+<h2 id="unscented-transforms">Unscented Transforms<a class="headerlink" href="#unscented-transforms" title="Permanent link">&para;</a></h2>
 <p><center></p>
-<p><img alt="png" src="../figures/jaxgp/examples/mc/1d_gp_mc.png" /></p>
+<p><img alt="png" src="Unscented/pics/1d_gp_un.png" /></p>
 <p>The predictive mean and variance using the Unscented transformation.</p>
 <p></center></p>
 <hr />
-<h4 id="variational-inference">Variational Inference<a class="headerlink" href="#variational-inference" title="Permanent link">&para;</a></h4>
+<h2 id="variational-inference">Variational Inference<a class="headerlink" href="#variational-inference" title="Permanent link">&para;</a></h2>
 <p><strong>TODO</strong></p>
 <hr />
-<h4 id="monte-carlo-estimation">Monte Carlo Estimation<a class="headerlink" href="#monte-carlo-estimation" title="Permanent link">&para;</a></h4>
-<p><center></p>
+<h2 id="monte-carlo-estimation">Monte Carlo Estimation<a class="headerlink" href="#monte-carlo-estimation" title="Permanent link">&para;</a></h2>
+<div class="admonition details">
+<p class="admonition-title">1D Example</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Posterior Approximation</label><div class="tabbed-content">
+<p><img alt="png" src="MonteCarlo/pics/1d_gp_mc.png" /></p>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Training</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Exact</label><div class="tabbed-content">
+<p><img alt="png" src="MonteCarlo/pics/output_10_1.png" /></p>
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Prior</label><div class="tabbed-content">
+<p><img alt="png" src="MonteCarlo/pics/1d_square_prior.png" /></p>
+</div>
+<input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><label for="__tabbed_4_3">Known Input Error</label><div class="tabbed-content">
 <p><img alt="png" src="MonteCarlo/pics/output_19_1.png" /></p>
-<p>The predictive mean and variance using the MonteCarlo sampling of the posterior.</p>
-<p></center></p>
-<p><center></p>
-<p><img alt="png" src="../figures/jaxgp/examples/mc/1d_gp_mc.png" /></p>
-<p>The predictive mean and variance using the MonteCarlo for training.</p>
-<p></center></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <hr />
 <h2 id="my-resources">My Resources<a class="headerlink" href="#my-resources" title="Permanent link">&para;</a></h2>
 <h4 id="literature-review"><a href="https://jejjohnson.github.io/uncertain_gps/#/literature">Literature Review</a><a class="headerlink" href="#literature-review" title="Permanent link">&para;</a></h4>
