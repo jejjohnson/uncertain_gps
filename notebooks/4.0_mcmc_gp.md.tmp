@@ -1,945 +1,5 @@
-
-
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="Uncertain Inputs with Gaussian Processes">
-      
-      
-        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/notebooks/4.0_mcmc_gp/">
-      
-      
-        <meta name="author" content="J. Emmanuel Johnson">
-      
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.4">
-    
-    
-      
-        <title>4.0 mcmc gp - Uncertain Gaussian Processes</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.c4007cdc.min.css">
-      
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.8435c73a.min.css">
-      
-      
-        
-        
-        <meta name="theme-color" content="">
-      
-    
-    
-    
-      
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=source+code+pro:300,400,400i,700%7Csource+code+pro&display=fallback">
-        <style>body,input{font-family:"source code pro",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"source code pro",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-      <link rel="stylesheet" href="../../css/ansi-colours.css">
-    
-      <link rel="stylesheet" href="../../css/jupyter-cells.css">
-    
-      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
-    
-    
-      
-    
-    
-  </head>
-  
-  
-    
-    
-    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="gray">
-  
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#gp-mcmc-posterior" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://jejjohnson.github.io/uncertain_gps" title="Uncertain Gaussian Processes" class="md-header-nav__button md-logo" aria-label="Uncertain Gaussian Processes">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
-            Uncertain Gaussian Processes
-          </span>
-          <span class="md-header-nav__topic md-ellipsis">
-            
-              4.0 mcmc gp
-            
-          </span>
-        </div>
-      
-    </div>
-    
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-    
-      <div class="md-header-nav__source">
-        
-<a href="https://github.com/jejjohnson/uncertain_gps/" title="Go to repository" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
-    jejjohnson/uncertain_gps
-  </div>
-</a>
-      </div>
-    
-  </nav>
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-        
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="https://jejjohnson.github.io/uncertain_gps" title="Uncertain Gaussian Processes" class="md-nav__button md-logo" aria-label="Uncertain Gaussian Processes">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
-    Uncertain Gaussian Processes
-  </label>
-  
-    <div class="md-nav__source">
-      
-<a href="https://github.com/jejjohnson/uncertain_gps/" title="Go to repository" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
-    jejjohnson/uncertain_gps
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../.." title="Input Uncertainty for Gaussian Processes" class="md-nav__link">
-      Input Uncertainty for Gaussian Processes
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
-    
-    <label class="md-nav__link" for="nav-2">
-      MonteCarlo
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
-    </label>
-    <nav class="md-nav" aria-label="MonteCarlo" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
-        MonteCarlo
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../MonteCarlo/demo/" title="MCMC eGP" class="md-nav__link">
-      MCMC eGP
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      Notes
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
-    </label>
-    <nav class="md-nav" aria-label="Notes" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
-        Notes
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/approximate/" title="Gaussian Approximations" class="md-nav__link">
-      Gaussian Approximations
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/basics/" title="Basics" class="md-nav__link">
-      Basics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/error_propagation/" title="Error Propagation" class="md-nav__link">
-      Error Propagation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/literature/" title="Literature" class="md-nav__link">
-      Literature
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/mm/" title="Moment-Matching" class="md-nav__link">
-      Moment-Matching
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/next/" title="Next Steps" class="md-nav__link">
-      Next Steps
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/software/" title="Software" class="md-nav__link">
-      Software
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/stochastic/" title="Stochastic" class="md-nav__link">
-      Stochastic
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/taylor/" title="Linearization (Taylor Expansions)" class="md-nav__link">
-      Linearization (Taylor Expansions)
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/uncertainty/" title="What is Uncertainty?" class="md-nav__link">
-      What is Uncertainty?
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Notes/vi/" title="Uncertain Inputs GPs - Variational Strategies" class="md-nav__link">
-      Uncertain Inputs GPs - Variational Strategies
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      Taylor
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
-    </label>
-    <nav class="md-nav" aria-label="Taylor" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
-        Taylor
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Taylor/2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
-      2.0 linearized gp
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Taylor/error_propagation/" title="Error Propagation" class="md-nav__link">
-      Error Propagation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Taylor/scratch/" title="Scratch" class="md-nav__link">
-      Scratch
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Taylor/taylor/" title="Linearized GP" class="md-nav__link">
-      Linearized GP
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
-    
-    <label class="md-nav__link" for="nav-5">
-      Notebooks
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
-    </label>
-    <nav class="md-nav" aria-label="Notebooks" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
-        Notebooks
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../1.0_gp_basics/" title="1.0 gp basics" class="md-nav__link">
-      1.0 gp basics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../1.1_gp_refactored/" title="1.1 gp refactored" class="md-nav__link">
-      1.1 gp refactored
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
-      2.0 linearized gp
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../3.0_unscented_gp/" title="3.0 unscented gp" class="md-nav__link">
-      3.0 unscented gp
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        4.0 mcmc gp
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="4.0 mcmc gp" class="md-nav__link md-nav__link--active">
-      4.0 mcmc gp
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#imports" class="md-nav__link">
-    Imports
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#data" class="md-nav__link">
-    Data
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#model" class="md-nav__link">
-    Model
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optimizer" class="md-nav__link">
-    Optimizer
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#training" class="md-nav__link">
-    Training
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#predictions" class="md-nav__link">
-    Predictions
-  </a>
-  
-    <nav class="md-nav" aria-label="Predictions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#standard-predictions" class="md-nav__link">
-    Standard Predictions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#monte-carlo-samples" class="md-nav__link">
-    Monte Carlo Samples
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#refactoring-w-numpyro" class="md-nav__link">
-    Refactoring w. Numpyro
-  </a>
-  
-    <nav class="md-nav" aria-label="Refactoring w. Numpyro">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mc-sampling" class="md-nav__link">
-    MC Sampling
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exact-x-distribution" class="md-nav__link">
-    Exact X Distribution
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../distances/" title="Distances" class="md-nav__link">
-      Distances
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../egp_pyro_svgp/" title="Egp pyro svgp" class="md-nav__link">
-      Egp pyro svgp
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../egp_pyro_vgp/" title="Egp pyro vgp" class="md-nav__link">
-      Egp pyro vgp
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../kernel_derivatives/" title="Kernel derivatives" class="md-nav__link">
-      Kernel derivatives
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../numpyro_egp_mcmc/" title="Numpyro egp mcmc" class="md-nav__link">
-      Numpyro egp mcmc
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
-    
-    <label class="md-nav__link" for="nav-6">
-      Talks
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
-      </span>
-    </label>
-    <nav class="md-nav" aria-label="Talks" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-        </span>
-        Talks
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../talks/2020_kermes/" title="KERMES Meetup 2020" class="md-nav__link">
-      KERMES Meetup 2020
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#imports" class="md-nav__link">
-    Imports
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#data" class="md-nav__link">
-    Data
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#model" class="md-nav__link">
-    Model
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optimizer" class="md-nav__link">
-    Optimizer
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#training" class="md-nav__link">
-    Training
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#predictions" class="md-nav__link">
-    Predictions
-  </a>
-  
-    <nav class="md-nav" aria-label="Predictions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#standard-predictions" class="md-nav__link">
-    Standard Predictions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#monte-carlo-samples" class="md-nav__link">
-    Monte Carlo Samples
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#refactoring-w-numpyro" class="md-nav__link">
-    Refactoring w. Numpyro
-  </a>
-  
-    <nav class="md-nav" aria-label="Refactoring w. Numpyro">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mc-sampling" class="md-nav__link">
-    MC Sampling
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exact-x-distribution" class="md-nav__link">
-    Exact X Distribution
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
-              
-                
-                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/notebooks/4.0_mcmc_gp.ipynb" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                  
-                
-                
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
 <script>
 (function() {
   function addWidgetsRenderer() {
@@ -965,74 +25,76 @@
 }());
 </script>
 
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h1 id="gp-mcmc-posterior">GP - MCMC Posterior<a class="headerlink" href="#gp-mcmc-posterior" title="Permanent link">&para;</a></h1>
-<p>This notebook, I will go over how we can implement the Gaussian process (GP) regression algorithm using Jax. This isn't a new algorithm or anything but I would like to get accustomed to using Jax because it will be useful later when I implement the GPs to handle uncertain inputs.</p>
-<p><strong>Inspirations</strong></p>
-<ul>
-<li><a href="https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L62">SSMToyBox</a></li>
-<li><a href="https://github.com/jaztsong/PILCO-gpytorch/blob/master/pilco/models/mgpr.py#L282">GPyTorch PILCO</a>
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+# GP - MCMC Posterior
+
+This notebook, I will go over how we can implement the Gaussian process (GP) regression algorithm using Jax. This isn't a new algorithm or anything but I would like to get accustomed to using Jax because it will be useful later when I implement the GPs to handle uncertain inputs.
+
+**Inspirations**
+
+* [SSMToyBox](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L62)
+* [GPyTorch PILCO](https://github.com/jaztsong/PILCO-gpytorch/blob/master/pilco/models/mgpr.py#L282)
 </div>
-</div></li>
-</ul>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h2 id="imports">Imports<a class="headerlink" href="#imports" title="Permanent link">&para;</a></h2>
-<p></div>
-</div></p>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+## Imports
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">pyprojroot</span> <span class="kn">import</span> <span class="n">here</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">here</span><span class="p">()))</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="n">PATH</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">here</span><span class="p">())</span>
+```python
+import sys
+from pyprojroot import here
+sys.path.append(str(here()))
+import pathlib
+PATH = pathlib.Path(here())
 
-<span class="kn">import</span> <span class="nn">functools</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
-<span class="kn">import</span> <span class="nn">jax</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+import functools
+from typing import Callable, Dict, Tuple
+import argparse
+import jax
+import jax.numpy as jnp
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-<span class="n">sns</span><span class="o">.</span><span class="n">reset_defaults</span><span class="p">()</span>
-<span class="c1"># sns.set_style(&#39;whitegrid&#39;)</span>
-<span class="c1"># sns.set_context(&#39;talk&#39;)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;talk&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+sns.reset_defaults()
+# sns.set_style('whitegrid')
+# sns.set_context('talk')
+sns.set_context(context="talk", font_scale=0.7)
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">onp</span>
-<span class="kn">import</span> <span class="nn">numpyro</span>
-<span class="kn">import</span> <span class="nn">numpyro.distributions</span> <span class="k">as</span> <span class="nn">dist</span>
-<span class="kn">import</span> <span class="nn">tqdm</span>
-<span class="kn">from</span> <span class="nn">jax.experimental</span> <span class="kn">import</span> <span class="n">optimizers</span>
+import numpy as onp
+import numpyro
+import numpyro.distributions as dist
+import tqdm
+from jax.experimental import optimizers
 
-<span class="kn">from</span> <span class="nn">src.models.jaxgp.data</span> <span class="kn">import</span> <span class="n">get_data</span>
-<span class="kn">from</span> <span class="nn">src.models.jaxgp.exact</span> <span class="kn">import</span> <span class="n">predictive_mean</span><span class="p">,</span> <span class="n">predictive_variance</span>
-<span class="kn">from</span> <span class="nn">src.models.jaxgp.kernels</span> <span class="kn">import</span> <span class="n">gram</span><span class="p">,</span> <span class="n">rbf_kernel</span><span class="p">,</span> <span class="n">ard_kernel</span>
-<span class="kn">from</span> <span class="nn">src.models.jaxgp.loss</span> <span class="kn">import</span> <span class="n">marginal_likelihood</span>
-<span class="kn">from</span> <span class="nn">src.models.jaxgp.mean</span> <span class="kn">import</span> <span class="n">zero_mean</span>
-<span class="kn">from</span> <span class="nn">src.models.jaxgp.utils</span> <span class="kn">import</span> <span class="n">cholesky_factorization</span><span class="p">,</span> <span class="n">get_factorizations</span><span class="p">,</span> <span class="n">saturate</span>
+from src.models.jaxgp.data import get_data
+from src.models.jaxgp.exact import predictive_mean, predictive_variance
+from src.models.jaxgp.kernels import gram, rbf_kernel, ard_kernel
+from src.models.jaxgp.loss import marginal_likelihood
+from src.models.jaxgp.mean import zero_mean
+from src.models.jaxgp.utils import cholesky_factorization, get_factorizations, saturate
 
-<span class="c1"># LOGGING SETTINGS</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> 
-    <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
-    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1">:</span><span class="si">%(levelname)s</span><span class="s1">:</span><span class="si">%(message)s</span><span class="s1">&#39;</span>
-<span class="p">)</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+# LOGGING SETTINGS
+import sys
+import logging
+logging.basicConfig(
+    level=logging.INFO, 
+    stream=sys.stdout,
+    format='%(asctime)s:%(levelname)s:%(message)s'
+)
+logger = logging.getLogger()
 
-<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
-<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
-</code></pre></div>
+%load_ext autoreload
+%autoreload 2
+```
 
 </div>
 
@@ -1051,159 +113,164 @@
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h2 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h2>
-<p></div>
-</div></p>
+</div>
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+## Data
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+```python
+from dataclasses import dataclass
 
-<span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">args</span><span class="p">:</span>
-    <span class="n">num_train</span> <span class="o">=</span> <span class="mi">30</span>
-    <span class="n">num_test</span> <span class="o">=</span> <span class="mi">1_000</span>
-    <span class="n">smoke_test</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">input_noise</span> <span class="o">=</span> <span class="mf">0.15</span>
-    <span class="n">output_noise</span> <span class="o">=</span> <span class="mf">0.15</span>
-</code></pre></div>
+@dataclass
+class args:
+    num_train = 30
+    num_test = 1_000
+    smoke_test = False
+    input_noise = 0.15
+    output_noise = 0.15
+```
 
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="c1"># sigma_inputs = 0.15</span>
-<span class="n">input_cov</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">args</span><span class="o">.</span><span class="n">input_noise</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">,</span> <span class="n">ytest</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span>
-    <span class="n">N</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">num_train</span><span class="p">,</span>
-    <span class="n">input_noise</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_noise</span><span class="p">,</span>
-    <span class="n">output_noise</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_noise</span><span class="p">,</span>
-    <span class="n">N_test</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">num_test</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div>
+```python
+# sigma_inputs = 0.15
+input_cov = jnp.array([args.input_noise]).reshape(-1, 1)
+X, y, Xtest, ytest = get_data(
+    N=args.num_train,
+    input_noise=args.input_noise,
+    output_noise=args.output_noise,
+    N_test=args.num_test,
+)
+```
 
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h2 id="model">Model<a class="headerlink" href="#model" title="Permanent link">&para;</a></h2>
-<p></div>
-</div></p>
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+## Model
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="c1"># PRIOR FUNCTIONS (mean, covariance)</span>
-<span class="n">mu_f</span> <span class="o">=</span> <span class="n">zero_mean</span>
-<span class="n">cov_f</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">gram</span><span class="p">,</span> <span class="n">ard_kernel</span><span class="p">)</span>
-<span class="n">gp_priors</span> <span class="o">=</span> <span class="p">(</span><span class="n">mu_f</span><span class="p">,</span> <span class="n">cov_f</span><span class="p">)</span>
+```python
+# PRIOR FUNCTIONS (mean, covariance)
+mu_f = zero_mean
+cov_f = functools.partial(gram, ard_kernel)
+gp_priors = (mu_f, cov_f)
 
-<span class="c1"># Kernel, Likelihood parameters</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># &quot;gamma&quot;: 2.0,</span>
-    <span class="s2">&quot;length_scale&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="s2">&quot;var_f&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="s2">&quot;likelihood_noise&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="c1"># saturate parameters with likelihoods</span>
-<span class="n">params</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+# Kernel, Likelihood parameters
+params = {
+    # "gamma": 2.0,
+    "length_scale": 1.0,
+    "var_f": 1.0,
+    "likelihood_noise": 1.0,
+}
+# saturate parameters with likelihoods
+params = saturate(params)
 
-<span class="c1"># LOSS FUNCTION</span>
-<span class="n">mll_loss</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">marginal_likelihood</span><span class="p">,</span> <span class="n">gp_priors</span><span class="p">))</span>
+# LOSS FUNCTION
+mll_loss = jax.jit(functools.partial(marginal_likelihood, gp_priors))
 
-<span class="c1"># GRADIENT LOSS FUNCTION</span>
-<span class="n">dloss</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">mll_loss</span><span class="p">))</span>
-</code></pre></div>
+# GRADIENT LOSS FUNCTION
+dloss = jax.jit(jax.grad(mll_loss))
+```
 
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h2 id="optimizer">Optimizer<a class="headerlink" href="#optimizer" title="Permanent link">&para;</a></h2>
-<p></div>
-</div></p>
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+## Optimizer
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="c1"># STEP FUNCTION</span>
-<span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
-<span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">):</span>
-    <span class="c1"># calculate loss</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">mll_loss</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+```python
+# STEP FUNCTION
+@jax.jit
+def step(params, X, y, opt_state):
+    # calculate loss
+    loss = mll_loss(params, X, y)
 
-    <span class="c1"># calculate gradient of loss</span>
-    <span class="n">grads</span> <span class="o">=</span> <span class="n">dloss</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    # calculate gradient of loss
+    grads = dloss(params, X, y)
 
-    <span class="c1"># update optimizer state</span>
-    <span class="n">opt_state</span> <span class="o">=</span> <span class="n">opt_update</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">grads</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">)</span>
+    # update optimizer state
+    opt_state = opt_update(0, grads, opt_state)
 
-    <span class="c1"># update params</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="n">get_params</span><span class="p">(</span><span class="n">opt_state</span><span class="p">)</span>
+    # update params
+    params = get_params(opt_state)
 
-    <span class="k">return</span> <span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">loss</span>
-</code></pre></div>
+    return params, opt_state, loss
+```
 
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h2 id="training">Training<a class="headerlink" href="#training" title="Permanent link">&para;</a></h2>
-<p></div>
-</div></p>
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+## Training
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="c1"># TRAINING PARARMETERS</span>
-<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">500</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">smoke_test</span> <span class="k">else</span> <span class="mi">2</span>
-<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">losses</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+```python
+# TRAINING PARARMETERS
+n_epochs = 500 if not args.smoke_test else 2
+learning_rate = 0.01
+losses = list()
 
-<span class="c1"># initialize optimizer</span>
-<span class="n">opt_init</span><span class="p">,</span> <span class="n">opt_update</span><span class="p">,</span> <span class="n">get_params</span> <span class="o">=</span> <span class="n">optimizers</span><span class="o">.</span><span class="n">rmsprop</span><span class="p">(</span><span class="n">step_size</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+# initialize optimizer
+opt_init, opt_update, get_params = optimizers.rmsprop(step_size=learning_rate)
 
-<span class="c1"># initialize parameters</span>
-<span class="n">opt_state</span> <span class="o">=</span> <span class="n">opt_init</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+# initialize parameters
+opt_state = opt_init(params)
 
-<span class="c1"># get initial parameters</span>
-<span class="n">params</span> <span class="o">=</span> <span class="n">get_params</span><span class="p">(</span><span class="n">opt_state</span><span class="p">)</span>
+# get initial parameters
+params = get_params(opt_state)
 
-<span class="n">postfix</span> <span class="o">=</span> <span class="p">{}</span>
+postfix = {}
 
-<span class="k">with</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">trange</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">)</span> <span class="k">as</span> <span class="n">bar</span><span class="p">:</span>
+with tqdm.trange(n_epochs) as bar:
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bar</span><span class="p">:</span>
-        <span class="c1"># 1 step - optimize function</span>
-        <span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">)</span>
+    for i in bar:
+        # 1 step - optimize function
+        params, opt_state, value = step(params, X, y, opt_state)
 
-        <span class="c1"># update params</span>
-        <span class="n">postfix</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">ikey</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">postfix</span><span class="p">[</span><span class="n">ikey</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">ikey</span><span class="p">])</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
+        # update params
+        postfix = {}
+        for ikey in params.keys():
+            postfix[ikey] = f"{jax.nn.softplus(params[ikey]):.2f}"
 
-        <span class="c1"># save loss values</span>
-        <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+        # save loss values
+        losses.append(value.mean())
 
-        <span class="c1"># update progress bar</span>
-        <span class="n">postfix</span><span class="p">[</span><span class="s2">&quot;Loss&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">onp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">bar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">postfix</span><span class="p">)</span>
-        <span class="c1"># saturate params</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="n">saturate</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-</code></pre></div>
+        # update progress bar
+        postfix["Loss"] = f"{onp.array(losses[-1]):.2f}"
+        bar.set_postfix(postfix)
+        # saturate params
+        params = saturate(params)
+```
 
 </div>
 
@@ -1221,65 +288,67 @@
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h2 id="predictions">Predictions<a class="headerlink" href="#predictions" title="Permanent link">&para;</a></h2>
-<p></div>
-</div></p>
+</div>
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+## Predictions
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h3 id="standard-predictions">Standard Predictions<a class="headerlink" href="#standard-predictions" title="Permanent link">&para;</a></h3>
-<p></div>
-</div></p>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+### Standard Predictions
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="c1"># Posterior Predictions</span>
-<span class="n">mu_y</span> <span class="o">=</span> <span class="n">predictive_mean</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">gp_priors</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">)</span>
-<span class="n">var_y</span> <span class="o">=</span> <span class="n">predictive_variance</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">gp_priors</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+```python
+# Posterior Predictions
+mu_y = predictive_mean(params, gp_priors, X, y, Xtest)
+var_y = predictive_variance(params, gp_priors, X, y, Xtest, True, False)
 
-<span class="c1"># Uncertainty</span>
-<span class="n">uncertainty</span> <span class="o">=</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
-</code></pre></div>
+# Uncertainty
+uncertainty = 1.96 * jnp.sqrt(var_y.squeeze())
+```
 
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+```python
+logger.setLevel(logging.INFO)
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+fig, ax = plt.subplots()
 
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Data&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">Xtest</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Predictive Mean&quot;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
-    <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">Xtest</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span> <span class="o">+</span> <span class="n">uncertainty</span><span class="p">,</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span> <span class="o">-</span> <span class="n">uncertainty</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Predictive Std (95% Confidence)&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+ax.scatter(X, y, c="red", label="Training Data")
+ax.plot(
+    Xtest.squeeze(),
+    mu_y.squeeze(),
+    label=r"Predictive Mean",
+    color="black",
+    linewidth=3,
+)
+ax.fill_between(
+    Xtest.squeeze(),
+    mu_y.squeeze() + uncertainty,
+    mu_y.squeeze() - uncertainty,
+    alpha=0.3,
+    color="darkorange",
+    label=f"Predictive Std (95% Confidence)",
+)
+ax.set_ylim([-3.5, 3.5])
+ax.legend(fontsize=12)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">PATH</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;figures/jaxgp/examples/mc/1d_gp.png&quot;</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div>
+plt.tight_layout()
+fig.savefig(PATH.joinpath("figures/jaxgp/examples/mc/1d_gp.png"))
+plt.show()
+```
 
 </div>
 
@@ -1301,103 +370,106 @@
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h3 id="monte-carlo-samples">Monte Carlo Samples<a class="headerlink" href="#monte-carlo-samples" title="Permanent link">&para;</a></h3>
-<p></div>
-</div></p>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+### Monte Carlo Samples
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
+```python
+X.shape, input_cov.shape
+logger.setLevel(logging.INFO)
+n_features = X.shape[1]
+n_mc_samples = 1000
+
+Wc = 1.0 / (n_mc_samples - 1)
+Wm = 1.0 / n_mc_samples
+# get unit sigma points
+key = jax.random.PRNGKey(0)
+unit_sigma_points = jax.random.multivariate_normal(
+    key,
+    jnp.zeros(n_features), 
+    jnp.eye(n_features),
+    shape=(n_mc_samples,)
+).T
+logging.debug(f"Sigma Points: {unit_sigma_points.shape}")
+logging.debug(f"Xtest: {Xtest.shape}")
+# form sigma-points from unit sigma-points
+x_ = Xtest + jnp.dot(jnp.linalg.cholesky(input_cov), unit_sigma_points)
+logging.debug(f"x_: {x_.shape}")
+
+# push sigma points through non-linearity
+mu_f = functools.partial(predictive_mean, params, gp_priors, X, y)
+mu_f_batch = jax.jit(jax.vmap(mu_f, in_axes=(0)))
+
+outputs = mu_f_batch(x_)
+logging.debug(f"outputs: {outputs.shape}")
+# output mean
+outputs_mean = jnp.mean(outputs, axis=1).T
+logging.debug(f"outputs (mean): {outputs_mean.shape}")
+
+# output covariance
+# logging.debug(f"Cov: {outputs.shape}, {outputs_mean.shape}")
+dfx = outputs - outputs_mean[:, None]
+logging.debug(f"dfx: {dfx.shape}")
+
+cov_f = Wc * jnp.dot(dfx, dfx.T)
+logging.debug(f"cov_f: {cov_f.shape}")
+# output covariance
+# dfx = 
+# mu_y_ = predictive_mean()
+```
+
 </div>
-</div>
-<div class="highlight"><pre><span></span><code><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">input_cov</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">n_mc_samples</span> <span class="o">=</span> <span class="mi">1000</span>
-
-<span class="n">Wc</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_mc_samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">Wm</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">n_mc_samples</span>
-<span class="c1"># get unit sigma points</span>
-<span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">unit_sigma_points</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span>
-    <span class="n">key</span><span class="p">,</span>
-    <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_features</span><span class="p">),</span> 
-    <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_features</span><span class="p">),</span>
-    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_mc_samples</span><span class="p">,)</span>
-<span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sigma Points: </span><span class="si">{</span><span class="n">unit_sigma_points</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Xtest: </span><span class="si">{</span><span class="n">Xtest</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="c1"># form sigma-points from unit sigma-points</span>
-<span class="n">x_</span> <span class="o">=</span> <span class="n">Xtest</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">input_cov</span><span class="p">),</span> <span class="n">unit_sigma_points</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_: </span><span class="si">{</span><span class="n">x_</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># push sigma points through non-linearity</span>
-<span class="n">mu_f</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">predictive_mean</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">gp_priors</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">mu_f_batch</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">mu_f</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
-
-<span class="n">outputs</span> <span class="o">=</span> <span class="n">mu_f_batch</span><span class="p">(</span><span class="n">x_</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;outputs: </span><span class="si">{</span><span class="n">outputs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="c1"># output mean</span>
-<span class="n">outputs_mean</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;outputs (mean): </span><span class="si">{</span><span class="n">outputs_mean</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># output covariance</span>
-<span class="c1"># logging.debug(f&quot;Cov: {outputs.shape}, {outputs_mean.shape}&quot;)</span>
-<span class="n">dfx</span> <span class="o">=</span> <span class="n">outputs</span> <span class="o">-</span> <span class="n">outputs_mean</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dfx: </span><span class="si">{</span><span class="n">dfx</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">cov_f</span> <span class="o">=</span> <span class="n">Wc</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dfx</span><span class="p">,</span> <span class="n">dfx</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cov_f: </span><span class="si">{</span><span class="n">cov_f</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="c1"># output covariance</span>
-<span class="c1"># dfx = </span>
-<span class="c1"># mu_y_ = predictive_mean()</span>
-</code></pre></div>
 
 </div>
-
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="n">uncertainty</span> <span class="o">=</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">cov_f</span><span class="p">))</span>
-</code></pre></div>
+```python
+uncertainty = 1.96 * jnp.sqrt(jnp.diag(cov_f))
+```
 
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+```python
+logger.setLevel(logging.INFO)
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+fig, ax = plt.subplots()
 
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Data&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">Xtest</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Predictive Mean&quot;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
-    <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">Xtest</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span> <span class="o">+</span> <span class="n">uncertainty</span><span class="p">,</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span> <span class="o">-</span> <span class="n">uncertainty</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Predictive Std (95% Confidence)&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+ax.scatter(X, y, c="red", label="Training Data")
+ax.plot(
+    Xtest.squeeze(),
+    mu_y.squeeze(),
+    label=r"Predictive Mean",
+    color="black",
+    linewidth=3,
+)
+ax.fill_between(
+    Xtest.squeeze(),
+    mu_y.squeeze() + uncertainty,
+    mu_y.squeeze() - uncertainty,
+    alpha=0.3,
+    color="darkorange",
+    label=f"Predictive Std (95% Confidence)",
+)
+ax.set_ylim([-3.5, 3.5])
+ax.legend(fontsize=12)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">PATH</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;figures/jaxgp/examples/mc/1d_gp_mc.png&quot;</span><span class="p">))</span>
-<span class="c1"># fig.savefig(&quot;figures/jaxgp/examples/mc/1d_gp_mc.png&quot;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div>
+plt.tight_layout()
+fig.savefig(PATH.joinpath("figures/jaxgp/examples/mc/1d_gp_mc.png"))
+# fig.savefig("figures/jaxgp/examples/mc/1d_gp_mc.png")
+plt.show()
+```
 
 </div>
 
@@ -1419,67 +491,68 @@
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h2 id="refactoring-w-numpyro">Refactoring w. Numpyro<a class="headerlink" href="#refactoring-w-numpyro" title="Permanent link">&para;</a></h2>
-<p></div>
-</div></p>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h3 id="mc-sampling">MC Sampling<a class="headerlink" href="#mc-sampling" title="Permanent link">&para;</a></h3>
-<p></div>
-</div></p>
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+## Refactoring w. Numpyro
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+</div>
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+### MC Sampling
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">input_cov</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">n_mc_samples</span> <span class="o">=</span> <span class="mi">1000</span>
+```python
+X.shape, input_cov.shape
+logger.setLevel(logging.DEBUG)
+n_features = X.shape[1]
+n_mc_samples = 1000
 
-<span class="n">Wc</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_mc_samples</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">Wm</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">n_mc_samples</span>
-<span class="c1"># get unit sigma points</span>
-<span class="c1"># create data distribution</span>
-<span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">sigma_dist</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_features</span><span class="p">,)),</span> <span class="n">scale</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_features</span><span class="p">))</span>
+Wc = 1.0 / (n_mc_samples - 1)
+Wm = 1.0 / n_mc_samples
+# get unit sigma points
+# create data distribution
+key = jax.random.PRNGKey(0)
+sigma_dist = dist.Normal(loc=jnp.zeros(shape=(n_features,)), scale=jnp.eye(n_features))
 
-<span class="c1"># generate samples</span>
-<span class="n">unit_sigma_samples</span> <span class="o">=</span> <span class="n">sigma_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_mc_samples</span><span class="p">,))</span>
+# generate samples
+unit_sigma_samples = sigma_dist.sample(key, sample_shape=(n_mc_samples,))
 
 
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sigma Points: </span><span class="si">{</span><span class="n">unit_sigma_points</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Xtest: </span><span class="si">{</span><span class="n">Xtest</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="c1"># form sigma-points from unit sigma-points</span>
-<span class="n">x_</span> <span class="o">=</span> <span class="n">Xtest</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">input_cov</span><span class="p">),</span> <span class="n">unit_sigma_samples</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X Noise: </span><span class="si">{</span><span class="n">x_</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, &quot;</span><span class="p">)</span>
+logging.debug(f"Sigma Points: {unit_sigma_points.shape}")
+logging.debug(f"Xtest: {Xtest.shape}")
+# form sigma-points from unit sigma-points
+x_ = Xtest[:, None] + jnp.dot(jnp.linalg.cholesky(input_cov), unit_sigma_samples)
+logging.debug(f"X Noise: {x_.shape}, ")
 
-<span class="c1"># push sigma points through non-linearity</span>
-<span class="n">mu_f</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">predictive_mean</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">gp_priors</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">mu_f_batch</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">mu_f</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+# push sigma points through non-linearity
+mu_f = functools.partial(predictive_mean, params, gp_priors, X, y)
+mu_f_batch = jax.jit(jax.vmap(mu_f, in_axes=(0)))
 
-<span class="n">outputs</span> <span class="o">=</span> <span class="n">mu_f_batch</span><span class="p">(</span><span class="n">x_</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;outputs: </span><span class="si">{</span><span class="n">outputs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="c1"># output mean</span>
-<span class="n">outputs_mean</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;outputs (mean): </span><span class="si">{</span><span class="n">outputs_mean</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+outputs = mu_f_batch(x_)
+logging.debug(f"outputs: {outputs.shape}")
+# output mean
+outputs_mean = jnp.mean(outputs, axis=1).T
+logging.debug(f"outputs (mean): {outputs_mean.shape}")
 
-<span class="c1"># output covariance</span>
-<span class="c1"># logging.debug(f&quot;Cov: {outputs.shape}, {outputs_mean.shape}&quot;)</span>
-<span class="n">dfx</span> <span class="o">=</span> <span class="n">outputs</span> <span class="o">-</span> <span class="n">outputs_mean</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dfx: </span><span class="si">{</span><span class="n">dfx</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# output covariance
+# logging.debug(f"Cov: {outputs.shape}, {outputs_mean.shape}")
+dfx = outputs - outputs_mean[:, None]
+logging.debug(f"dfx: {dfx.shape}")
 
-<span class="n">cov_f</span> <span class="o">=</span> <span class="n">Wc</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dfx</span><span class="p">,</span> <span class="n">dfx</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cov_f: </span><span class="si">{</span><span class="n">cov_f</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="c1"># output covariance</span>
-<span class="c1"># dfx = </span>
-<span class="n">uncertainty</span> <span class="o">=</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">cov_f</span><span class="p">))</span>
-</code></pre></div>
+cov_f = Wc * jnp.dot(dfx, dfx.T)
+logging.debug(f"cov_f: {cov_f.shape}")
+# output covariance
+# dfx = 
+uncertainty = 1.96 * jnp.sqrt(jnp.diag(cov_f))
+```
 
 </div>
 
@@ -1504,38 +577,38 @@
 </div>
 </div>
 
-<div class="cell border-box-sizing code_cell rendered">
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-</div>
-</div>
-<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+```python
+logger.setLevel(logging.INFO)
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+fig, ax = plt.subplots()
 
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Data&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">Xtest</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Predictive Mean&quot;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
-    <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">Xtest</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span> <span class="o">+</span> <span class="n">uncertainty</span><span class="p">,</span>
-    <span class="n">mu_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span> <span class="o">-</span> <span class="n">uncertainty</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Predictive Std (95% Confidence)&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+ax.scatter(X, y, c="red", label="Training Data")
+ax.plot(
+    Xtest.squeeze(),
+    mu_y.squeeze(),
+    label=r"Predictive Mean",
+    color="black",
+    linewidth=3,
+)
+ax.fill_between(
+    Xtest.squeeze(),
+    mu_y.squeeze() + uncertainty,
+    mu_y.squeeze() - uncertainty,
+    alpha=0.3,
+    color="darkorange",
+    label=f"Predictive Std (95% Confidence)",
+)
+ax.set_ylim([-3.5, 3.5])
+ax.legend(fontsize=12)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="c1"># fig.savefig(&quot;figures/jaxgp/examples/taylor/1d_gp.png&quot;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div>
+plt.tight_layout()
+# fig.savefig("figures/jaxgp/examples/taylor/1d_gp.png")
+plt.show()
+```
 
 </div>
 
@@ -1557,71 +630,75 @@
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
-<p><div class="inner_cell" markdown="1">
-<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
-<h3 id="exact-x-distribution">Exact X Distribution<a class="headerlink" href="#exact-x-distribution" title="Permanent link">&para;</a></h3>
-<p></div>
-</div></p>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing text_cell rendered" markdown="1">
+<div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1">
+### Exact X Distribution
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">n_mc_samples</span> <span class="o">=</span> <span class="mi">1000</span>
+```python
+logger.setLevel(logging.INFO)
+n_features = X.shape[1]
+n_mc_samples = 1000
 
-<span class="c1"># create data distribution</span>
-<span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">x_noise_dist</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_features</span><span class="p">,)),</span> <span class="n">scale</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">input_cov</span><span class="p">)))</span>
+# create data distribution
+key = jax.random.PRNGKey(0)
+x_noise_dist = dist.Normal(loc=jnp.zeros((n_features,)), scale=jnp.sqrt(jnp.diag(input_cov)))
 
-<span class="c1"># generate samples</span>
-<span class="n">x_noise_samples</span> <span class="o">=</span> <span class="n">x_noise_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_mc_samples</span><span class="p">,))</span>
-<span class="n">x_samples</span> <span class="o">=</span> <span class="n">Xtest</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">x_noise_samples</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
-<span class="c1"># push samples through non-linearity</span>
-<span class="n">mu_f</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">predictive_mean</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">gp_priors</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">mu_f_batch</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">mu_f</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+# generate samples
+x_noise_samples = x_noise_dist.sample(key, sample_shape=(n_mc_samples,))
+x_samples = Xtest[None, :] + x_noise_samples[:, None]
+# push samples through non-linearity
+mu_f = functools.partial(predictive_mean, params, gp_priors, X, y)
+mu_f_batch = jax.jit(jax.vmap(mu_f, in_axes=(0)))
 
-<span class="n">predictions</span> <span class="o">=</span> <span class="n">mu_f_batch</span><span class="p">(</span><span class="n">x_samples</span><span class="p">)</span>
+predictions = mu_f_batch(x_samples)
 
 
-<span class="n">mean_prediction</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">percentiles</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="p">[</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">95.0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</code></pre></div>
+mean_prediction = jnp.mean(predictions, axis=0)
+percentiles = jnp.percentile(predictions, [5., 95.0], axis=0)
+
+```
 
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
+<div class="cell border-box-sizing code_cell rendered" markdown="1">
 <div class="input">
 
-<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+```python
+logger.setLevel(logging.INFO)
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+fig, ax = plt.subplots()
 
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Data&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">Xtest</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">mean_prediction</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Predictive Mean&quot;</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
-    <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">Xtest</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span>
-    <span class="n">percentiles</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span>
-    <span class="n">percentiles</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Predictive Std (90% Confidence)&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+ax.scatter(X, y, c="red", label="Training Data")
+ax.plot(
+    Xtest.squeeze(),
+    mean_prediction.squeeze(),
+    label=r"Predictive Mean",
+    color="black",
+    linewidth=3,
+)
+ax.fill_between(
+    Xtest.squeeze(),
+    percentiles[0,:],
+    percentiles[1,:],
+    alpha=0.3,
+    color="darkorange",
+    label=f"Predictive Std (90% Confidence)",
+)
+ax.set_ylim([-3.5, 3.5])
+ax.legend(fontsize=12)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="c1"># fig.savefig(&quot;figures/jaxgp/examples/taylor/1d_gp.png&quot;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</code></pre></div>
+plt.tight_layout()
+# fig.savefig("figures/jaxgp/examples/taylor/1d_gp.png")
+plt.show()
+```
 
 </div>
 
@@ -1644,123 +721,5 @@
 </div>
 
 </div>
-                
-              
-              
-                
 
 
-              
-            </article>
-          </div>
-        </div>
-      </main>
-      
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../3.0_unscented_gp/" title="3.0 unscented gp" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                3.0 unscented gp
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../distances/" title="Distances" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Distances
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-          <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2020 J. Emmanuel Johnson
-          </div>
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
-      
-  <div class="md-footer-social">
-    
-      
-      
-      <a href="https://github.com/jejjohnson" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-      </a>
-    
-      
-      
-      <a href="https://twitter.com/jejjohnson" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
-      </a>
-    
-      
-      
-      <a href="https://linkedin.com/in/jejjohnson" target="_blank" rel="noopener" title="linkedin.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-      </a>
-    
-      
-      
-      <a href="https://jejjohnson.netlify.com" target="_blank" rel="noopener" title="jejjohnson.netlify.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4-73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"/></svg>
-      </a>
-    
-  </div>
-
-    </div>
-  </div>
-</footer>
-      
-    </div>
-    
-      <script src="../../assets/javascripts/vendor.83fe6e3c.min.js"></script>
-      <script src="../../assets/javascripts/bundle.7e1cb91c.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
-      
-      <script>
-        app = initialize({
-          base: "../..",
-          features: [],
-          search: Object.assign({
-            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
-      
-        <script src="../../javascripts/extra.js"></script>
-      
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-      
-    
-  </body>
-</html>

@@ -8,10 +8,10 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Uncertain Inputs with Gaussian Processes">
+        <meta name="description" content="All of my projects">
       
       
-        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/talks/2020_kermes/">
+        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/Taylor/taylor/">
       
       
         <meta name="author" content="J. Emmanuel Johnson">
@@ -21,7 +21,7 @@
     
     
       
-        <title>KERMES Meetup 2020 - Uncertain Gaussian Processes</title>
+        <title>Linearized GP</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#kermes-meetup-2020" class="md-skip">
+        <a href="#linearized-gp" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              KERMES Meetup 2020
+              Linearized GP
             
           </span>
         </div>
@@ -410,10 +410,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Taylor
@@ -437,7 +439,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Taylor/2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
+    <a href="../2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
       2.0 linearized gp
     </a>
   </li>
@@ -449,7 +451,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Taylor/error_propagation/" title="Error Propagation" class="md-nav__link">
+    <a href="../error_propagation/" title="Error Propagation" class="md-nav__link">
       Error Propagation
     </a>
   </li>
@@ -461,7 +463,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Taylor/scratch/" title="Scratch" class="md-nav__link">
+    <a href="../scratch/" title="Scratch" class="md-nav__link">
       Scratch
     </a>
   </li>
@@ -471,11 +473,74 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../Taylor/taylor/" title="Linearized GP" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Linearized GP
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Linearized GP" class="md-nav__link md-nav__link--active">
       Linearized GP
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#taylor-approximation" class="md-nav__link">
+    Taylor Approximation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sparse-gps" class="md-nav__link">
+    Sparse GPs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literature" class="md-nav__link">
+    Literature
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -638,12 +703,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
       Talks
@@ -665,73 +728,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        KERMES Meetup 2020
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="KERMES Meetup 2020" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../talks/2020_kermes/" title="KERMES Meetup 2020" class="md-nav__link">
       KERMES Meetup 2020
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#input-uncertainty-propagation-in-gaussian-process-regression-models" class="md-nav__link">
-    Input Uncertainty Propagation in Gaussian Process Regression Models
-  </a>
-  
-    <nav class="md-nav" aria-label="Input Uncertainty Propagation in Gaussian Process Regression Models">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#resources" class="md-nav__link">
-    Resources
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#slides" class="md-nav__link">
-    Slides
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -766,29 +767,30 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#input-uncertainty-propagation-in-gaussian-process-regression-models" class="md-nav__link">
-    Input Uncertainty Propagation in Gaussian Process Regression Models
-  </a>
-  
-    <nav class="md-nav" aria-label="Input Uncertainty Propagation in Gaussian Process Regression Models">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#resources" class="md-nav__link">
-    Resources
+  <a href="#taylor-approximation" class="md-nav__link">
+    Taylor Approximation
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#slides" class="md-nav__link">
-    Slides
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#sparse-gps" class="md-nav__link">
+    Sparse GPs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literature" class="md-nav__link">
+    Literature
+  </a>
   
 </li>
       
@@ -804,29 +806,409 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/talks/2020_kermes.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/Taylor/taylor.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
                   
+                    
+
+
+  
+
+
+<a href="https://github.com/jejjohnson/uncertain_gps/docs/Taylor/README.md" title="README.md" class="md-content__button md-icon">
+  Source
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+</a>
+                  
                 
                 
-                <h1 id="kermes-meetup-2020">KERMES Meetup 2020<a class="headerlink" href="#kermes-meetup-2020" title="Permanent link">&para;</a></h1>
+                <h1 id="linearized-gp">Linearized GP<a class="headerlink" href="#linearized-gp" title="Permanent link">&para;</a></h1>
+<p>Recall the GP formulation:</p>
+<div>
+<div class="MathJax_Preview">
+y=f(\mathbf{x}) + \epsilon_y, \epsilon_y \sim \mathcal{N}(0, \sigma_y^2\mathbf{I})
+</div>
+<script type="math/tex; mode=display">
+y=f(\mathbf{x}) + \epsilon_y, \epsilon_y \sim \mathcal{N}(0, \sigma_y^2\mathbf{I})
+</script>
+</div>
+<p>Recall the posterior formulas:</p>
+<div>
+<div class="MathJax_Preview">\mu_\mathcal{GP}(\mathbf{x}_*) = {\bf k}_* ({\bf K}+\lambda {\bf I}_N)^{-1}{\bf y} = {\bf k}_* \alpha</div>
+<script type="math/tex; mode=display">\mu_\mathcal{GP}(\mathbf{x}_*) = {\bf k}_* ({\bf K}+\lambda {\bf I}_N)^{-1}{\bf y} = {\bf k}_* \alpha</script>
+</div>
+<div>
+<div class="MathJax_Preview">\sigma_{GP*}^2 =  \sigma_y^2 + k_{**}- {\bf k}_* ({\bf K}+\sigma_y^2 \mathbf{I}_N )^{-1} {\bf k}_{*}^{\top}</div>
+<script type="math/tex; mode=display">\sigma_{GP*}^2 =  \sigma_y^2 + k_{**}- {\bf k}_* ({\bf K}+\sigma_y^2 \mathbf{I}_N )^{-1} {\bf k}_{*}^{\top}</script>
+</div>
+<p>In the case where we have uncertain inputs <span><span class="MathJax_Preview">\mathbf{x} \sim \mathcal{N}(\mu_\mathbf{x}, \Sigma_\mathbf{x})</span><script type="math/tex">\mathbf{x} \sim \mathcal{N}(\mu_\mathbf{x}, \Sigma_\mathbf{x})</script></span>, this function needs to be modified in order to accommodate the uncertainty</p>
+<p>The posterior of this distribution is non-Gaussian because we have to propagate a probability distribution through a non-linear kernel function. So this integral becomes intractable. We can compute the analytical Gaussian approximation by only computing the mean and the variance of the posterior distribution wrt the inputs.</p>
+<hr />
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Mean Function</label><div class="tabbed-content">
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+m(\mu_\mathbf{x}, \Sigma_\mathbf{x})
+&amp;=
+\mathbb{E}_\mathbf{f_*}
+\left[ f_* \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right] \\
+&amp;=
+\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_{f_*} \left[ f_* \,p(f_* | \mathbf{x_*}) \right]\right]\\
+&amp;=
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+m(\mu_\mathbf{x}, \Sigma_\mathbf{x})
+&=
+\mathbb{E}_\mathbf{f_*}
+\left[ f_* \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right] \\
+&=
+\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_{f_*} \left[ f_* \,p(f_* | \mathbf{x_*}) \right]\right]\\
+&=
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]
+\end{aligned}
+</script>
+</div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Variance Function</label><div class="tabbed-content">
+<p>The variance term is a bit more complex.</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+v(\mu_\mathbf{x}, \Sigma_\mathbf{x})
+&amp;=
+\mathbb{E}_\mathbf{f_*}
+\left[ f_*^2 \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right] -
+\left(\mathbb{E}_\mathbf{f_*}
+\left[ f_* \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right]\right)^2\\
+&amp;=
+\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_\mathbf{x_*} \left[ f_*^2 \, p(f_*|\mathbf{x}_*) \right] \right] -
+\left(\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_\mathbf{x_*} \left[ f_* \, p(f_*|\mathbf{x}_*) \right] \right]\right)^2\\
+&amp;=
+\mathbb{E}_\mathbf{x_*}
+\left[  \sigma_\text{GP}^2(\mathbf{x}_*) + \mu_\text{GP}^2(\mathbf{x}_*) \right] -
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]^2 \\
+&amp;=
+\mathbb{E}_\mathbf{x_*}
+\left[  \sigma_\text{GP}^2(\mathbf{x}_*) \right] + \mathbb{E}_\mathbf{x_*} \left[ \mu_\text{GP}^2(\mathbf{x}_*) \right] -
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]^2\\
+&amp;=
+\mathbb{E}_\mathbf{x_*} \left[  \sigma_\text{GP}^2(\mathbf{x}_*) \right] +
+\mathbb{V}_\mathbf{x_*} \left[\mu_\text{GP}(\mathbf{x}_*) \right]
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+v(\mu_\mathbf{x}, \Sigma_\mathbf{x})
+&=
+\mathbb{E}_\mathbf{f_*}
+\left[ f_*^2 \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right] -
+\left(\mathbb{E}_\mathbf{f_*}
+\left[ f_* \, \mathbb{E}_\mathbf{x_*} \left[ p(f_*|\mathbf{x}_*) \right] \right]\right)^2\\
+&=
+\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_\mathbf{x_*} \left[ f_*^2 \, p(f_*|\mathbf{x}_*) \right] \right] -
+\left(\mathbb{E}_\mathbf{x_*}
+\left[ \mathbb{E}_\mathbf{x_*} \left[ f_* \, p(f_*|\mathbf{x}_*) \right] \right]\right)^2\\
+&=
+\mathbb{E}_\mathbf{x_*}
+\left[  \sigma_\text{GP}^2(\mathbf{x}_*) + \mu_\text{GP}^2(\mathbf{x}_*) \right] -
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]^2 \\
+&=
+\mathbb{E}_\mathbf{x_*}
+\left[  \sigma_\text{GP}^2(\mathbf{x}_*) \right] + \mathbb{E}_\mathbf{x_*} \left[ \mu_\text{GP}^2(\mathbf{x}_*) \right] -
+\mathbb{E}_{x_*}\left[ \mu_\text{GP}(\mathbf{x_*}) \right]^2\\
+&=
+\mathbb{E}_\mathbf{x_*} \left[  \sigma_\text{GP}^2(\mathbf{x}_*) \right] +
+\mathbb{V}_\mathbf{x_*} \left[\mu_\text{GP}(\mathbf{x}_*) \right]
+\end{aligned}
+</script>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="taylor-approximation">Taylor Approximation<a class="headerlink" href="#taylor-approximation" title="Permanent link">&para;</a></h2>
+<p>Taking complete expectations can be very expensive because we need to take the expectation wrt to the inputs through nonlinear terms such as the kernel functions and their inverses. So, we will approximate our mean and variance function via a Taylor Expansion. First the mean function:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mathbf{z}_\mu =
+\mu_\text{GP}(\mathbf{x_*})=
+\mu_\text{GP}(\mu_\mathbf{x_*}) +
+\nabla \mu_\text{GP}\bigg\vert_{\mathbf{x}_* = \mu_\mathbf{x}}
+(\mathbf{x}_* - \mu_\mathbf{x_*})
++ \mathcal{O} (\mathbf{x_*}^2)
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbf{z}_\mu =
+\mu_\text{GP}(\mathbf{x_*})=
+\mu_\text{GP}(\mu_\mathbf{x_*}) +
+\nabla \mu_\text{GP}\bigg\vert_{\mathbf{x}_* = \mu_\mathbf{x}}
+(\mathbf{x}_* - \mu_\mathbf{x_*})
++ \mathcal{O} (\mathbf{x_*}^2)
+\end{aligned}
+</script>
+</div>
+<p>and then the variance function:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mathbf{z}_\sigma =
+\sigma^2_\text{GP}(\mathbf{x_*})=
+\sigma^2_\text{GP}(\mu_\mathbf{x_*}) +
+\nabla \sigma^2_\text{GP}\bigg\vert_{\mathbf{x}_* = \mu_\mathbf{x}}
+(\mathbf{x}_* - \mu_\mathbf{x_*})
++ \mathcal{O} (\mathbf{x_*}^2)
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbf{z}_\sigma =
+\sigma^2_\text{GP}(\mathbf{x_*})=
+\sigma^2_\text{GP}(\mu_\mathbf{x_*}) +
+\nabla \sigma^2_\text{GP}\bigg\vert_{\mathbf{x}_* = \mu_\mathbf{x}}
+(\mathbf{x}_* - \mu_\mathbf{x_*})
++ \mathcal{O} (\mathbf{x_*}^2)
+\end{aligned}
+</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To see more about error propagation and the relation to the mean and variance, see <a href="../error_propagation/">here</a>.</p>
+</div>
+<p>So expanding these equations gives us the following:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+m(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
+&amp;=
+\mu_\text{GP}(\mu_\mathbf{x_*})\\
+v(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
+&amp;= \sigma^2_\text{GP}(\mu_{x_*}) +
+\nabla_{\mu_{GP_*}}  \mu_\text{GP}(\mu_{x_*})^\top
+\Sigma_{x_*}
+\nabla_{\mu_{GP_*}} \mu_\text{GP}(\mu_{x_*}) +
+\frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+m(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
+&=
+\mu_\text{GP}(\mu_\mathbf{x_*})\\
+v(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
+&= \sigma^2_\text{GP}(\mu_{x_*}) +
+\nabla_{\mu_{GP_*}}  \mu_\text{GP}(\mu_{x_*})^\top
+\Sigma_{x_*}
+\nabla_{\mu_{GP_*}} \mu_\text{GP}(\mu_{x_*}) +
+\frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
+\end{aligned}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\nabla_x</span><script type="math/tex">\nabla_x</script></span> is the gradient of the function <span><span class="MathJax_Preview">f(\mu_x)</span><script type="math/tex">f(\mu_x)</script></span> w.r.t. <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">\nabla_x^2 f(\mu_x)</span><script type="math/tex">\nabla_x^2 f(\mu_x)</script></span> is the second derivative (the Hessian) of the function <span><span class="MathJax_Preview">f(\mu_x)</span><script type="math/tex">f(\mu_x)</script></span> w.r.t. <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>. This is a second-order approximation which has that expensive Hessian term. There have have been studies that have shown that that term tends to be neglible in practice and a first-order approximation is typically enough. </p>
+<p>Practically speaking, this leaves us with the following predictive mean and variance functions:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mu_\text{eGP}(\mathbf{x_*}) &amp;= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha  \\
+\sigma_{eGP}^2(\mathbf{x_*}) &amp;= \sigma_y^2 + k_{**}- {\bf k}_* ({\bf K}+\sigma_y^2 \mathbf{I}_N )^{-1} {\bf k}_{*}^{\top} + 
+{\color{red}{\nabla_{\mu_{GP_*}}\Sigma_x\nabla_{\mu_{GP_*}}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \sigma^2_{GP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mu_\text{eGP}(\mathbf{x_*}) &= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha  \\
+\sigma_{eGP}^2(\mathbf{x_*}) &= \sigma_y^2 + k_{**}- {\bf k}_* ({\bf K}+\sigma_y^2 \mathbf{I}_N )^{-1} {\bf k}_{*}^{\top} + 
+{\color{red}{\nabla_{\mu_{GP_*}}\Sigma_x\nabla_{\mu_{GP_*}}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \sigma^2_{GP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+\end{aligned}
+</script>
+</div>
+<p>As seen above, the only extra term we need to include is the derivative of the mean function that is present in the predictive variance term.</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<div class="admonition details">
+<p class="admonition-title">1D Demo</p>
+<div class="tabbed-set" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Exact GP</label><div class="tabbed-content">
+<p><center></p>
+<p><img alt="png" src="../pics/1d_gp.png" /></p>
+<p></center></p>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">1st Order Taylor</label><div class="tabbed-content">
+<p><center></p>
+<p><img alt="png" src="../pics/1d_gp_taylor_1o.png" /></p>
+<p></center></p>
+<div>
+<div class="MathJax_Preview">
+\nu_{eGP*}^2 =  
+\nu_{GP*}^2(\mathbf{x}_*)  +
+{\color{red}{\nabla_{\mu_*}\Sigma_x\nabla_{\mu_*}^\top}}
+</div>
+<script type="math/tex; mode=display">
+\nu_{eGP*}^2 =  
+\nu_{GP*}^2(\mathbf{x}_*)  +
+{\color{red}{\nabla_{\mu_*}\Sigma_x\nabla_{\mu_*}^\top}}
+</script>
+</div>
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">2nd Order Taylor</label><div class="tabbed-content">
+<p><center></p>
+<p><img alt="png" src="../pics/1d_gp_taylor_2o.png" /></p>
+<p></center></p>
+<div>
+<div class="MathJax_Preview">
+\nu_{eGP*}^2 =  
+\nu_{GP*}^2(\mathbf{x}_*)  +
+{\color{red}{\nabla_{\mu_*}\Sigma_x\nabla_{\mu_*}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \nu^2_{GP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+</div>
+<script type="math/tex; mode=display">
+\nu_{eGP*}^2 =  
+\nu_{GP*}^2(\mathbf{x}_*)  +
+{\color{red}{\nabla_{\mu_*}\Sigma_x\nabla_{\mu_*}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \nu^2_{GP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+</script>
+</div>
+</div>
+<input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Differences</label><div class="tabbed-content">
+<p><center></p>
+<p><img alt="png" src="../pics/1d_gp_taylor_diff.png" /></p>
+<p></center></p>
+<p>Here, we see a plot for the differences between the two GPs.</p>
+</div>
+</div>
+</div>
+<div class="admonition details">
+<p class="admonition-title">Satellite Data</p>
+<div class="tabbed-set" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Absolute Error</label><div class="tabbed-content">
+<p><img alt="png" src="../pics/iasi_abs_error.png" /></p>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Exact GP</label><div class="tabbed-content">
+<p><img alt="png" src="../pics/iasi_std.png" /></p>
+<p>These are the predictions using the exact GP and the predictive variances.</p>
+</div>
+<input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><label for="__tabbed_3_3">Linearized GP</label><div class="tabbed-content">
+<p><img alt="png" src="../pics/iasi_estd.png" /></p>
+<p>This is an example where we used the Taylor expanded GP. In this example, we only did the first order approximation.</p>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="sparse-gps">Sparse GPs<a class="headerlink" href="#sparse-gps" title="Permanent link">&para;</a></h2>
+<p>We can extend this method to other GP algorithms including sparse GP models. The only thing that changes are the original <span><span class="MathJax_Preview">\mu_{GP}</span><script type="math/tex">\mu_{GP}</script></span> and <span><span class="MathJax_Preview">\nu^2_{GP}</span><script type="math/tex">\nu^2_{GP}</script></span> equations. In a sparse GP we have the following predictive functions</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+    \mu_{SGP} &amp;= K_{*z}K_{zz}^{-1}m \\
+    \nu^2_{SGP} &amp;= K_{**} 
+    - K_{*z}\left[ K_{zz}^{-1} - K_{zz}^{-1}SK_{zz}^{-1} \right]K_{*z}^{\top}
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mu_{SGP} &= K_{*z}K_{zz}^{-1}m \\
+    \nu^2_{SGP} &= K_{**} 
+    - K_{*z}\left[ K_{zz}^{-1} - K_{zz}^{-1}SK_{zz}^{-1} \right]K_{*z}^{\top}
+\end{aligned}
+</script>
+</div>
+<p>So the new predictive functions will be:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+    \mu_{SGP} &amp;= K_{*z}K_{zz}^{-1}m \\
+    \nu^2_{SGP} &amp;= K_{**} 
+    - K_{*z}\left[ K_{zz}^{-1} - K_{zz}^{-1}SK_{zz}^{-1} \right]K_{*z}^{\top} 
+    + \tilde{\Sigma}_x
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \mu_{SGP} &= K_{*z}K_{zz}^{-1}m \\
+    \nu^2_{SGP} &= K_{**} 
+    - K_{*z}\left[ K_{zz}^{-1} - K_{zz}^{-1}SK_{zz}^{-1} \right]K_{*z}^{\top} 
+    + \tilde{\Sigma}_x
+\end{aligned}
+</script>
+</div>
+<p>Practically speaking, this leaves us with the following predictive mean and variance functions:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mu_\text{eSGP}(\mathbf{x_*}) &amp;= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha  \\
+\sigma_{eSGP}^2(\mathbf{x_*}) &amp;=
+\sigma_y^2 + 
+K_{**} - K_{*z}\left[ K_{zz}^{-1} - K_{zz}^{-1}SK_{zz}^{-1} \right]K_{*z}^{\top}  + {\color{red}{\nabla_{\mu_{SGP_*}}\Sigma_x\nabla_{\mu_{SGP_*}}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \sigma^2_{SGP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mu_\text{eSGP}(\mathbf{x_*}) &= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha  \\
+\sigma_{eSGP}^2(\mathbf{x_*}) &=
+\sigma_y^2 + 
+K_{**} - K_{*z}\left[ K_{zz}^{-1} - K_{zz}^{-1}SK_{zz}^{-1} \right]K_{*z}^{\top}  + {\color{red}{\nabla_{\mu_{SGP_*}}\Sigma_x\nabla_{\mu_{SGP_*}}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \sigma^2_{SGP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+\end{aligned}
+</script>
+</div>
+<p>As shown above, this is a fairly extensible method that offers a cheap improved predictive variance estimates on an already trained GP model. Some future work could be evaluating how other GP models, e.g. Sparse Spectrum GP, Multi-Output GPs, e.t.c.</p>
+<hr />
+<h2 id="literature">Literature<a class="headerlink" href="#literature" title="Permanent link">&para;</a></h2>
+<p><strong>Theory</strong></p>
 <ul>
-<li>Author: J. Emmanuel Johnson</li>
-<li>Email: jemanjohnson34@gmail.com</li>
-<li>Website: <a href="https://jejjohnson.netlify.com">jejjohnson.netlify.com</a></li>
-<li>Date: 2020</li>
+<li>Bayesian Filtering and Smoothing - Smio Sarkka ()- Book</li>
+<li>Modelling and Control of Dynamic Systems Using GP Models - Jus Kocijan () - Book</li>
 </ul>
-<h2 id="input-uncertainty-propagation-in-gaussian-process-regression-models">Input Uncertainty Propagation in Gaussian Process Regression Models<a class="headerlink" href="#input-uncertainty-propagation-in-gaussian-process-regression-models" title="Permanent link">&para;</a></h2>
-<h3 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h3>
-<p><strong>Demo Colab</strong></p>
-<p>You can see a <a href="https://colab.research.google.com/drive/1X-XCAJOJuiQOQVxN_cqsYAYOTztgIHTi">colab notebook</a> with some of the plots for the presentation.</p>
-<p><strong>Code</strong></p>
-<p>You can find the code for my experiments on this repository: <a href="https://github.com/jejjohnson/uncertain_gps">github.com/jejjohnson/uncertain_gps</a>. There you can also find the <a href="https://jejjohnson.github.io/uncertain_gps/">project website</a>.</p>
-<h3 id="slides">Slides<a class="headerlink" href="#slides" title="Permanent link">&para;</a></h3>
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR31qQU3NmyR3hPnUCZHWARia6RPmJpGgd7ArZJgWx1qswrOs2cqeDuU4Dj8df_VJVGKtO053MxRY83/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<p><strong>Applied to Gaussian Processes</strong></p>
+<ul>
+<li>Gaussian Process Priors with Uncertain Inputs: Multiple-Step-Ahead Prediction - Girard et. al. (2002) - Technical Report<blockquote>
+<p>Does the derivation for taking the expectation and variance for the  Taylor series expansion of the predictive mean and variance. </p>
+</blockquote>
+</li>
+<li>Expectation Propagation in Gaussian Process Dynamical Systems: Extended Version - Deisenroth &amp; Mohamed (2012) - NeuRIPS<blockquote>
+<p>First time the moment matching <strong>and</strong> linearized version appears in the GP literature.</p>
+</blockquote>
+</li>
+<li>Learning with Uncertainty-Gaussian Processes and Relevance Vector Machines - Candela (2004) - Thesis<blockquote>
+<p>Full law of iterated expectations and conditional variance.</p>
+</blockquote>
+</li>
+<li>Gaussian Process Training with Input Noise - McHutchon &amp; Rasmussen et. al. (2012) - NeuRIPS <blockquote>
+<p>Used the same logic but instead of just approximated the posterior, they also applied this to the model which resulted in an iterative procedure.</p>
+</blockquote>
+</li>
+<li>Multi-class Gaussian Process Classification with Noisy Inputs - Villacampa-Calvo et. al. (2020) - <a href="">axriv</a><blockquote>
+<p>Applied the first order approximation using the Taylor expansion for a classification problem. Compared this to the variational inference.</p>
+</blockquote>
+</li>
+</ul>
+                
+                  
                 
               
               
@@ -845,7 +1227,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../notebooks/numpyro_egp_mcmc/" title="Numpyro egp mcmc" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../scratch/" title="Scratch" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -854,11 +1236,25 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Numpyro egp mcmc
+                Scratch
               </div>
             </div>
           </a>
         
+        
+          <a href="../../notebooks/1.0_gp_basics/" title="1.0 gp basics" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                1.0 gp basics
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
         
       </nav>
     </div>

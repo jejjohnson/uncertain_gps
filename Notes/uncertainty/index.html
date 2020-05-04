@@ -11,23 +11,23 @@
         <meta name="description" content="Uncertain Inputs with Gaussian Processes">
       
       
-        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/">
+        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/Notes/uncertainty/">
       
       
         <meta name="author" content="J. Emmanuel Johnson">
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.4">
     
     
       
-        <title>Uncertain Gaussian Processes</title>
+        <title>What is Uncertainty? - Uncertain Gaussian Processes</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.c4007cdc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4007cdc.min.css">
       
-        <link rel="stylesheet" href="assets/stylesheets/palette.8435c73a.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.8435c73a.min.css">
       
       
         
@@ -45,11 +45,11 @@
     
     
     
-      <link rel="stylesheet" href="css/ansi-colours.css">
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
     
     
       
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#input-uncertainty-for-gaussian-processes" class="md-skip">
+        <a href="#what-is-uncertainty" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Input Uncertainty for Gaussian Processes
+              What is Uncertainty?
             
           </span>
         </div>
@@ -194,121 +194,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Input Uncertainty for Gaussian Processes
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="." title="Input Uncertainty for Gaussian Processes" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../.." title="Input Uncertainty for Gaussian Processes" class="md-nav__link">
       Input Uncertainty for Gaussian Processes
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#taylor-approximation" class="md-nav__link">
-    Taylor Approximation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unscented-transforms" class="md-nav__link">
-    Unscented Transforms
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#variational-inference" class="md-nav__link">
-    Variational Inference
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#monte-carlo-estimation" class="md-nav__link">
-    Monte Carlo Estimation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#my-resources" class="md-nav__link">
-    My Resources
-  </a>
-  
-    <nav class="md-nav" aria-label="My Resources">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#literature-review" class="md-nav__link">
-    Literature Review
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    Documentation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gp-model-zoo" class="md-nav__link">
-    GP Model Zoo
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -343,7 +233,7 @@
 
 
   <li class="md-nav__item">
-    <a href="MonteCarlo/demo/" title="MCMC eGP" class="md-nav__link">
+    <a href="../../MonteCarlo/demo/" title="MCMC eGP" class="md-nav__link">
       MCMC eGP
     </a>
   </li>
@@ -358,10 +248,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Notes
@@ -385,7 +277,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/approximate/" title="Gaussian Approximations" class="md-nav__link">
+    <a href="../approximate/" title="Gaussian Approximations" class="md-nav__link">
       Gaussian Approximations
     </a>
   </li>
@@ -397,7 +289,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/basics/" title="Basics" class="md-nav__link">
+    <a href="../basics/" title="Basics" class="md-nav__link">
       Basics
     </a>
   </li>
@@ -409,7 +301,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/error_propagation/" title="Error Propagation" class="md-nav__link">
+    <a href="../error_propagation/" title="Error Propagation" class="md-nav__link">
       Error Propagation
     </a>
   </li>
@@ -421,7 +313,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/literature/" title="Literature" class="md-nav__link">
+    <a href="../literature/" title="Literature" class="md-nav__link">
       Literature
     </a>
   </li>
@@ -433,7 +325,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/mm/" title="Moment-Matching" class="md-nav__link">
+    <a href="../mm/" title="Moment-Matching" class="md-nav__link">
       Moment-Matching
     </a>
   </li>
@@ -445,7 +337,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/next/" title="Next Steps" class="md-nav__link">
+    <a href="../next/" title="Next Steps" class="md-nav__link">
       Next Steps
     </a>
   </li>
@@ -457,7 +349,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/software/" title="Software" class="md-nav__link">
+    <a href="../software/" title="Software" class="md-nav__link">
       Software
     </a>
   </li>
@@ -469,7 +361,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/stochastic/" title="Stochastic" class="md-nav__link">
+    <a href="../stochastic/" title="Stochastic" class="md-nav__link">
       Stochastic
     </a>
   </li>
@@ -481,7 +373,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/taylor/" title="Linearization (Taylor Expansions)" class="md-nav__link">
+    <a href="../taylor/" title="Linearization (Taylor Expansions)" class="md-nav__link">
       Linearization (Taylor Expansions)
     </a>
   </li>
@@ -491,11 +383,20 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="Notes/uncertainty/" title="What is Uncertainty?" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="What is Uncertainty?" class="md-nav__link md-nav__link--active">
       What is Uncertainty?
     </a>
+    
   </li>
 
         
@@ -505,7 +406,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Notes/vi/" title="Uncertain Inputs GPs - Variational Strategies" class="md-nav__link">
+    <a href="../vi/" title="Uncertain Inputs GPs - Variational Strategies" class="md-nav__link">
       Uncertain Inputs GPs - Variational Strategies
     </a>
   </li>
@@ -547,7 +448,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Taylor/2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
+    <a href="../../Taylor/2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
       2.0 linearized gp
     </a>
   </li>
@@ -559,7 +460,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Taylor/error_propagation/" title="Error Propagation" class="md-nav__link">
+    <a href="../../Taylor/error_propagation/" title="Error Propagation" class="md-nav__link">
       Error Propagation
     </a>
   </li>
@@ -571,7 +472,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Taylor/scratch/" title="Scratch" class="md-nav__link">
+    <a href="../../Taylor/scratch/" title="Scratch" class="md-nav__link">
       Scratch
     </a>
   </li>
@@ -583,7 +484,7 @@
 
 
   <li class="md-nav__item">
-    <a href="Taylor/taylor/" title="Linearized GP" class="md-nav__link">
+    <a href="../../Taylor/taylor/" title="Linearized GP" class="md-nav__link">
       Linearized GP
     </a>
   </li>
@@ -625,7 +526,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/1.0_gp_basics/" title="1.0 gp basics" class="md-nav__link">
+    <a href="../../notebooks/1.0_gp_basics/" title="1.0 gp basics" class="md-nav__link">
       1.0 gp basics
     </a>
   </li>
@@ -637,7 +538,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/1.1_gp_refactored/" title="1.1 gp refactored" class="md-nav__link">
+    <a href="../../notebooks/1.1_gp_refactored/" title="1.1 gp refactored" class="md-nav__link">
       1.1 gp refactored
     </a>
   </li>
@@ -649,7 +550,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
+    <a href="../../notebooks/2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
       2.0 linearized gp
     </a>
   </li>
@@ -661,7 +562,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/3.0_unscented_gp/" title="3.0 unscented gp" class="md-nav__link">
+    <a href="../../notebooks/3.0_unscented_gp/" title="3.0 unscented gp" class="md-nav__link">
       3.0 unscented gp
     </a>
   </li>
@@ -673,7 +574,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/4.0_mcmc_gp/" title="4.0 mcmc gp" class="md-nav__link">
+    <a href="../../notebooks/4.0_mcmc_gp/" title="4.0 mcmc gp" class="md-nav__link">
       4.0 mcmc gp
     </a>
   </li>
@@ -685,7 +586,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/distances/" title="Distances" class="md-nav__link">
+    <a href="../../notebooks/distances/" title="Distances" class="md-nav__link">
       Distances
     </a>
   </li>
@@ -697,7 +598,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/egp_pyro_svgp/" title="Egp pyro svgp" class="md-nav__link">
+    <a href="../../notebooks/egp_pyro_svgp/" title="Egp pyro svgp" class="md-nav__link">
       Egp pyro svgp
     </a>
   </li>
@@ -709,7 +610,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/egp_pyro_vgp/" title="Egp pyro vgp" class="md-nav__link">
+    <a href="../../notebooks/egp_pyro_vgp/" title="Egp pyro vgp" class="md-nav__link">
       Egp pyro vgp
     </a>
   </li>
@@ -721,7 +622,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/kernel_derivatives/" title="Kernel derivatives" class="md-nav__link">
+    <a href="../../notebooks/kernel_derivatives/" title="Kernel derivatives" class="md-nav__link">
       Kernel derivatives
     </a>
   </li>
@@ -733,7 +634,7 @@
 
 
   <li class="md-nav__item">
-    <a href="notebooks/numpyro_egp_mcmc/" title="Numpyro egp mcmc" class="md-nav__link">
+    <a href="../../notebooks/numpyro_egp_mcmc/" title="Numpyro egp mcmc" class="md-nav__link">
       Numpyro egp mcmc
     </a>
   </li>
@@ -775,7 +676,7 @@
 
 
   <li class="md-nav__item">
-    <a href="talks/2020_kermes/" title="KERMES Meetup 2020" class="md-nav__link">
+    <a href="../../talks/2020_kermes/" title="KERMES Meetup 2020" class="md-nav__link">
       KERMES Meetup 2020
     </a>
   </li>
@@ -803,91 +704,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#taylor-approximation" class="md-nav__link">
-    Taylor Approximation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unscented-transforms" class="md-nav__link">
-    Unscented Transforms
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#variational-inference" class="md-nav__link">
-    Variational Inference
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#monte-carlo-estimation" class="md-nav__link">
-    Monte Carlo Estimation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#my-resources" class="md-nav__link">
-    My Resources
-  </a>
-  
-    <nav class="md-nav" aria-label="My Resources">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#literature-review" class="md-nav__link">
-    Literature Review
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    Documentation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gp-model-zoo" class="md-nav__link">
-    GP Model Zoo
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -898,7 +714,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/README.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/Notes/uncertainty.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -906,59 +722,7 @@
                   
                 
                 
-                <h1 id="input-uncertainty-for-gaussian-processes">Input Uncertainty for Gaussian Processes<a class="headerlink" href="#input-uncertainty-for-gaussian-processes" title="Permanent link">&para;</a></h1>
-<ul>
-<li>Author: J. Emmanuel Johnson</li>
-<li>Email: jemanjohnson34@gmail.com</li>
-<li>Documentation: <a href="https://jejjohnson.github.io/uncertain_gps">jejjohnson.github.io/uncertain_gps</a></li>
-<li>Repo: <a href="https://github.com/jejjohnson/uncertain_gps">github.com/jejjohnson/uncertain_gps</a></li>
-</ul>
-<hr />
-<p><center>
-<img alt="png" src="pics/gp_plot.png" /></p>
-<p>A graphical model of a GP algorithm with the addition of uncertainty component for the input.</p>
-<p></center></p>
-<p>This repository is home to my studies on uncertain inputs for Gaussian processes. Gaussian processes are a kernel Bayesian framework that is known to generalize well for small datasets and also offers predictive mean and predictive variance estimates. It is one of the most complete models that model uncertainty.</p>
-<p><center></p>
-<p><img alt="png" src="pics/gp_demo.png" /></p>
-<p>Demo showing the error bars for a standard GP predictive variance and an augmented predictive variance estimate using Taylor expansions.</p>
-<p></center></p>
-<p>In this repository, I am interested in exploring the capabilities and limits with Gaussian process regression algorithms when handling noisy inputs. Input uncertainty is often not talked about in the machine learning literature, so I will be exploring this in great detail for my thesis.</p>
-<hr />
-<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
-<h4 id="taylor-approximation">Taylor Approximation<a class="headerlink" href="#taylor-approximation" title="Permanent link">&para;</a></h4>
-<p><center></p>
-<p><img alt="png" src="pics/gp_taylor_funcs.png" /></p>
-<p>The predictive mean and variance equations with the correction term in red to augment the predictive variance to account for uncertain inputs with a known variance.</p>
-<p></center></p>
-<p>We can approximate the predictive mean and variance equations via a Taylor expansion which adds a corrective term w.r.t. the derivative of the function and the known variance. This assumes we know the variance and we don't modify the predictive mean of the learned GP function.</p>
-<hr />
-<h4 id="unscented-transforms">Unscented Transforms<a class="headerlink" href="#unscented-transforms" title="Permanent link">&para;</a></h4>
-<p><center></p>
-<p><img alt="png" src="../../uncertain_gps/figures/jaxgp/examples/mc/1d_gp_mc.png" /></p>
-<p>The predictive mean and variance using the Unscented transformation.</p>
-<p></center></p>
-<hr />
-<h4 id="variational-inference">Variational Inference<a class="headerlink" href="#variational-inference" title="Permanent link">&para;</a></h4>
-<p><strong>TODO</strong></p>
-<hr />
-<h4 id="monte-carlo-estimation">Monte Carlo Estimation<a class="headerlink" href="#monte-carlo-estimation" title="Permanent link">&para;</a></h4>
-<p><center></p>
-<p><img alt="png" src="../docs/MonteCarlo/pics/output_19_1.png" /></p>
-<p>The predictive mean and variance using the MonteCarlo sampling of the posterior.</p>
-<p></center></p>
-<p><center></p>
-<p><img alt="png" src="../../uncertain_gps/figures/jaxgp/examples/mc/1d_gp_mc.png" /></p>
-<p>The predictive mean and variance using the MonteCarlo sampling of the posterior.</p>
-<p></center></p>
-<hr />
-<h2 id="my-resources">My Resources<a class="headerlink" href="#my-resources" title="Permanent link">&para;</a></h2>
-<h4 id="literature-review"><a href="https://jejjohnson.github.io/uncertain_gps/#/literature">Literature Review</a><a class="headerlink" href="#literature-review" title="Permanent link">&para;</a></h4>
-<p>I have gone through most of the relevant works related to noisy inputs in the context of Gaussian processes. It is very extensive and it also offers some literature that is relevant but may not explicitly mentioned uncertain inputs in the paper.</p>
-<h4 id="documentation"><a href="https://jejjohnson.github.io/uncertain_gps/">Documentation</a><a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h4>
-<p>I have some documentation which has all of my personal notes and derivations related to GPs and noisy inputs. Some highlights include the Taylor approximation, moment matching and variational inference.</p>
-<h4 id="gp-model-zoo"><a href="https://jejjohnson.github.io/gp_model_zoo/#/literature">GP Model Zoo</a><a class="headerlink" href="#gp-model-zoo" title="Permanent link">&para;</a></h4>
-<p>I have documented and try to keep up with some of the latest Gaussian process literature in my repository.</p>
+                <h1 id="what-is-uncertainty">What is Uncertainty?<a class="headerlink" href="#what-is-uncertainty" title="Permanent link">&para;</a></h1>
                 
               
               
@@ -977,14 +741,28 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
+          <a href="../taylor/" title="Linearization (Taylor Expansions)" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Linearization (Taylor Expansions)
+              </div>
+            </div>
+          </a>
         
-          <a href="MonteCarlo/demo/" title="MCMC eGP" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+        
+          <a href="../vi/" title="Uncertain Inputs GPs - Variational Strategies" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                MCMC eGP
+                Uncertain Inputs GPs - Variational Strategies
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
@@ -1043,20 +821,20 @@
       
     </div>
     
-      <script src="assets/javascripts/vendor.83fe6e3c.min.js"></script>
-      <script src="assets/javascripts/bundle.7e1cb91c.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="../../assets/javascripts/vendor.83fe6e3c.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7e1cb91c.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
       
       <script>
         app = initialize({
-          base: ".",
+          base: "../..",
           features: [],
           search: Object.assign({
-            worker: "assets/javascripts/worker/search.37585f48.min.js"
+            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
       
-        <script src="javascripts/extra.js"></script>
+        <script src="../../javascripts/extra.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

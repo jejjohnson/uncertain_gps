@@ -8,10 +8,10 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Uncertain Inputs with Gaussian Processes">
+        <meta name="description" content="All of my projects">
       
       
-        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/talks/2020_kermes/">
+        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/Notes/approximate/">
       
       
         <meta name="author" content="J. Emmanuel Johnson">
@@ -21,7 +21,7 @@
     
     
       
-        <title>KERMES Meetup 2020 - Uncertain Gaussian Processes</title>
+        <title>Gaussian Approximations</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#kermes-meetup-2020" class="md-skip">
+        <a href="#error-propagation-in-gaussian-transformations" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              KERMES Meetup 2020
+              Gaussian Approximations
             
           </span>
         </div>
@@ -248,10 +248,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Notes
@@ -273,11 +275,87 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../Notes/approximate/" title="Gaussian Approximations" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Gaussian Approximations
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Gaussian Approximations" class="md-nav__link md-nav__link--active">
       Gaussian Approximations
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#change-of-variables" class="md-nav__link">
+    Change of Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conditional-gaussian-distribution" class="md-nav__link">
+    Conditional Gaussian Distribution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taylor-expansions" class="md-nav__link">
+    Taylor Expansions
+  </a>
+  
+    <nav class="md-nav" aria-label="Taylor Expansions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#joint-distribution" class="md-nav__link">
+    Joint Distribution
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#joint-distribution-for-additive-noise" class="md-nav__link">
+    Joint Distribution for Additive Noise
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -287,7 +365,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/basics/" title="Basics" class="md-nav__link">
+    <a href="../basics/" title="Basics" class="md-nav__link">
       Basics
     </a>
   </li>
@@ -299,7 +377,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/error_propagation/" title="Error Propagation" class="md-nav__link">
+    <a href="../error_propagation/" title="Error Propagation" class="md-nav__link">
       Error Propagation
     </a>
   </li>
@@ -311,7 +389,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/literature/" title="Literature" class="md-nav__link">
+    <a href="../literature/" title="Literature" class="md-nav__link">
       Literature
     </a>
   </li>
@@ -323,7 +401,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/mm/" title="Moment-Matching" class="md-nav__link">
+    <a href="../mm/" title="Moment-Matching" class="md-nav__link">
       Moment-Matching
     </a>
   </li>
@@ -335,7 +413,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/next/" title="Next Steps" class="md-nav__link">
+    <a href="../next/" title="Next Steps" class="md-nav__link">
       Next Steps
     </a>
   </li>
@@ -347,7 +425,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/software/" title="Software" class="md-nav__link">
+    <a href="../software/" title="Software" class="md-nav__link">
       Software
     </a>
   </li>
@@ -359,7 +437,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/stochastic/" title="Stochastic" class="md-nav__link">
+    <a href="../stochastic/" title="Stochastic" class="md-nav__link">
       Stochastic
     </a>
   </li>
@@ -371,7 +449,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/taylor/" title="Linearization (Taylor Expansions)" class="md-nav__link">
+    <a href="../taylor/" title="Linearization (Taylor Expansions)" class="md-nav__link">
       Linearization (Taylor Expansions)
     </a>
   </li>
@@ -383,7 +461,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/uncertainty/" title="What is Uncertainty?" class="md-nav__link">
+    <a href="../uncertainty/" title="What is Uncertainty?" class="md-nav__link">
       What is Uncertainty?
     </a>
   </li>
@@ -395,7 +473,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Notes/vi/" title="Uncertain Inputs GPs - Variational Strategies" class="md-nav__link">
+    <a href="../vi/" title="Uncertain Inputs GPs - Variational Strategies" class="md-nav__link">
       Uncertain Inputs GPs - Variational Strategies
     </a>
   </li>
@@ -638,12 +716,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
       Talks
@@ -665,73 +741,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        KERMES Meetup 2020
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="KERMES Meetup 2020" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../talks/2020_kermes/" title="KERMES Meetup 2020" class="md-nav__link">
       KERMES Meetup 2020
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#input-uncertainty-propagation-in-gaussian-process-regression-models" class="md-nav__link">
-    Input Uncertainty Propagation in Gaussian Process Regression Models
-  </a>
-  
-    <nav class="md-nav" aria-label="Input Uncertainty Propagation in Gaussian Process Regression Models">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#resources" class="md-nav__link">
-    Resources
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#slides" class="md-nav__link">
-    Slides
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -766,29 +780,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#input-uncertainty-propagation-in-gaussian-process-regression-models" class="md-nav__link">
-    Input Uncertainty Propagation in Gaussian Process Regression Models
-  </a>
-  
-    <nav class="md-nav" aria-label="Input Uncertainty Propagation in Gaussian Process Regression Models">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#resources" class="md-nav__link">
-    Resources
+  <a href="#change-of-variables" class="md-nav__link">
+    Change of Variables
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#conditional-gaussian-distribution" class="md-nav__link">
+    Conditional Gaussian Distribution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taylor-expansions" class="md-nav__link">
+    Taylor Expansions
+  </a>
+  
+    <nav class="md-nav" aria-label="Taylor Expansions">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#slides" class="md-nav__link">
-    Slides
+  <a href="#joint-distribution" class="md-nav__link">
+    Joint Distribution
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#joint-distribution-for-additive-noise" class="md-nav__link">
+    Joint Distribution for Additive Noise
+  </a>
   
 </li>
       
@@ -804,29 +832,363 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/talks/2020_kermes.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/Notes/approximate.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
                   
+                    
+
+
+  
+
+
+<a href="https://github.com/jejjohnson/uncertain_gps/docs/projects/ErrorGPs/approximate.md" title="approximate.md" class="md-content__button md-icon">
+  Source
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+</a>
+                  
                 
                 
-                <h1 id="kermes-meetup-2020">KERMES Meetup 2020<a class="headerlink" href="#kermes-meetup-2020" title="Permanent link">&para;</a></h1>
-<ul>
-<li>Author: J. Emmanuel Johnson</li>
-<li>Email: jemanjohnson34@gmail.com</li>
-<li>Website: <a href="https://jejjohnson.netlify.com">jejjohnson.netlify.com</a></li>
-<li>Date: 2020</li>
-</ul>
-<h2 id="input-uncertainty-propagation-in-gaussian-process-regression-models">Input Uncertainty Propagation in Gaussian Process Regression Models<a class="headerlink" href="#input-uncertainty-propagation-in-gaussian-process-regression-models" title="Permanent link">&para;</a></h2>
-<h3 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h3>
-<p><strong>Demo Colab</strong></p>
-<p>You can see a <a href="https://colab.research.google.com/drive/1X-XCAJOJuiQOQVxN_cqsYAYOTztgIHTi">colab notebook</a> with some of the plots for the presentation.</p>
-<p><strong>Code</strong></p>
-<p>You can find the code for my experiments on this repository: <a href="https://github.com/jejjohnson/uncertain_gps">github.com/jejjohnson/uncertain_gps</a>. There you can also find the <a href="https://jejjohnson.github.io/uncertain_gps/">project website</a>.</p>
-<h3 id="slides">Slides<a class="headerlink" href="#slides" title="Permanent link">&para;</a></h3>
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR31qQU3NmyR3hPnUCZHWARia6RPmJpGgd7ArZJgWx1qswrOs2cqeDuU4Dj8df_VJVGKtO053MxRY83/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                <h1 id="error-propagation-in-gaussian-transformations">Error Propagation in Gaussian Transformations<a class="headerlink" href="#error-propagation-in-gaussian-transformations" title="Permanent link">&para;</a></h1>
+<p>We're in the setting where we have some inputs that come from a distribution <span><span class="MathJax_Preview">\mathbf{x} \sim \mathcal{N}(\mathbf{\mu_x}, \Sigma_\mathbf{x})</span><script type="math/tex">\mathbf{x} \sim \mathcal{N}(\mathbf{\mu_x}, \Sigma_\mathbf{x})</script></span> and we have some outputs <span><span class="MathJax_Preview">y\in\mathbb{R}</span><script type="math/tex">y\in\mathbb{R}</script></span>. Typically we have some function <span><span class="MathJax_Preview">f(\mathbf)</span><script type="math/tex">f(\mathbf)</script></span> that maps the points <span><span class="MathJax_Preview">f:\mathbb{R}^D \rightarrow \mathbb{R}</span><script type="math/tex">f:\mathbb{R}^D \rightarrow \mathbb{R}</script></span>. So like we do with GPs, we have the following function"</p>
+<div>
+<div class="MathJax_Preview">
+y=f(\mathbf{x})
+</div>
+<script type="math/tex; mode=display">
+y=f(\mathbf{x})
+</script>
+</div>
+<hr />
+<h2 id="change-of-variables">Change of Variables<a class="headerlink" href="#change-of-variables" title="Permanent link">&para;</a></h2>
+<p>To have this full mapping, we would need to use the change of variables method because we are doing a transformation between of probability distributions.</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+p(y) &amp;= p(x)\left| \frac{dy}{dx} \right|^{-1} \\
+&amp;= p(f^{-1}(y)|\mu_x,\Sigma_x)|\nabla f(y)|
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+p(y) &= p(x)\left| \frac{dy}{dx} \right|^{-1} \\
+&= p(f^{-1}(y)|\mu_x,\Sigma_x)|\nabla f(y)|
+\end{aligned}
+</script>
+</div>
+<p>This is very expensive and can be very difficult depending upon the function.</p>
+<hr />
+<h2 id="conditional-gaussian-distribution">Conditional Gaussian Distribution<a class="headerlink" href="#conditional-gaussian-distribution" title="Permanent link">&para;</a></h2>
+<p>Alternatively, if we know that <span><span class="MathJax_Preview">f()</span><script type="math/tex">f()</script></span> is described by a Gaussian distribution, then we can find the joint distribution between <span><span class="MathJax_Preview">\mathbf{x},y</span><script type="math/tex">\mathbf{x},y</script></span>. This can be described as:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{bmatrix}
+    \mathbf{x} \\
+    y
+    \end{bmatrix}
+    \sim \mathcal{N} \left( 
+    \begin{bmatrix}
+    \mu_\mathbf{x} \\ 
+    f(\mathbf{x})
+    \end{bmatrix}, 
+    \begin{bmatrix}
+    \Sigma_\mathbf{x} &amp; C \\
+    C^\top &amp; \Pi
+    \end{bmatrix}
+    \right)
+</div>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+    \mathbf{x} \\
+    y
+    \end{bmatrix}
+    \sim \mathcal{N} \left( 
+    \begin{bmatrix}
+    \mu_\mathbf{x} \\ 
+    f(\mathbf{x})
+    \end{bmatrix}, 
+    \begin{bmatrix}
+    \Sigma_\mathbf{x} & C \\
+    C^\top & \Pi
+    \end{bmatrix}
+    \right)
+</script>
+</div>
+<hr />
+<h2 id="taylor-expansions">Taylor Expansions<a class="headerlink" href="#taylor-expansions" title="Permanent link">&para;</a></h2>
+<p>by using a Taylor series expansion. Let <span><span class="MathJax_Preview">\mu_x</span><script type="math/tex">\mu_x</script></span> be the true inputs and we perturb these by some noise <span><span class="MathJax_Preview">\delta_x</span><script type="math/tex">\delta_x</script></span> which is described by a normal distribution <span><span class="MathJax_Preview">\delta_x \sim \mathcal{N}(0, \Sigma_x)</span><script type="math/tex">\delta_x \sim \mathcal{N}(0, \Sigma_x)</script></span>. So we can write an expression for the function <span><span class="MathJax_Preview">f(\mathbf{x})</span><script type="math/tex">f(\mathbf{x})</script></span>.</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+f(\mathbf{x}) &amp;= f(\mu_x + \delta_x) \\
+&amp;\approx f(\mu_x) + \nabla_x f(\mu_x)\delta_x + \frac{1}{2}\sum_i \delta_x^\top \nabla_{xx}^{(i)}f(\mu_x)\delta_x e_i + \ldots
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f(\mathbf{x}) &= f(\mu_x + \delta_x) \\
+&\approx f(\mu_x) + \nabla_x f(\mu_x)\delta_x + \frac{1}{2}\sum_i \delta_x^\top \nabla_{xx}^{(i)}f(\mu_x)\delta_x e_i + \ldots
+\end{aligned}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\nabla_x f(\mu_x)</span><script type="math/tex">\nabla_x f(\mu_x)</script></span> is the jacobian of <span><span class="MathJax_Preview">f(\cdot)</span><script type="math/tex">f(\cdot)</script></span> evaluated at <span><span class="MathJax_Preview">\mu_x</span><script type="math/tex">\mu_x</script></span>, <span><span class="MathJax_Preview">\nabla_{xx}f(\mu_x)</span><script type="math/tex">\nabla_{xx}f(\mu_x)</script></span> is the hessian of <span><span class="MathJax_Preview">f(\cdot)</span><script type="math/tex">f(\cdot)</script></span> evaluated at <span><span class="MathJax_Preview">\mu_x</span><script type="math/tex">\mu_x</script></span> and <span><span class="MathJax_Preview">e_i</span><script type="math/tex">e_i</script></span> is a ones vector (essentially the trace of a full matrix).</p>
+<hr />
+<h3 id="joint-distribution">Joint Distribution<a class="headerlink" href="#joint-distribution" title="Permanent link">&para;</a></h3>
+<p>So, we want <span><span class="MathJax_Preview">\tilde{f}(\mathbf{x})</span><script type="math/tex">\tilde{f}(\mathbf{x})</script></span> which is a joint distribution of <span><span class="MathJax_Preview">\begin{bmatrix} \mathbf{x} \\ f(\mathbf{x})\end{bmatrix}</span><script type="math/tex">\begin{bmatrix} \mathbf{x} \\ f(\mathbf{x})\end{bmatrix}</script></span>. But as we said, this is difficult to compute so we do a Taylor approximation to this function <span><span class="MathJax_Preview">\begin{bmatrix} \mu_\mathbf{x} \\ f(\mu_\mathbf{x} + \delta_x) \end{bmatrix}</span><script type="math/tex">\begin{bmatrix} \mu_\mathbf{x} \\ f(\mu_\mathbf{x} + \delta_x) \end{bmatrix}</script></span>. But we still want the <strong>full joint distribution</strong>, ideally Gaussian. So that would mean we at least need the expectation and the covariance.</p>
+<div>
+<div class="MathJax_Preview">
+\mathbb{E}_\mathbf{x}\left[ \tilde{f}(\mathbf{x}) \right], \mathbb{V}_\mathbf{x}\left[ \tilde{f}(\mathbf{x}) \right]
+</div>
+<script type="math/tex; mode=display">
+\mathbb{E}_\mathbf{x}\left[ \tilde{f}(\mathbf{x}) \right], \mathbb{V}_\mathbf{x}\left[ \tilde{f}(\mathbf{x}) \right]
+</script>
+</div>
+<details class="details"><summary>Derivation</summary><div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Mean Function</label><div class="tabbed-content">
+<p>The mean function is the easiest to derive. We can just take the expectation of the first two terms and we'll see why all the higher order terms disappear.</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mathbb{E}_\mathbf{x}\left[ \tilde{f}(\mathbf{x}) \right] &amp;=
+\mathbb{E}_\mathbf{x}\left[ \tilde{f}(\mu_\mathbf{x})  + \nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} \right] \\
+&amp;= \mathbb{E}_\mathbf{x}\left[ \tilde{f}(\mu_\mathbf{x}) \right]  +
+\mathbb{E}_\mathbf{x}\left[ \nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} \right] \\
+&amp;= \tilde{f}(\mu_\mathbf{x})  +
+\nabla_\mathbf{x}\mathbb{E}_\mathbf{x}\left[ f(\mathbf{x})\epsilon_\mathbf{x} \right] \\
+&amp;= \tilde{f}(\mu_\mathbf{x})\\
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb{E}_\mathbf{x}\left[ \tilde{f}(\mathbf{x}) \right] &=
+\mathbb{E}_\mathbf{x}\left[ \tilde{f}(\mu_\mathbf{x})  + \nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} \right] \\
+&= \mathbb{E}_\mathbf{x}\left[ \tilde{f}(\mu_\mathbf{x}) \right]  +
+\mathbb{E}_\mathbf{x}\left[ \nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} \right] \\
+&= \tilde{f}(\mu_\mathbf{x})  +
+\nabla_\mathbf{x}\mathbb{E}_\mathbf{x}\left[ f(\mathbf{x})\epsilon_\mathbf{x} \right] \\
+&= \tilde{f}(\mu_\mathbf{x})\\
+\end{aligned}
+</script>
+</div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Covariance Function</label><div class="tabbed-content">
+<p>The covariance function is a bit harder. But again, the final expression is quite simple.</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mathbb{V}_\mathbf{x}\left[ \tilde{f}(\mathbf{x}) \right] &amp;=
+\mathbb{E}_\mathbf{x}\left[f(\mathbf{x}) - \mathbb{E}_\mathbf{x}\left[f(\mathbf{x})\right] \right] \;
+\mathbb{E}_\mathbf{x}\left[f(\mathbf{x}) - \mathbb{E}_\mathbf{x}\left[f(\mathbf{x})\right] \right]^\top \\
+&amp;\approx
+\mathbb{E}_\mathbf{x}
+\left[f(\mathbf{x}) - f(\mu_\mathbf{x}) \right] \;
+\mathbb{E}_\mathbf{x}
+\left[f(\mathbf{x}) - f(\mu_\mathbf{x}) \right]^\top\\
+&amp;\approx
+\mathbb{E}_\mathbf{x}
+\left[f(\mu_\mathbf{x}) + \nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} - f(\mu_\mathbf{x}) \right] \;
+\mathbb{E}_\mathbf{x}
+\left[f(\mu_\mathbf{x}) + \nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x}- f(\mu_\mathbf{x}) \right]^\top\\
+&amp;\approx
+\mathbb{E}_\mathbf{x}
+\left[\nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} \right] \;
+\mathbb{E}_\mathbf{x}
+\left[\nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} \right]^\top\\
+&amp;\approx
+\mathbb{E}_\mathbf{x}
+\left[\left(\nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x}\right) \left(\nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x}\right)^\top \right] \\
+&amp;\approx
+\nabla_\mathbf{x}f(\mu_\mathbf{x})
+\mathbb{E}_\mathbf{x}
+\left[\left(\epsilon_\mathbf{x}\right) \left(\epsilon_\mathbf{x}\right)^\top \right]
+\nabla_\mathbf{x}f(\mu_\mathbf{x}) \\
+&amp;\approx
+\nabla_\mathbf{x}f(\mu_\mathbf{x})
+\Sigma_\mathbf{x}
+\nabla_\mathbf{x}f(\mu_\mathbf{x})
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb{V}_\mathbf{x}\left[ \tilde{f}(\mathbf{x}) \right] &=
+\mathbb{E}_\mathbf{x}\left[f(\mathbf{x}) - \mathbb{E}_\mathbf{x}\left[f(\mathbf{x})\right] \right] \;
+\mathbb{E}_\mathbf{x}\left[f(\mathbf{x}) - \mathbb{E}_\mathbf{x}\left[f(\mathbf{x})\right] \right]^\top \\
+&\approx
+\mathbb{E}_\mathbf{x}
+\left[f(\mathbf{x}) - f(\mu_\mathbf{x}) \right] \;
+\mathbb{E}_\mathbf{x}
+\left[f(\mathbf{x}) - f(\mu_\mathbf{x}) \right]^\top\\
+&\approx
+\mathbb{E}_\mathbf{x}
+\left[f(\mu_\mathbf{x}) + \nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} - f(\mu_\mathbf{x}) \right] \;
+\mathbb{E}_\mathbf{x}
+\left[f(\mu_\mathbf{x}) + \nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x}- f(\mu_\mathbf{x}) \right]^\top\\
+&\approx
+\mathbb{E}_\mathbf{x}
+\left[\nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} \right] \;
+\mathbb{E}_\mathbf{x}
+\left[\nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x} \right]^\top\\
+&\approx
+\mathbb{E}_\mathbf{x}
+\left[\left(\nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x}\right) \left(\nabla_\mathbf{x}f(\mu_\mathbf{x})\epsilon_\mathbf{x}\right)^\top \right] \\
+&\approx
+\nabla_\mathbf{x}f(\mu_\mathbf{x})
+\mathbb{E}_\mathbf{x}
+\left[\left(\epsilon_\mathbf{x}\right) \left(\epsilon_\mathbf{x}\right)^\top \right]
+\nabla_\mathbf{x}f(\mu_\mathbf{x}) \\
+&\approx
+\nabla_\mathbf{x}f(\mu_\mathbf{x})
+\Sigma_\mathbf{x}
+\nabla_\mathbf{x}f(\mu_\mathbf{x})
+\end{aligned}
+</script>
+</div>
+</div>
+</div>
+</details>
+<p>So now we can have a full expression for the joint distribution with the Taylor expansion.</p>
+<div>
+<div class="MathJax_Preview">
+\begin{bmatrix}
+    x \\
+    y
+    \end{bmatrix}
+    \sim \mathcal{N} \left( 
+    \begin{bmatrix}
+    \mu_{x} \\ 
+    \mu_y
+    \end{bmatrix}, 
+    \begin{bmatrix}
+    \Sigma_\mathbf{x} &amp; C_\mathcal{T} \\
+    C_\mathcal{T}^\top &amp; \Pi_\mathcal{T}
+    \end{bmatrix}
+    \right)
+</div>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+    x \\
+    y
+    \end{bmatrix}
+    \sim \mathcal{N} \left( 
+    \begin{bmatrix}
+    \mu_{x} \\ 
+    \mu_y
+    \end{bmatrix}, 
+    \begin{bmatrix}
+    \Sigma_\mathbf{x} & C_\mathcal{T} \\
+    C_\mathcal{T}^\top & \Pi_\mathcal{T}
+    \end{bmatrix}
+    \right)
+</script>
+</div>
+<p>where:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mu_y &amp;= f(\mu_\mathbf{x})\\
+C_T &amp;= \Sigma_\mathbf{x} \nabla_\mathbf{x}f(\mu_\mathbf{x}) \\
+\Pi_T &amp;= 
+\nabla_\mathbf{x}f(\mu_\mathbf{x})
+\Sigma_\mathbf{x} 
+\nabla_\mathbf{x}f(\mu_\mathbf{x}) \\
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mu_y &= f(\mu_\mathbf{x})\\
+C_T &= \Sigma_\mathbf{x} \nabla_\mathbf{x}f(\mu_\mathbf{x}) \\
+\Pi_T &= 
+\nabla_\mathbf{x}f(\mu_\mathbf{x})
+\Sigma_\mathbf{x} 
+\nabla_\mathbf{x}f(\mu_\mathbf{x}) \\
+\end{aligned}
+</script>
+</div>
+<hr />
+<h2 id="joint-distribution-for-additive-noise">Joint Distribution for Additive Noise<a class="headerlink" href="#joint-distribution-for-additive-noise" title="Permanent link">&para;</a></h2>
+<p>So in this setting, we are closer to what we typically use for a GP model. </p>
+<div>
+<div class="MathJax_Preview">
+y = f(\mathbf{x}) + \epsilon
+</div>
+<script type="math/tex; mode=display">
+y = f(\mathbf{x}) + \epsilon
+</script>
+</div>
+<p>where we have noisy inputs with additive Gaussian noise<span><span class="MathJax_Preview">\mathbf{x} \sim \mathcal{N}(\mathbf{\mu_x}, \Sigma_\mathbf{x})</span><script type="math/tex">\mathbf{x} \sim \mathcal{N}(\mathbf{\mu_x}, \Sigma_\mathbf{x})</script></span> and we assume additive Gaussian noise for the outputs <span><span class="MathJax_Preview">\epsilon \sim \mathcal{N}(0, \sigma_y^2 \mathbf{I})</span><script type="math/tex">\epsilon \sim \mathcal{N}(0, \sigma_y^2 \mathbf{I})</script></span>. We want a joint distribution of <span><span class="MathJax_Preview">\mathbf{x},y</span><script type="math/tex">\mathbf{x},y</script></span>. So using the same sequences of steps as above, we actually get a very similar joint distribution, just with an additional term.</p>
+<div>
+<div class="MathJax_Preview">
+\begin{bmatrix}
+    x \\
+    y
+    \end{bmatrix}
+    \sim \mathcal{N} \left( 
+    \begin{bmatrix}
+    \mu_{x} \\ 
+    \mu_{\mathcal{GP}} 
+    \end{bmatrix}, 
+    \begin{bmatrix}
+    \Sigma_\mathbf{x} &amp; C_\mathcal{eGP} \\
+    C_\mathcal{eGP}^\top &amp; \Pi_\mathcal{eGP}
+    \end{bmatrix}
+    \right)
+</div>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+    x \\
+    y
+    \end{bmatrix}
+    \sim \mathcal{N} \left( 
+    \begin{bmatrix}
+    \mu_{x} \\ 
+    \mu_{\mathcal{GP}} 
+    \end{bmatrix}, 
+    \begin{bmatrix}
+    \Sigma_\mathbf{x} & C_\mathcal{eGP} \\
+    C_\mathcal{eGP}^\top & \Pi_\mathcal{eGP}
+    \end{bmatrix}
+    \right)
+</script>
+</div>
+<p>where</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mu_y &amp;= f(\mu_x) \\
+\Pi_\mathcal{eGP} &amp;= \nabla_x f(\mu_x) \: \Sigma_x \: \nabla_x f(\mu_x)^\top + \nu^2(x) \\
+C_\mathcal{eGP} &amp;= \Sigma_x \: \nabla_x^\top f(\mu_x)
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mu_y &= f(\mu_x) \\
+\Pi_\mathcal{eGP} &= \nabla_x f(\mu_x) \: \Sigma_x \: \nabla_x f(\mu_x)^\top + \nu^2(x) \\
+C_\mathcal{eGP} &= \Sigma_x \: \nabla_x^\top f(\mu_x)
+\end{aligned}
+</script>
+</div>
+<p>So if we want to make predictions with our new model, we will have the final equation as:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+f &amp;\sim \mathcal{N}(f|\mu_{GP}, \nu^2_{GP}) \\
+    \mu_\mathcal{eGP} &amp;= K_{*} K_{GP}^{-1}y=K_{*} \alpha \\
+    \sigma^2_\mathcal{eGP} &amp;= K_{**} - K_{*} K_{GP}^{-1}K_{*}^{\top} + \tilde{\Sigma}_x
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f &\sim \mathcal{N}(f|\mu_{GP}, \nu^2_{GP}) \\
+    \mu_\mathcal{eGP} &= K_{*} K_{GP}^{-1}y=K_{*} \alpha \\
+    \sigma^2_\mathcal{eGP} &= K_{**} - K_{*} K_{GP}^{-1}K_{*}^{\top} + \tilde{\Sigma}_x
+\end{aligned}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\tilde{\Sigma}_x = \nabla_x \mu_{GP} \Sigma_x \nabla \mu_{GP}^\top</span><script type="math/tex">\tilde{\Sigma}_x = \nabla_x \mu_{GP} \Sigma_x \nabla \mu_{GP}^\top</script></span>.</p>
+                
+                  
                 
               
               
@@ -845,7 +1207,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../notebooks/numpyro_egp_mcmc/" title="Numpyro egp mcmc" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../MonteCarlo/demo/" title="MCMC eGP" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -854,11 +1216,25 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Numpyro egp mcmc
+                MCMC eGP
               </div>
             </div>
           </a>
         
+        
+          <a href="../basics/" title="Basics" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Basics
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
         
       </nav>
     </div>

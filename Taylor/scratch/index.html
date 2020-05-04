@@ -11,23 +11,23 @@
         <meta name="description" content="Uncertain Inputs with Gaussian Processes">
       
       
-        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/software/">
+        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/Taylor/scratch/">
       
       
         <meta name="author" content="J. Emmanuel Johnson">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.4">
     
     
       
-        <title>Software - Uncertain Gaussian Processes</title>
+        <title>Scratch - Uncertain Gaussian Processes</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.c4007cdc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.c4007cdc.min.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/palette.8435c73a.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.8435c73a.min.css">
       
       
         
@@ -45,11 +45,11 @@
     
     
     
-      <link rel="stylesheet" href="../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
     
     
       
@@ -66,11 +66,6 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
-      
-        
-        <a href="#software" class="md-skip">
-          Skip to content
-        </a>
       
     </div>
     <div data-md-component="announce">
@@ -96,7 +91,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Software
+              Scratch
             
           </span>
         </div>
@@ -196,237 +191,8 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="Input Uncertainty for Gaussian Processes" class="md-nav__link">
+    <a href="../.." title="Input Uncertainty for Gaussian Processes" class="md-nav__link">
       Input Uncertainty for Gaussian Processes
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../basics/" title="Gaussian Process Basics" class="md-nav__link">
-      Gaussian Process Basics
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../error_propagation/" title="Error Propagation" class="md-nav__link">
-      Error Propagation
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../literature/" title="Uncertain Inputs in Gaussian Processes" class="md-nav__link">
-      Uncertain Inputs in Gaussian Processes
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../mm/" title="Moment-Matching" class="md-nav__link">
-      Moment-Matching
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../next/" title="Next Steps" class="md-nav__link">
-      Next Steps
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Software
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="Software" class="md-nav__link md-nav__link--active">
-      Software
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gpy" class="md-nav__link">
-    GPy
-  </a>
-  
-    <nav class="md-nav" aria-label="GPy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#my-model-zoo" class="md-nav__link">
-    My Model Zoo
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpflow" class="md-nav__link">
-    GPFlow
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pyro" class="md-nav__link">
-    Pyro
-  </a>
-  
-    <nav class="md-nav" aria-label="Pyro">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#my-model-zoo_1" class="md-nav__link">
-    My Model Zoo
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpytorch" class="md-nav__link">
-    GPyTorch
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    Summary
-  </a>
-  
-    <nav class="md-nav" aria-label="Summary">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#algorithms-implemented" class="md-nav__link">
-    Algorithms Implemented
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../stochastic/" title="Stochastic" class="md-nav__link">
-      Stochastic
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../taylor/" title="Linearization (Taylor Expansions)" class="md-nav__link">
-      Linearization (Taylor Expansions)
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../uncertainty/" title="What is Uncertainty?" class="md-nav__link">
-      What is Uncertainty?
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../vi/" title="Uncertain Inputs GPs - Variational Strategies" class="md-nav__link">
-      Uncertain Inputs GPs - Variational Strategies
     </a>
   </li>
 
@@ -438,16 +204,307 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
-    <label class="md-nav__link" for="nav-12">
+    <label class="md-nav__link" for="nav-2">
+      MonteCarlo
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="MonteCarlo" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        MonteCarlo
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../MonteCarlo/demo/" title="MCMC eGP" class="md-nav__link">
+      MCMC eGP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Notes
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Notes" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/approximate/" title="Gaussian Approximations" class="md-nav__link">
+      Gaussian Approximations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/basics/" title="Basics" class="md-nav__link">
+      Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/error_propagation/" title="Error Propagation" class="md-nav__link">
+      Error Propagation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/literature/" title="Literature" class="md-nav__link">
+      Literature
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/mm/" title="Moment-Matching" class="md-nav__link">
+      Moment-Matching
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/next/" title="Next Steps" class="md-nav__link">
+      Next Steps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/software/" title="Software" class="md-nav__link">
+      Software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/stochastic/" title="Stochastic" class="md-nav__link">
+      Stochastic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/taylor/" title="Linearization (Taylor Expansions)" class="md-nav__link">
+      Linearization (Taylor Expansions)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/uncertainty/" title="What is Uncertainty?" class="md-nav__link">
+      What is Uncertainty?
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Notes/vi/" title="Uncertain Inputs GPs - Variational Strategies" class="md-nav__link">
+      Uncertain Inputs GPs - Variational Strategies
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Taylor
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Taylor" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Taylor
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
+      2.0 linearized gp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../error_propagation/" title="Error Propagation" class="md-nav__link">
+      Error Propagation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" title="Scratch" class="md-nav__link md-nav__link--active">
+      Scratch
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../taylor/" title="Linearized GP" class="md-nav__link">
+      Linearized GP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
       Notebooks
       <span class="md-nav__icon md-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
       </span>
     </label>
     <nav class="md-nav" aria-label="Notebooks" data-md-level="1">
-      <label class="md-nav__title" for="nav-12">
+      <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
         </span>
@@ -462,7 +519,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/1.0_gp_basics/" title="1.0 gp basics" class="md-nav__link">
+    <a href="../../notebooks/1.0_gp_basics/" title="1.0 gp basics" class="md-nav__link">
       1.0 gp basics
     </a>
   </li>
@@ -474,7 +531,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/1.1_gp_refactored/" title="1.1 gp refactored" class="md-nav__link">
+    <a href="../../notebooks/1.1_gp_refactored/" title="1.1 gp refactored" class="md-nav__link">
       1.1 gp refactored
     </a>
   </li>
@@ -486,7 +543,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
+    <a href="../../notebooks/2.0_linearized_gp/" title="2.0 linearized gp" class="md-nav__link">
       2.0 linearized gp
     </a>
   </li>
@@ -498,7 +555,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/3.0_unscented_gp/" title="3.0 unscented gp" class="md-nav__link">
+    <a href="../../notebooks/3.0_unscented_gp/" title="3.0 unscented gp" class="md-nav__link">
       3.0 unscented gp
     </a>
   </li>
@@ -510,7 +567,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/4.0_mcmc_gp/" title="4.0 mcmc gp" class="md-nav__link">
+    <a href="../../notebooks/4.0_mcmc_gp/" title="4.0 mcmc gp" class="md-nav__link">
       4.0 mcmc gp
     </a>
   </li>
@@ -522,7 +579,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/distances/" title="Distances" class="md-nav__link">
+    <a href="../../notebooks/distances/" title="Distances" class="md-nav__link">
       Distances
     </a>
   </li>
@@ -534,7 +591,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/egp_pyro_svgp/" title="Egp pyro svgp" class="md-nav__link">
+    <a href="../../notebooks/egp_pyro_svgp/" title="Egp pyro svgp" class="md-nav__link">
       Egp pyro svgp
     </a>
   </li>
@@ -546,7 +603,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/egp_pyro_vgp/" title="Egp pyro vgp" class="md-nav__link">
+    <a href="../../notebooks/egp_pyro_vgp/" title="Egp pyro vgp" class="md-nav__link">
       Egp pyro vgp
     </a>
   </li>
@@ -558,7 +615,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/kernel_derivatives/" title="Kernel derivatives" class="md-nav__link">
+    <a href="../../notebooks/kernel_derivatives/" title="Kernel derivatives" class="md-nav__link">
       Kernel derivatives
     </a>
   </li>
@@ -570,7 +627,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../notebooks/numpyro_egp_mcmc/" title="Numpyro egp mcmc" class="md-nav__link">
+    <a href="../../notebooks/numpyro_egp_mcmc/" title="Numpyro egp mcmc" class="md-nav__link">
       Numpyro egp mcmc
     </a>
   </li>
@@ -588,16 +645,16 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
-    <label class="md-nav__link" for="nav-13">
+    <label class="md-nav__link" for="nav-6">
       Talks
       <span class="md-nav__icon md-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
       </span>
     </label>
     <nav class="md-nav" aria-label="Talks" data-md-level="1">
-      <label class="md-nav__title" for="nav-13">
+      <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
         </span>
@@ -612,7 +669,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../talks/2020_kermes/" title="KERMES Meetup 2020" class="md-nav__link">
+    <a href="../../talks/2020_kermes/" title="KERMES Meetup 2020" class="md-nav__link">
       KERMES Meetup 2020
     </a>
   </li>
@@ -630,111 +687,12 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gpy" class="md-nav__link">
-    GPy
-  </a>
-  
-    <nav class="md-nav" aria-label="GPy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#my-model-zoo" class="md-nav__link">
-    My Model Zoo
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpflow" class="md-nav__link">
-    GPFlow
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pyro" class="md-nav__link">
-    Pyro
-  </a>
-  
-    <nav class="md-nav" aria-label="Pyro">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#my-model-zoo_1" class="md-nav__link">
-    My Model Zoo
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpytorch" class="md-nav__link">
-    GPyTorch
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    Summary
-  </a>
-  
-    <nav class="md-nav" aria-label="Summary">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#algorithms-implemented" class="md-nav__link">
-    Algorithms Implemented
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/software.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/Taylor/scratch.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -742,121 +700,9 @@
                   
                 
                 
-                <h1 id="software">Software<a class="headerlink" href="#software" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="#gpy">GPy</a><ul>
-<li><a href="#my-model-zoo">My Model Zoo</a></li>
-</ul>
-</li>
-<li><a href="#gpflow">GPFlow</a></li>
-<li><a href="#pyro">Pyro</a><ul>
-<li><a href="#my-model-zoo-1">My Model Zoo</a></li>
-</ul>
-</li>
-<li><a href="#gpytorch">GPyTorch</a></li>
-<li><a href="#summary">Summary</a></li>
-<li><a href="#algorithms-implemented">Algorithms Implemented</a></li>
-</ul>
-<hr />
-<p>Right now there are a few Python packages that do handle uncertain inputs. I try to focus on the libraries that offer the most built-infunctionality but also are the most extensible. </p>
-<p>!&gt; <strong>Note</strong> If you want more information regarding the software, then please look at my software guide to GPs located <a href="https://jejjohnson.github.io/gp_model_zoo/#/software">here</a>. For more information specifically related to GPs for uncertain inputs, then keep reading.</p>
-<p><strong>TLDR</strong>:
-* Like TensorFlow? Use GPFlow.
-* Like PyTorch? Use Pyro.
-* Lastest and greatest modern GPs? Use GPyTorch.</p>
-<h2 id="gpy"><a href="https://sheffieldml.github.io/GPy/">GPy</a><a class="headerlink" href="#gpy" title="Permanent link">&para;</a></h2>
-<p>This library has a lot of the original algorithms available regarding uncertain inputs. It will host the classics such as the sparse variational GP which offers an argument to specify the input uncertainty. However, the backend is the same as the Bayesian GPLVM. This library hasn't been updated in a while so I don't recommend users to use this regularly outside of small data problems.</p>
-<h4 id="my-model-zoo">My Model Zoo<a class="headerlink" href="#my-model-zoo" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Exact GP Linearized - <a href="https://github.com/jejjohnson/gp_model_zoo/tree/master/gpy">github</a></li>
-<li>Sparse GP Linearized - <a href="https://github.com/jejjohnson/gp_model_zoo/tree/master/gpy">github</a></li>
-<li>Bayesian GPLVM - <a href="https://github.com/jejjohnson/gp_model_zoo/tree/master/gpy">github</a></li>
-</ul>
-<h2 id="gpflow"><a href="https://github.com/GPflow/GPflow">GPFlow</a><a class="headerlink" href="#gpflow" title="Permanent link">&para;</a></h2>
-<p>This library is the successor to GPy that is built on TensorFlow and TensorFlow Probability. It now features more or less most of the original algorithms from the GPy library but it is much cleaner because a lot of the gradients are handled automatically by TensorFlow. It is a good defacto library for working with GPs in the research setting.</p>
-<h2 id="pyro"><a href="http://pyro.ai/">Pyro</a><a class="headerlink" href="#pyro" title="Permanent link">&para;</a></h2>
-<p>This is a probabilistic library uses PyTorch as a backend. It features many inference algorithms such as Monte Carlo and Variational inference schemes. It has a barebones but really extensible GP library available. It is really easy to modify parameters and add prior distributions to whichever components is necessary. I find this library very easy to experiment with in my research.</p>
-<h4 id="my-model-zoo_1">My Model Zoo<a class="headerlink" href="#my-model-zoo_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Sparse GP - <a href="https://colab.research.google.com/drive/1LIeYFaJPiguN2GDj5tYS_YZbg_GazKDa">colab</a></li>
-<li>Variational GP - <a href="https://colab.research.google.com/drive/15ViaPySxqicBp19AKvVRSuYjGHYzrWIP">colab</a></li>
-<li>Stochastic Variational GP - <a href="https://colab.research.google.com/drive/1WZOMte6OnSWmWnJLEAZoGp8z31HgGlvF">colab</a></li>
-</ul>
-<h2 id="gpytorch"><a href="https://gpytorch.ai/">GPyTorch</a><a class="headerlink" href="#gpytorch" title="Permanent link">&para;</a></h2>
-<p>This is a dedicated GP library with PyTorch as a backend. It has the most update features for using modern GPs. This also has some shared components with the Pyro library so it is now easier to modify parameters and add prior distributions. Right now, there is a bit of a learning curve if you want to use it outside of the use cases in the documentation. But, as they keep updating it, I'm sure utilizing it will get easier and easier; on par with Pyro or better. I recommend using this library when you want to move towards production or more extreme applications.</p>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<h3 id="algorithms-implemented">Algorithms Implemented<a class="headerlink" href="#algorithms-implemented" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th><strong>Package</strong></th>
-<th><strong>GPy</strong></th>
-<th><strong>GPFlow</strong></th>
-<th><strong>Pyro</strong></th>
-<th><strong>GPyTorch</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Linearized (Taylor)</td>
-<td>S</td>
-<td>S</td>
-<td>S</td>
-<td>S</td>
-</tr>
-<tr>
-<td>Exact Moment Matching GP</td>
-<td>✗</td>
-<td>✗</td>
-<td>✗</td>
-<td>✗</td>
-</tr>
-<tr>
-<td>Sparse Moment Matching GP</td>
-<td>✓</td>
-<td>✗</td>
-<td>✓</td>
-<td>✗</td>
-</tr>
-<tr>
-<td>Uncertain Variational GP</td>
-<td>✓</td>
-<td>S</td>
-<td>S</td>
-<td>S</td>
-</tr>
-<tr>
-<td>Bayesian GPLVM</td>
-<td>✓</td>
-<td>✓</td>
-<td>✓</td>
-<td>S</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Key</strong></p>
-<table>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>✓</strong></td>
-<td><strong>Implemented</strong></td>
-</tr>
-<tr>
-<td>✗</td>
-<td>Not Implemented</td>
-</tr>
-<tr>
-<td>S</td>
-<td>Supported</td>
-</tr>
-</tbody>
-</table>
+                  <h1>Scratch</h1>
+                
+                
                 
               
               
@@ -875,7 +721,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../next/" title="Next Steps" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../error_propagation/" title="Error Propagation" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -884,19 +730,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Next Steps
+                Error Propagation
               </div>
             </div>
           </a>
         
         
-          <a href="../stochastic/" title="Stochastic" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../taylor/" title="Linearized GP" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Stochastic
+                Linearized GP
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
@@ -955,20 +801,20 @@
       
     </div>
     
-      <script src="../assets/javascripts/vendor.83fe6e3c.min.js"></script>
-      <script src="../assets/javascripts/bundle.7e1cb91c.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="../../assets/javascripts/vendor.83fe6e3c.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7e1cb91c.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
       
       <script>
         app = initialize({
-          base: "..",
+          base: "../..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.37585f48.min.js"
+            worker: "../../assets/javascripts/worker/search.37585f48.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
       
-        <script src="../javascripts/extra.js"></script>
+        <script src="../../javascripts/extra.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
