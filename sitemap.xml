@@ -1,87 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/basics/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/error_propagation/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/literature/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/mm/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/next/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/software/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/stochastic/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/taylor/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/uncertainty/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/vi/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/1.0_gp_basics/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/1.1_gp_refactored/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/2.0_linearized_gp/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/3.0_unscented_gp/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/4.0_mcmc_gp/</loc>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/distances/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/egp_pyro_svgp/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/egp_pyro_vgp/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/kernel_derivatives/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/numpyro_egp_mcmc/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/talks/2020_kermes/</loc>
-     <lastmod>2020-05-02</lastmod>
+     <lastmod>2020-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
