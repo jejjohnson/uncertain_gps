@@ -1,12 +1,12 @@
+---
+title: Basics
+description: Basics for GPs
+authors:
+    - J. Emmanuel Johnson
+path: docs/
+source: literature.md
+---
 # Gaussian Process Basics
-
-- [Data](#data)
-- [Model](#model)
-- [Posterior](#posterior)
-  - [Deterministic Inputs](#deterministic-inputs)
-  - [Probabilistic Inputs](#probabilistic-inputs)
-- [Variational GP Models](#variational-gp-models)
-- [Sparse GP Models](#sparse-gp-models)
 
 ## Data
 
