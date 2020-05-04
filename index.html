@@ -927,11 +927,99 @@
 <hr />
 <h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
 <h4 id="taylor-approximation">Taylor Approximation<a class="headerlink" href="#taylor-approximation" title="Permanent link">&para;</a></h4>
-<p><center></p>
-<p><img alt="png" src="pics/gp_taylor_funcs.png" /></p>
-<p>The predictive mean and variance equations with the correction term in red to augment the predictive variance to account for uncertain inputs with a known variance.</p>
-<p></center></p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\mu_\text{eGP}(\mathbf{x_*}) &amp;= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha  \\
+\sigma_{eGP}^2(\mathbf{x_*}) &amp;= \sigma_y^2 + k_{**}- {\bf k}_* ({\bf K}+\sigma_y^2 \mathbf{I}_N )^{-1} {\bf k}_{*}^{\top} + 
+{\color{red}{\nabla_{\mu_{GP_*}}\Sigma_x\nabla_{\mu_{GP_*}}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \sigma^2_{GP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mu_\text{eGP}(\mathbf{x_*}) &= k(\mathbf{x_*}) \, \mathbf{K}_{GP}^{-1}y=k(\mathbf{x_*}) \, \alpha  \\
+\sigma_{eGP}^2(\mathbf{x_*}) &= \sigma_y^2 + k_{**}- {\bf k}_* ({\bf K}+\sigma_y^2 \mathbf{I}_N )^{-1} {\bf k}_{*}^{\top} + 
+{\color{red}{\nabla_{\mu_{GP_*}}\Sigma_x\nabla_{\mu_{GP_*}}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \sigma^2_{GP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+\end{aligned}
+</script>
+</div>
 <p>We can approximate the predictive mean and variance equations via a Taylor expansion which adds a corrective term w.r.t. the derivative of the function and the known variance. This assumes we know the variance and we don't modify the predictive mean of the learned GP function.</p>
+<div class="admonition details">
+<p class="admonition-title">1D Demo</p>
+<div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Exact GP</label><div class="tabbed-content">
+<p><center></p>
+<p><img alt="png" src="Taylor/pics/1d_gp.png" /></p>
+<p></center></p>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">1st Order Taylor</label><div class="tabbed-content">
+<p><center></p>
+<p><img alt="png" src="Taylor/pics/1d_gp_taylor_1o.png" /></p>
+<p></center></p>
+<div>
+<div class="MathJax_Preview">
+\nu_{eGP*}^2 =  
+\nu_{GP*}^2(\mathbf{x}_*)  +
+{\color{red}{\nabla_{\mu_*}\Sigma_x\nabla_{\mu_*}^\top}}
+</div>
+<script type="math/tex; mode=display">
+\nu_{eGP*}^2 =  
+\nu_{GP*}^2(\mathbf{x}_*)  +
+{\color{red}{\nabla_{\mu_*}\Sigma_x\nabla_{\mu_*}^\top}}
+</script>
+</div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">2nd Order Taylor</label><div class="tabbed-content">
+<p><center></p>
+<p><img alt="png" src="Taylor/pics/1d_gp_taylor_2o.png" /></p>
+<p></center></p>
+<div>
+<div class="MathJax_Preview">
+\nu_{eGP*}^2 =  
+\nu_{GP*}^2(\mathbf{x}_*)  +
+{\color{red}{\nabla_{\mu_*}\Sigma_x\nabla_{\mu_*}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \nu^2_{GP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+</div>
+<script type="math/tex; mode=display">
+\nu_{eGP*}^2 =  
+\nu_{GP*}^2(\mathbf{x}_*)  +
+{\color{red}{\nabla_{\mu_*}\Sigma_x\nabla_{\mu_*}^\top} +
+\text{Tr} \left\{  
+  \frac{\partial^2 \nu^2_{GP*}(\mathbf{x_*})}{\partial\mathbf{x_*}\partial\mathbf{x_*}^\top} \bigg\vert_{\mathbf{x_*}=\mu_{\mathbf{x_*}}} \Sigma_\mathbf{x_*}
+\right\}}
+</script>
+</div>
+</div>
+<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Differences</label><div class="tabbed-content">
+<p><center></p>
+<p><img alt="png" src="Taylor/pics/1d_gp_taylor_diff.png" /></p>
+<p></center></p>
+<p>Here, we see a plot for the differences between the two GPs.</p>
+</div>
+</div>
+</div>
+<div class="admonition details">
+<p class="admonition-title">Satellite Data</p>
+<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Absolute Error</label><div class="tabbed-content">
+<p><img alt="png" src="Taylor/pics/iasi_abs_error.png" /></p>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Exact GP</label><div class="tabbed-content">
+<p><img alt="png" src="Taylor/pics/iasi_std.png" /></p>
+<p>These are the predictions using the exact GP and the predictive variances.</p>
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Linearized GP</label><div class="tabbed-content">
+<p><img alt="png" src="Taylor/pics/iasi_estd.png" /></p>
+<p>This is an example where we used the Taylor expanded GP. In this example, we only did the first order approximation.</p>
+</div>
+</div>
+</div>
 <hr />
 <h4 id="unscented-transforms">Unscented Transforms<a class="headerlink" href="#unscented-transforms" title="Permanent link">&para;</a></h4>
 <p><center></p>
