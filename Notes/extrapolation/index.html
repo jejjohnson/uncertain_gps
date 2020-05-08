@@ -11,7 +11,7 @@
         <meta name="description" content="Uncertain Inputs with Gaussian Processes">
       
       
-        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/Notes/next/">
+        <link rel="canonical" href="https://jejjohnson.github.io/uncertain_gps/Notes/extrapolation/">
       
       
         <meta name="author" content="J. Emmanuel Johnson">
@@ -21,7 +21,7 @@
     
     
       
-        <title>Next Steps - Uncertain Gaussian Processes</title>
+        <title>Extrapolation - Uncertain Gaussian Processes</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#next-steps" class="md-skip">
+        <a href="#extrapolation" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Next Steps
+              Extrapolation
             
           </span>
         </div>
@@ -311,11 +311,81 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../extrapolation/" title="Extrapolation" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Extrapolation
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Extrapolation" class="md-nav__link md-nav__link--active">
       Extrapolation
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#smart-combination-of-kernels" class="md-nav__link">
+    Smart Combination of Kernels
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fourier-basis-functions" class="md-nav__link">
+    Fourier Basis Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spectral-mixture-kernel" class="md-nav__link">
+    Spectral Mixture Kernel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#large-scale" class="md-nav__link">
+    Large Scale
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-propagation" class="md-nav__link">
+    Error Propagation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -347,81 +417,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Next Steps
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="Next Steps" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../next/" title="Next Steps" class="md-nav__link">
       Next Steps
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-apply-these-algorithms-to-different-problems-other-than-dynamical-systems" class="md-nav__link">
-    1. Apply these algorithms to different problems (other than dynamical systems)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-improve-the-kernel-expectation-calculations" class="md-nav__link">
-    2. Improve the Kernel Expectation Calculations
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-think-about-the-problem-differently" class="md-nav__link">
-    3. Think about the problem differently
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-think-about-pragmatic-solutions" class="md-nav__link">
-    4. Think about pragmatic solutions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-figure-out-how-to-extend-it-to-deep-gps" class="md-nav__link">
-    5. Figure Out how to extend it to Deep GPs
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -786,36 +786,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-apply-these-algorithms-to-different-problems-other-than-dynamical-systems" class="md-nav__link">
-    1. Apply these algorithms to different problems (other than dynamical systems)
+  <a href="#smart-combination-of-kernels" class="md-nav__link">
+    Smart Combination of Kernels
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-improve-the-kernel-expectation-calculations" class="md-nav__link">
-    2. Improve the Kernel Expectation Calculations
+  <a href="#fourier-basis-functions" class="md-nav__link">
+    Fourier Basis Functions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-think-about-the-problem-differently" class="md-nav__link">
-    3. Think about the problem differently
+  <a href="#spectral-mixture-kernel" class="md-nav__link">
+    Spectral Mixture Kernel
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-think-about-pragmatic-solutions" class="md-nav__link">
-    4. Think about pragmatic solutions
+  <a href="#large-scale" class="md-nav__link">
+    Large Scale
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-figure-out-how-to-extend-it-to-deep-gps" class="md-nav__link">
-    5. Figure Out how to extend it to Deep GPs
+  <a href="#error-propagation" class="md-nav__link">
+    Error Propagation
   </a>
   
 </li>
@@ -832,7 +832,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/Notes/next.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/jejjohnson/uncertain_gps/edit/master/docs/Notes/extrapolation.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -840,18 +840,72 @@
                   
                 
                 
-                <h1 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h1>
-<p>So after all of this literature, what is the next step for the community? I have a few suggestions based on what I've seen:</p>
-<h4 id="1-apply-these-algorithms-to-different-problems-other-than-dynamical-systems">1. Apply these algorithms to different problems (other than dynamical systems)<a class="headerlink" href="#1-apply-these-algorithms-to-different-problems-other-than-dynamical-systems" title="Permanent link">&para;</a></h4>
-<p>It's clear to me that there are a LOT of different algorithms. But in almost every study above, I don't see many applications outside of dynamical systems. I would love to see other people outside (or within) community use these algorithms on different problems. Like Neil Lawrence said in a recent MLSS talk; "we need to stop jacking around with GPs and actually <strong>apply them</strong>" (paraphrased). There are many little goodies to be had from all of these methods; like the linearized GP predictive variance estimate for better variance estimates is something you get almost for free. So why not use it? </p>
-<h4 id="2-improve-the-kernel-expectation-calculations">2. Improve the Kernel Expectation Calculations<a class="headerlink" href="#2-improve-the-kernel-expectation-calculations" title="Permanent link">&para;</a></h4>
-<p>So how we calculate kernel expectations is costly. A typical sparse GP has a cost of <span><span class="MathJax_Preview">O(NM^2)</span><script type="math/tex">O(NM^2)</script></span>. But when we do the calculation of kernel expectations, that order goes back up to <span><span class="MathJax_Preview">O (DNM^2)</span><script type="math/tex">O (DNM^2)</script></span> . It's not bad considering but it is still now an order of magnitude larger for high dimensional datasets. This is going backwards in terms of efficiency. Also, many implementations attempt to do this in parallel for speed but then the cost of memory becomes prohibitive (especially on GPUs). There are some other good approximation schemes we might be able to use such as advanced Bayesian Quadrature techniques and the many moment transformation techniques that are present in the Kalman Filter literature. I'm sure there are tricks of the trade to be had there.</p>
-<h4 id="3-think-about-the-problem-differently">3. Think about the problem differently<a class="headerlink" href="#3-think-about-the-problem-differently" title="Permanent link">&para;</a></h4>
-<p>An interesting way to approach the method is to perhaps use the idea of covariates. Instead of the noise being additive, perhaps it's another combination where we have to model it separately. That's what Salimbeni did for his latest Deep GP and it's a very interesting way to look at it. It works well too!</p>
-<h4 id="4-think-about-pragmatic-solutions">4. Think about pragmatic solutions<a class="headerlink" href="#4-think-about-pragmatic-solutions" title="Permanent link">&para;</a></h4>
-<p>Some of these algorithms are super complicated. It makes it less desireable to actually try them because it's so easy to get lost in the mathematics of it all. I like pragmatic solutions. For example, using Drop-Out, Ensembles and Noise Constrastive Priors are easy and pragmatic ways of adding reliable uncertainty estimates in Bayesian Neural Networks. I would like some more pragmatic solutions for some of these methods that have been listed above. <strong>Another Shameless Plug</strong>: the method I used is very easy to get better predictive variances almost for free.</p>
-<h4 id="5-figure-out-how-to-extend-it-to-deep-gps">5. Figure Out how to extend it to Deep GPs<a class="headerlink" href="#5-figure-out-how-to-extend-it-to-deep-gps" title="Permanent link">&para;</a></h4>
-<p>So the original Deep GP is just a stack of BGPLVMs and more recent GPs have regressed back to stacking SVGPs. I would like to know if there is a way to improve the BGPLVM in such a way that we can stack them again and then constrain the solutions with our known prior distributions. </p>
+                <h1 id="extrapolation">Extrapolation<a class="headerlink" href="#extrapolation" title="Permanent link">&para;</a></h1>
+<p>One interesting problem that is related to uncertainty is how well this extrapolates for unseen regions (whether it is spatially or temporally).</p>
+<hr />
+<h2 id="smart-combination-of-kernels">Smart Combination of Kernels<a class="headerlink" href="#smart-combination-of-kernels" title="Permanent link">&para;</a></h2>
+<p>Related to what @Gus and I were talking about earlier. I think a GP would be better at extrapolating if we use kernel that is better defined for extrapolation.</p>
+<p>For example, we can just use a combination of well defined kernels with actual thought into the trends we expect like they did for the classic Mauna dataset: (<a href="https://scikit-learn.org/stable/modules/gaussian_process.html#gpr-on-mauna-loa-co2-data">sklearn demo</a>) , (<a href="https://peterroelants.github.io/posts/gaussian-process-kernel-fitting/#Mauna-Loa-CO%E2%82%82-data">tensorflow demo</a>). They ended up using a combination of RBF + RBF * ExpSinSquared + RQ + RBF + White with arbitrary scalers in front of all of the terms. I have no clue how in the world they came up with that…</p>
+<hr />
+<h2 id="fourier-basis-functions">Fourier Basis Functions<a class="headerlink" href="#fourier-basis-functions" title="Permanent link">&para;</a></h2>
+<p>In general any GP that is approximated with Fourier Basis functions will be good at finding periodic trends. For example the Sparse Spectrum GP (SSGP) (as you mentioned in your <a href="https://www.uv.es/lapeva/papers/2016_IEEE_GRSM.pdf">paper</a> Gustau, pg68) (original <a href="http://www.jmlr.org/papers/v11/lazaro-gredilla10a.html">paper</a> for SSGP) is related to the Fourier features method but GP-ed.</p>
+<details class="details"><summary>Resources</summary><ul>
+<li><a href="https://www.uv.es/lapeva/papers/2016_IEEE_GRSM.pdf">Gustau Paper</a><blockquote>
+<p>Gustaus paper summarizing GPs in the context of Earth science. Briefly mentions SSGPs.</p>
+</blockquote>
+</li>
+<li><a href="https://www.hiit.fi/wp-content/uploads/2018/04/Spectral-Kernels-S12.pdf">Presentation</a><blockquote>
+<p>A lab that does a lot of work on spectral kernels did a nice presentation with a decent summary of the literature.</p>
+</blockquote>
+</li>
+<li><a href="http://www.jmlr.org/papers/v11/lazaro-gredilla10a.html">SSGP Paper</a><blockquote>
+<p>original paper on SSGP by Titsias.</p>
+</blockquote>
+</li>
+<li>SSGP w. Uncertain Inputs <a href="http://proceedings.mlr.press/v70/pan17a.html">Paper</a><blockquote>
+<p>Paper detailing how one can do the Taylor expansion to propagate the errors.</p>
+</blockquote>
+</li>
+<li><a href="https://arxiv.org/pdf/1503.02424.pdf">VSSGP Paper</a> | <a href="https://www.cs.ox.ac.uk/people/yarin.gal/website/PDFs/ICML_2015_Improving_poster.pdf">Poster</a>  | <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwi97Kvdl6TpAhUlSxUIHeU5CooQFjAAegQIBRAB&amp;url=http%3A%2F%2Fmlg.eng.cam.ac.uk%2Fyarin%2FPDFs%2FICML_Improving_presentation.pdf&amp;usg=AOvVaw1_Chb_QJzTNmz8NpuDNtAk">ICML Presentation</a> <blockquote>
+<p>Original paper by Yarin Gal and presentation about the variational approach to the SSGP method. The original author did the code in Theano so I don't recommend you use it nor try to understand it. It's ugly...</p>
+</blockquote>
+</li>
+<li>Variational Fourier Features for GPs - <a href="http://www.jmlr.org/papers/volume18/16-579/16-579.pdf">Paper</a><blockquote>
+<p>Original paper by James Hensman et al. using variational fourier features for GPs. To be honest, I'm still not 100% sure what the difference is between this method and the method by Yarin Gal... According to the paper they say:
+"Gal and Turner proposed variation inference in a sparse spectrum model that is derived form a GP model. Our work aims to directly approximate the posterior of the try models using a variational representation." I still don't get it.</p>
+</blockquote>
+</li>
+</ul>
+</details>
+<hr />
+<h2 id="spectral-mixture-kernel">Spectral Mixture Kernel<a class="headerlink" href="#spectral-mixture-kernel" title="Permanent link">&para;</a></h2>
+<p>Or a kernel that was designed to include all the parameters necessary to find patterns like the spectral mixture kernel (<a href="https://arxiv.org/pdf/1302.4245.pdf">paper</a>, pg 2, eq. 12).
+Lastly, just use a neural network and slap a GP layer at the end and let the data tell you the pattern.</p>
+<details class="details"><summary>Resources</summary><ul>
+<li>Original <a href="https://arxiv.org/pdf/1302.4245.pdf">Paper</a><blockquote>
+<p>original paper with the derivation of the spectral mixture kernel.</p>
+</blockquote>
+</li>
+<li><a href="https://arxiv.org/abs/1808.01132">Paper</a><blockquote>
+<p>some extenions to Multi-Task / Multi-Output / Multi-Fidelity problems</p>
+</blockquote>
+</li>
+<li><a href="https://lib.ugent.be/fulltxt/RUG01/002/367/115/RUG01-002367115_2017_0001_AC.pdf">Thesis</a> of Vincent Dutordoi (chapter 6, pg. 67)<blockquote>
+<p>Does the derivation for the spectral mixture kernel extension to incorporate uncertain inputs. Uses exact moment matching (which is an expensive operation...) but in theory, it should better propagate the uncertain inputs. It's also a <strong>really good</strong> thesis that explains how to propagate uncertain inputs through Gaussian processes (chapter 4, pg. 42). <strong>Warning</strong>: the equations are nasty...</p>
+</blockquote>
+</li>
+<li><a href="https://gpytorch.readthedocs.io/en/latest/examples/01_Exact_GPs/Spectral_Mixture_GP_Regression.html">GPyTorch Demo</a><blockquote>
+<p>The fastest implementation you'll find on the internet.</p>
+</blockquote>
+</li>
+</ul>
+</details>
+<hr />
+<h2 id="large-scale">Large Scale<a class="headerlink" href="#large-scale" title="Permanent link">&para;</a></h2>
+<p>All of the above methods can be trained using sparse and variational methods to make them scale to really large amounts of data. Although I think they kind of fail when you have a lot of dimensions. No more than 3-5 is what I’ve seen in the literature. And typically they only do toy examples with 1D data.</p>
+<hr />
+<h2 id="error-propagation">Error Propagation<a class="headerlink" href="#error-propagation" title="Permanent link">&para;</a></h2>
+<p>Now to couple them with the Taylor expansion would be interesting. As long as the methods have a kernel that is differentiable (wrt inputs), then it should be possible.</p>
                 
               
               
@@ -870,7 +924,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../mm/" title="Moment-Matching" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../error_propagation/" title="Error Propagation" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -879,19 +933,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Moment-Matching
+                Error Propagation
               </div>
             </div>
           </a>
         
         
-          <a href="../software/" title="Software" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../literature/" title="Literature" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Software
+                Literature
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
