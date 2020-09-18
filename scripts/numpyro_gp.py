@@ -8,6 +8,9 @@ In this example we show how to use NUTS to sample from the posterior
 over the hyperparameters of a gaussian process.
 """
 from pyprojroot import here
+import sys
+sys.path.append(str(here()))
+from src.models.jaxgp.data import near_square_wave
 import pathlib
 import argparse
 import os
@@ -110,7 +113,12 @@ def get_data(N=30, sigma_obs=0.15, N_test=400):
 
 
 def main(args):
-    X, Y, X_test = get_data(N=args.num_data)
+    
+    if args.dataset == 'square':
+        X, Y, X_test, _ = near_square_wave(n_train=args.num_data)
+        
+    else:
+        X, Y, X_test = get_data(N=args.num_data)
 
     # do inference
     rng_key, rng_key_predict = random.split(random.PRNGKey(0))
@@ -129,23 +137,32 @@ def main(args):
         )
     )(*vmap_args)
 
-    mean_prediction = onp.mean(means, axis=0)
+    mu_y = onp.mean(means, axis=0)
     percentiles = onp.percentile(predictions, [5.0, 95.0], axis=0)
 
     # make plots
-    fig, ax = plt.subplots(1, 1)
-
-    # plot training data
-    ax.plot(X, Y, "kx")
-    # plot 90% confidence level of predictions
-    ax.fill_between(X_test, percentiles[0, :], percentiles[1, :], color="lightblue")
-    # plot mean prediction
-    ax.plot(X_test, mean_prediction, "blue", ls="solid", lw=2.0)
-    ax.set(xlabel="X", ylabel="Y", title="Mean predictions with 90% CI")
-
-    plt.savefig("numpyro_gp_plot.png")
+    
+    fig, ax = plt.subplots()
+    ax.scatter(X, Y, c="red", label="Training Data")
+    ax.plot(
+        X_test.squeeze(),
+        mu_y.squeeze(),
+        label=r"Predictive Mean",
+        color="black",
+        linewidth=3,
+    )
+    ax.fill_between(
+        X_test.squeeze(),
+        percentiles[0, :], percentiles[1, :],
+        alpha=0.3,
+        color="darkorange",
+        label=f"Predictive Std (95% Confidence)",
+    )
+    ax.set_ylim([-3.5, 3.5])
+    ax.legend(fontsize=12)
     plt.tight_layout()
-
+    fig.savefig("figures/jaxgp/examples/mcmc/1d_gp_train.png")
+    plt.show()
 
 if __name__ == "__main__":
     assert numpyro.__version__.startswith("0.2.4")
@@ -155,6 +172,7 @@ if __name__ == "__main__":
     parser.add_argument("--num-chains", nargs="?", default=1, type=int)
     parser.add_argument("--num-data", nargs="?", default=25, type=int)
     parser.add_argument("--device", default="cpu", type=str, help='use "cpu" or "gpu".')
+    parser.add_argument("--dataset", default="default", type=str,)
     args = parser.parse_args()
 
     numpyro.set_platform(args.device)

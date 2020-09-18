@@ -228,7 +228,7 @@ To my knowledge, I only know of the following kernels that have analytically cal
       * [Moment Transform](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L11)
       * [Linearized Moment Transform](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L49)
       * [MC Transform](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L62)
-      * [Sigma Point Transform]([SigmaPointTransform](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L102)),
+      * [SigmaPointTransform](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L102),
       * [Spherical Radial Transform](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L152)
       * [Unscented Transform](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L207)
       * [Gaussian Hermite Transform](https://github.com/jacobnzw/SSMToybox/blob/master/ssmtoybox/mtran.py#L296)

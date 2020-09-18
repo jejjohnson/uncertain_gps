@@ -15,7 +15,7 @@ import numpy as onp
 import tqdm
 from jax.experimental import optimizers
 
-from src.models.jaxgp.data import get_data
+from src.models.jaxgp.data import get_data, near_square_wave
 from src.models.jaxgp.exact import predictive_mean, predictive_variance
 from src.models.jaxgp.kernels import gram, rbf_kernel, ard_kernel
 from src.models.jaxgp.loss import marginal_likelihood
@@ -26,11 +26,11 @@ from src.models.jaxgp.utils import cholesky_factorization, get_factorizations, s
 def main(args):
     # sigma_inputs = 0.15
     input_cov = jnp.array([args.input_noise]).reshape(-1, 1)
-    X, y, Xtest, ytest = get_data(
-        N=args.num_train,
+    X, y, Xtest, ytest = near_square_wave(
+        n_train=args.num_train,
         input_noise=args.input_noise,
         output_noise=args.output_noise,
-        N_test=args.num_test,
+        n_test=args.num_test,
     )
 
     # PRIOR FUNCTIONS (mean, covariance)
