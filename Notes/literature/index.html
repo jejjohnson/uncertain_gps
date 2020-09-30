@@ -945,9 +945,18 @@
 <hr />
 <h3 id="moment-matching">Moment Matching<a class="headerlink" href="#moment-matching" title="Permanent link">&para;</a></h3>
 <p>This is where we approximate the mean function and the predictive variance function to be Gaussian by taking the mean and variance (the moments needed to describe the distribution).</p>
-<details>
-
-$$
+<details class="info"><summary>Details</summary><div>
+<div class="MathJax_Preview">
+\begin{aligned}
+m(\mu_{x_*}, \Sigma_{x_*}) &amp;= \mu(\mu_{x_*})\\
+v(\mu_{x_*}, \Sigma_{x_*}) &amp;= \nu^2(\mu_{x_*}) + 
+\frac{\partial \mu(\mu_{x_*})}{\partial x_*}^\top
+\Sigma_{x_*}
+\frac{\partial \mu(\mu_{x_*})}{\partial x_*} +
+\frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
 \begin{aligned}
 m(\mu_{x_*}, \Sigma_{x_*}) &= \mu(\mu_{x_*})\\
 v(\mu_{x_*}, \Sigma_{x_*}) &= \nu^2(\mu_{x_*}) + 
@@ -956,10 +965,9 @@ v(\mu_{x_*}, \Sigma_{x_*}) &= \nu^2(\mu_{x_*}) +
 \frac{\partial \mu(\mu_{x_*})}{\partial x_*} +
 \frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
 \end{aligned}
-$$
-
+</script>
+</div>
 </details>
-
 <ul>
 <li><a href="">Gaussian Process Priors With Uncertain Inputs – Application to Multiple-Step Ahead Time Series Forecasting</a> - Girard et. al. (2003)</li>
 <li><a href="">Approximate Methods for Propagation of Uncertainty in GP Models</a> - Girard (2004) [<strong>Thesis</strong>]</li>
@@ -974,25 +982,26 @@ $$
 </ul>
 <hr />
 <h3 id="covariance-functions">Covariance Functions<a class="headerlink" href="#covariance-functions" title="Permanent link">&para;</a></h3>
-<details>
-
-Daillaire constructed a modification to the RBF covariance function that takes into account the input noise.
-
-$$
+<details class="info"><summary>Details</summary><p>Daillaire constructed a modification to the RBF covariance function that takes into account the input noise.</p>
+<div>
+<div class="MathJax_Preview">
 K_{ij} = \left| 2\Lambda^{-1}\Sigma_x + I \right|^{1/2} \sigma_f^2 \exp\left( -\frac{1}{2}(x_i - x_j)^\top (\Lambda + 2\Sigma_x)^{-1}(x_i - x_j) \right)
-$$
-
-for $i\neq j$ and
-
-$$
+</div>
+<script type="math/tex; mode=display">
+K_{ij} = \left| 2\Lambda^{-1}\Sigma_x + I \right|^{1/2} \sigma_f^2 \exp\left( -\frac{1}{2}(x_i - x_j)^\top (\Lambda + 2\Sigma_x)^{-1}(x_i - x_j) \right)
+</script>
+</div>
+<p>for <span><span class="MathJax_Preview">i\neq j</span><script type="math/tex">i\neq j</script></span> and</p>
+<div>
+<div class="MathJax_Preview">
 K_{ij}=\sigma_f^2
-$$
-
-for $i=j$. This was shown to have bad results if this $\Sigma_x$ is not known. You can see the full explanation in the thesis of McHutchon (section 2.2.1) which can be found in Iterative section below.
-
-
+</div>
+<script type="math/tex; mode=display">
+K_{ij}=\sigma_f^2
+</script>
+</div>
+<p>for <span><span class="MathJax_Preview">i=j</span><script type="math/tex">i=j</script></span>. This was shown to have bad results if this <span><span class="MathJax_Preview">\Sigma_x</span><script type="math/tex">\Sigma_x</script></span> is not known. You can see the full explanation in the thesis of McHutchon (section 2.2.1) which can be found in Iterative section below.</p>
 </details>
-
 <ul>
 <li><a href="">An approximate inference with Gaussian process to latent functions from uncertain data</a> - Dallaire et. al. (2011) | <a href="https://s3.amazonaws.com/academia.edu.documents/31116309/presentation_iconip09.pdf?response-content-disposition=inline%3B%20filename%3DLearning_Gaussian_Process_Models_from_Un.pdf&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191016%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20191016T123012Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=92785eb3561f2822752b538ea8f232fc127d9bc6db94a307e165ac73e62a3601">Prezi</a> | <a href="https://github.com/maka89/noisy-gp">Code</a></li>
 </ul>
@@ -1013,19 +1022,22 @@ for $i=j$. This was shown to have bad results if this $\Sigma_x$ is not known. Y
 <hr />
 <h3 id="linearized-unscented-approximation">Linearized (Unscented) Approximation<a class="headerlink" href="#linearized-unscented-approximation" title="Permanent link">&para;</a></h3>
 <p>This is the linearized version of the Moment-Matching approach mentioned above. Also known as unscented GP. In this approximation, we only change the predictive variance. You can find an example colab notebook <a href="https://colab.research.google.com/drive/1AOtGvOVRzqPaLkAzSH5tjkG-8OKOJ43R">here</a> with an example of how to use this with the GPy library.</p>
-<details>
-
-$$
+<details class="info"><summary>Details</summary><div>
+<div class="MathJax_Preview">
+\begin{aligned}
+\tilde{\mu}_f(x_*) &amp;= \underbrace{k_*^\top K^{-1}y}_{\mu_f(x_*)} \\
+\tilde{\nu}^2(x_*) &amp;= \underbrace{k_{**} - k_*^\top K^{-1} k_*}_{\nu^2(x_*)} + \partial \mu_f \text{ } \Sigma_x \text{ } \partial \mu_f^\top
+\end{aligned}
+</div>
+<script type="math/tex; mode=display">
 \begin{aligned}
 \tilde{\mu}_f(x_*) &= \underbrace{k_*^\top K^{-1}y}_{\mu_f(x_*)} \\
 \tilde{\nu}^2(x_*) &= \underbrace{k_{**} - k_*^\top K^{-1} k_*}_{\nu^2(x_*)} + \partial \mu_f \text{ } \Sigma_x \text{ } \partial \mu_f^\top
 \end{aligned}
-$$
-
-**Note**: The inspiration of this comes from the Extended Kalman Filter (links below) which tries to find an approximation to a non-linear transformation, $f$ of $x$ when $x$ comes from a distribution $x \sim \mathcal{N}(\mu_x, \Sigma_x)$.
-
+</script>
+</div>
+<p><strong>Note</strong>: The inspiration of this comes from the Extended Kalman Filter (links below) which tries to find an approximation to a non-linear transformation, <span><span class="MathJax_Preview">f</span><script type="math/tex">f</script></span> of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> when <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> comes from a distribution <span><span class="MathJax_Preview">x \sim \mathcal{N}(\mu_x, \Sigma_x)</span><script type="math/tex">x \sim \mathcal{N}(\mu_x, \Sigma_x)</script></span>.</p>
 </details>
-
 <ul>
 <li><a href="">GP-BayesFilters: Bayesian Filtering Using Gaussian Process Prediction</a> - Ko and Fox (2008)<blockquote>
 <p>They originally came up with the linearized (unscented) approximation to the moment-matching method. They used it in the context of the extended Kalman filter which has a few more elaborate steps in addition to the input uncertainty propagation.</p>
@@ -1090,24 +1102,32 @@ $$
 <hr />
 <h3 id="kernel-expectations">Kernel Expectations<a class="headerlink" href="#kernel-expectations" title="Permanent link">&para;</a></h3>
 <p>So [Girard 2003] came up with a name of something we call kernel expectations <span><span class="MathJax_Preview">\{\mathbf{\xi, \Omega, \Phi}\}</span><script type="math/tex">\{\mathbf{\xi, \Omega, \Phi}\}</script></span>-statistics. These are basically calculated by taking the expectation of a kernel or product of two kernels w.r.t. some distribution. Typically this distribution is normal but in the variational literature it is a variational distribution. </p>
-<details>
-
-The three kernel expectations that surface are:
-
-$$
+<details class="info"><summary>Details</summary><p>The three kernel expectations that surface are:</p>
+<div>
+<div class="MathJax_Preview">
 \mathbf \xi(\mathbf{\mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf x)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
-$$
-
-$$
+</div>
+<script type="math/tex; mode=display">
+\mathbf \xi(\mathbf{\mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf x)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+</script>
+</div>
+<div>
+<div class="MathJax_Preview">
 \mathbf \Omega(\mathbf{y, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
-$$
-
-$$
+</div>
+<script type="math/tex; mode=display">
+\mathbf \Omega(\mathbf{y, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+</script>
+</div>
+<div>
+<div class="MathJax_Preview">
 \mathbf \Phi(\mathbf{y, z, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)k(\mathbf x, \mathbf z)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
-$$
-
+</div>
+<script type="math/tex; mode=display">
+\mathbf \Phi(\mathbf{y, z, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)k(\mathbf x, \mathbf z)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+</script>
+</div>
 </details>
-
 <p>To my knowledge, I only know of the following kernels that have analytically calculated sufficient statistics: Linear, RBF, ARD and Spectral Mixture. And furthermore, the connection is how these kernel statistics show up in many other GP literature than just uncertain inputs of GPs; for example in Bayesian GP-LVMs and Deep GPs.</p>
 <h4 id="literature">Literature<a class="headerlink" href="#literature" title="Permanent link">&para;</a></h4>
 <ul>
@@ -1189,30 +1209,41 @@ Bayesian quadrature</a> - Wu et. al. (2018)</li>
 </ul>
 <hr />
 <h3 id="key-equations">Key Equations<a class="headerlink" href="#key-equations" title="Permanent link">&para;</a></h3>
-<details>
-<summary>Predictive Mean and Variance for Latent Function, f</summary>
-
-$$
+<details class="info"><summary>Details</summary><p>Predictive Mean and Variance for Latent Function, f</p>
+<div>
+<div class="MathJax_Preview">
 \mu_f(x_*) = k_*^\top K^{-1}y
-$$
-
-$$
+</div>
+<script type="math/tex; mode=display">
+\mu_f(x_*) = k_*^\top K^{-1}y
+</script>
+</div>
+<div>
+<div class="MathJax_Preview">
 \sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*
-$$
-
+</div>
+<script type="math/tex; mode=display">
+\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*
+</script>
+</div>
 </details>
-
-<details>
-<summary>Predictive Mean and Variance for mean output, y</summary>
-
-$$
+<details class="info"><summary>Details</summary><p>Predictive Mean and Variance for mean output, y</p>
+<div>
+<div class="MathJax_Preview">
 \mu_f(x_*) = k_*^\top K^{-1}y
-$$
-
-$$
+</div>
+<script type="math/tex; mode=display">
+\mu_f(x_*) = k_*^\top K^{-1}y
+</script>
+</div>
+<div>
+<div class="MathJax_Preview">
 \sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*
-$$
-
+</div>
+<script type="math/tex; mode=display">
+\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*
+</script>
+</div>
 </details>
                 
                   
