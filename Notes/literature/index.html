@@ -947,14 +947,16 @@
 <p>This is where we approximate the mean function and the predictive variance function to be Gaussian by taking the mean and variance (the moments needed to describe the distribution).</p>
 <details>
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 m(\mu_{x_*}, \Sigma_{x_*}) &= \mu(\mu_{x_*})\\
 v(\mu_{x_*}, \Sigma_{x_*}) &= \nu^2(\mu_{x_*}) + 
 \frac{\partial \mu(\mu_{x_*})}{\partial x_*}^\top
 \Sigma_{x_*}
 \frac{\partial \mu(\mu_{x_*})}{\partial x_*} +
 \frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
-\end{aligned}$$
+\end{aligned}
+$$
 
 </details>
 
@@ -976,11 +978,15 @@ v(\mu_{x_*}, \Sigma_{x_*}) &= \nu^2(\mu_{x_*}) +
 
 Daillaire constructed a modification to the RBF covariance function that takes into account the input noise.
 
-$$K_{ij} = \left| 2\Lambda^{-1}\Sigma_x + I \right|^{1/2} \sigma_f^2 \exp\left( -\frac{1}{2}(x_i - x_j)^\top (\Lambda + 2\Sigma_x)^{-1}(x_i - x_j) \right)$$
+$$
+K_{ij} = \left| 2\Lambda^{-1}\Sigma_x + I \right|^{1/2} \sigma_f^2 \exp\left( -\frac{1}{2}(x_i - x_j)^\top (\Lambda + 2\Sigma_x)^{-1}(x_i - x_j) \right)
+$$
 
 for $i\neq j$ and
 
-$$K_{ij}=\sigma_f^2$$
+$$
+K_{ij}=\sigma_f^2
+$$
 
 for $i=j$. This was shown to have bad results if this $\Sigma_x$ is not known. You can see the full explanation in the thesis of McHutchon (section 2.2.1) which can be found in Iterative section below.
 
@@ -1009,10 +1015,12 @@ for $i=j$. This was shown to have bad results if this $\Sigma_x$ is not known. Y
 <p>This is the linearized version of the Moment-Matching approach mentioned above. Also known as unscented GP. In this approximation, we only change the predictive variance. You can find an example colab notebook <a href="https://colab.research.google.com/drive/1AOtGvOVRzqPaLkAzSH5tjkG-8OKOJ43R">here</a> with an example of how to use this with the GPy library.</p>
 <details>
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \tilde{\mu}_f(x_*) &= \underbrace{k_*^\top K^{-1}y}_{\mu_f(x_*)} \\
 \tilde{\nu}^2(x_*) &= \underbrace{k_{**} - k_*^\top K^{-1} k_*}_{\nu^2(x_*)} + \partial \mu_f \text{ } \Sigma_x \text{ } \partial \mu_f^\top
-\end{aligned}$$
+\end{aligned}
+$$
 
 **Note**: The inspiration of this comes from the Extended Kalman Filter (links below) which tries to find an approximation to a non-linear transformation, $f$ of $x$ when $x$ comes from a distribution $x \sim \mathcal{N}(\mu_x, \Sigma_x)$.
 
@@ -1086,11 +1094,17 @@ $$\begin{aligned}
 
 The three kernel expectations that surface are:
 
-$$\mathbf \xi(\mathbf{\mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf x)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x$$
+$$
+\mathbf \xi(\mathbf{\mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf x)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+$$
 
-$$\mathbf \Omega(\mathbf{y, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x$$
+$$
+\mathbf \Omega(\mathbf{y, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+$$
 
-$$\mathbf \Phi(\mathbf{y, z, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)k(\mathbf x, \mathbf z)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x$$
+$$
+\mathbf \Phi(\mathbf{y, z, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)k(\mathbf x, \mathbf z)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+$$
 
 </details>
 
@@ -1178,16 +1192,26 @@ Bayesian quadrature</a> - Wu et. al. (2018)</li>
 <details>
 <summary>Predictive Mean and Variance for Latent Function, f</summary>
 
-$$\mu_f(x_*) = k_*^\top K^{-1}y$$
-$$\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*$$
+$$
+\mu_f(x_*) = k_*^\top K^{-1}y
+$$
+
+$$
+\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*
+$$
 
 </details>
 
 <details>
 <summary>Predictive Mean and Variance for mean output, y</summary>
 
-$$\mu_f(x_*) = k_*^\top K^{-1}y$$
-$$\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*$$
+$$
+\mu_f(x_*) = k_*^\top K^{-1}y
+$$
+
+$$
+\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*
+$$
 
 </details>
                 
