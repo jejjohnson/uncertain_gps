@@ -1,119 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/MonteCarlo/demo/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/approximate/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/basics/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/error_propagation/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/extrapolation/</loc>
-     <lastmod>2020-05-08</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/Notes/literature/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/mm/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/next/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/software/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/stochastic/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/taylor/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/uncertainty/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Notes/vi/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Taylor/2.0_linearized_gp/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Taylor/error_propagation/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/Taylor/scratch/</loc>
-     <lastmod>2020-05-08</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jejjohnson.github.io/uncertain_gps/Taylor/taylor/</loc>
-     <lastmod>2020-05-08</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/1.0_gp_basics/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/1.1_gp_refactored/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/2.0_linearized_gp/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/3.0_unscented_gp/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/4.0_mcmc_gp/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/distances/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/egp_pyro_svgp/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/egp_pyro_vgp/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/kernel_derivatives/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/notebooks/numpyro_egp_mcmc/</loc>
-     <lastmod>2020-05-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jejjohnson.github.io/uncertain_gps/talks/2020_kermes/</loc>
-     <lastmod>2020-05-08</lastmod>
+     <loc>https://jejjohnson.github.io/uncertain_gps/Taylor/error_propagation/</loc>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
