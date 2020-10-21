@@ -1,7 +1,7 @@
 # Linearization (Taylor Expansions)
 
 - [Conditional Gaussian Distributions](#conditional-gaussian-distributions)
-  - [I: Additive Noise Model ($x,f$)](#i-additive-noise-model-mathsemanticsmrowmixmimo-separator%22true%22momifmimrowannotation-encoding%22applicationx-tex%22xfannotationsemanticsmathxf)
+  - [I: Additive Noise Model ($x,f$)](#i-additive-noise-model-xf)
       - [Other GP Methods](#other-gp-methods)
   - [II: Non-Additive Noise Model](#ii-non-additive-noise-model)
   - [III: Quadratic Approximation](#iii-quadratic-approximation)
@@ -101,7 +101,8 @@ $$
 
 #### Linearized Predictive Mean and Variance
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 m(\mu_\mathbf{x_*}, \Sigma_\mathbf{x_*})
 &=
 \mu_\text{GP}(\mu_\mathbf{x_*})\\
