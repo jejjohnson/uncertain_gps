@@ -50,18 +50,18 @@ So almost all of the papers in the first few years mention that you can do this.
 
 This is where we approximate the mean function and the predictive variance function to be Gaussian by taking the mean and variance (the moments needed to describe the distribution).
 
-<details>
+??? info "Details"
 
-$$\begin{aligned}
-m(\mu_{x_*}, \Sigma_{x_*}) &= \mu(\mu_{x_*})\\
-v(\mu_{x_*}, \Sigma_{x_*}) &= \nu^2(\mu_{x_*}) + 
-\frac{\partial \mu(\mu_{x_*})}{\partial x_*}^\top
-\Sigma_{x_*}
-\frac{\partial \mu(\mu_{x_*})}{\partial x_*} +
-\frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
-\end{aligned}$$
-
-</details>
+    $$
+    \begin{aligned}
+    m(\mu_{x_*}, \Sigma_{x_*}) &= \mu(\mu_{x_*})\\
+    v(\mu_{x_*}, \Sigma_{x_*}) &= \nu^2(\mu_{x_*}) + 
+    \frac{\partial \mu(\mu_{x_*})}{\partial x_*}^\top
+    \Sigma_{x_*}
+    \frac{\partial \mu(\mu_{x_*})}{\partial x_*} +
+    \frac{1}{2} \text{Tr}\left\{ \frac{\partial^2 \nu^2(\mu_{x_*})}{\partial x_* \partial x_*^\top}  \Sigma_{x_*}\right\}
+    \end{aligned}
+    $$
 
 
 * [Gaussian Process Priors With Uncertain Inputs – Application to Multiple-Step Ahead Time Series Forecasting]() - Girard et. al. (2003)
@@ -77,20 +77,21 @@ v(\mu_{x_*}, \Sigma_{x_*}) &= \nu^2(\mu_{x_*}) +
 ---
 ### Covariance Functions
 
-<details>
+??? info "Details"
 
-Daillaire constructed a modification to the RBF covariance function that takes into account the input noise.
+    Daillaire constructed a modification to the RBF covariance function that takes into account the input noise.
 
-$$K_{ij} = \left| 2\Lambda^{-1}\Sigma_x + I \right|^{1/2} \sigma_f^2 \exp\left( -\frac{1}{2}(x_i - x_j)^\top (\Lambda + 2\Sigma_x)^{-1}(x_i - x_j) \right)$$
+    $$
+    K_{ij} = \left| 2\Lambda^{-1}\Sigma_x + I \right|^{1/2} \sigma_f^2 \exp\left( -\frac{1}{2}(x_i - x_j)^\top (\Lambda + 2\Sigma_x)^{-1}(x_i - x_j) \right)
+    $$
 
-for $i\neq j$ and
+    for $i\neq j$ and
 
-$$K_{ij}=\sigma_f^2$$
+    $$
+    K_{ij}=\sigma_f^2
+    $$
 
-for $i=j$. This was shown to have bad results if this $\Sigma_x$ is not known. You can see the full explanation in the thesis of McHutchon (section 2.2.1) which can be found in Iterative section below.
-
-
-</details>
+    for $i=j$. This was shown to have bad results if this $\Sigma_x$ is not known. You can see the full explanation in the thesis of McHutchon (section 2.2.1) which can be found in Iterative section below.
 
 
 * [An approximate inference with Gaussian process to latent functions from uncertain data]() - Dallaire et. al. (2011) | [Prezi](https://s3.amazonaws.com/academia.edu.documents/31116309/presentation_iconip09.pdf?response-content-disposition=inline%3B%20filename%3DLearning_Gaussian_Process_Models_from_Un.pdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191016%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20191016T123012Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=92785eb3561f2822752b538ea8f232fc127d9bc6db94a307e165ac73e62a3601) | [Code](https://github.com/maka89/noisy-gp)
@@ -114,16 +115,18 @@ for $i=j$. This was shown to have bad results if this $\Sigma_x$ is not known. Y
 
 This is the linearized version of the Moment-Matching approach mentioned above. Also known as unscented GP. In this approximation, we only change the predictive variance. You can find an example colab notebook [here](https://colab.research.google.com/drive/1AOtGvOVRzqPaLkAzSH5tjkG-8OKOJ43R) with an example of how to use this with the GPy library.
 
-<details>
+??? info "Details"
 
-$$\begin{aligned}
-\tilde{\mu}_f(x_*) &= \underbrace{k_*^\top K^{-1}y}_{\mu_f(x_*)} \\
-\tilde{\nu}^2(x_*) &= \underbrace{k_{**} - k_*^\top K^{-1} k_*}_{\nu^2(x_*)} + \partial \mu_f \text{ } \Sigma_x \text{ } \partial \mu_f^\top
-\end{aligned}$$
+    $$
+    \begin{aligned}
+    \tilde{\mu}_f(x_*) &= \underbrace{k_*^\top K^{-1}y}_{\mu_f(x_*)} \\
+    \tilde{\nu}^2(x_*) &= \underbrace{k_{**} - k_*^\top K^{-1} k_*}_{\nu^2(x_*)} + \partial \mu_f \text{ } \Sigma_x \text{ } \partial \mu_f^\top
+    \end{aligned}
+    $$
 
-**Note**: The inspiration of this comes from the Extended Kalman Filter (links below) which tries to find an approximation to a non-linear transformation, $f$ of $x$ when $x$ comes from a distribution $x \sim \mathcal{N}(\mu_x, \Sigma_x)$.
+    **Note**: The inspiration of this comes from the Extended Kalman Filter (links below) which tries to find an approximation to a non-linear transformation, $f$ of $x$ when $x$ comes from a distribution $x \sim \mathcal{N}(\mu_x, \Sigma_x)$.
 
-</details>
+
 
 
 
@@ -197,17 +200,22 @@ $$\begin{aligned}
 So [Girard 2003] came up with a name of something we call kernel expectations $\{\mathbf{\xi, \Omega, \Phi}\}$-statistics. These are basically calculated by taking the expectation of a kernel or product of two kernels w.r.t. some distribution. Typically this distribution is normal but in the variational literature it is a variational distribution. 
 
 
-<details>
+??? info "Details"
 
-The three kernel expectations that surface are:
+    The three kernel expectations that surface are:
 
-$$\mathbf \xi(\mathbf{\mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf x)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x$$
+    $$
+    \mathbf \xi(\mathbf{\mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf x)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+    $$
 
-$$\mathbf \Omega(\mathbf{y, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x$$
+    $$
+    \mathbf \Omega(\mathbf{y, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+    $$
 
-$$\mathbf \Phi(\mathbf{y, z, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)k(\mathbf x, \mathbf z)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x$$
+    $$
+    \mathbf \Phi(\mathbf{y, z, \mu, \Sigma}) = \int_X \mathbf k(\mathbf x, \mathbf y)k(\mathbf x, \mathbf z)\mathcal{N}(\mathbf x|\mathbf \mu,\mathbf  \Sigma)d\mathbf x
+    $$
 
-</details>
 
 To my knowledge, I only know of the following kernels that have analytically calculated sufficient statistics: Linear, RBF, ARD and Spectral Mixture. And furthermore, the connection is how these kernel statistics show up in many other GP literature than just uncertain inputs of GPs; for example in Bayesian GP-LVMs and Deep GPs.
 
@@ -292,19 +300,28 @@ This is the origination of the Unscented transformation applied to GPs. It takes
 ---
 ### Key Equations
 
-<details>
-<summary>Predictive Mean and Variance for Latent Function, f</summary>
 
-$$\mu_f(x_*) = k_*^\top K^{-1}y$$
-$$\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*$$
+??? info "Details"
 
-</details>
+    Predictive Mean and Variance for Latent Function, f
+
+    $$
+    \mu_f(x_*) = k_*^\top K^{-1}y
+    $$
+
+    $$
+    \sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*
+    $$
 
 
-<details>
-<summary>Predictive Mean and Variance for mean output, y</summary>
+??? info "Details"
 
-$$\mu_f(x_*) = k_*^\top K^{-1}y$$
-$$\sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*$$
+    Predictive Mean and Variance for mean output, y
 
-</details>
+    $$
+    \mu_f(x_*) = k_*^\top K^{-1}y
+    $$
+
+    $$
+    \sigma^2_f(x_*) = k_{**} - k_*^\top K^{-1} k_*
+    $$

@@ -26,6 +26,25 @@ plugins:
       write_markdown: true
       timeout: 600
 
+nav:
+  - Home: "README.md"
+  - Literature: "Notes/literature.md"
+  - Taylor:
+    - Linearized GP: "Taylor/taylor.md"
+    - Error Propagation: "Taylor/error_propagation.md"
+  - Notebooks:
+    - JAX:
+      - Basics: "notebooks/1.0_gp_basics"
+      - Refactor: "notebooks/1.1_gp_refactored"
+      - Objax: "notebooks/objax_gp"
+    - Numpyro:
+      - Numpyro (SVI): "notebooks/numpyro_gps"
+      - Numpyro (MCMC): "notebooks/numpyro_egp_mcmc"
+    - GPyTorch:
+      - Uncertain Inputs (Taylor): "notebooks/gpytorch_gp_uncertain"
+
+
+
 # Copyright
 copyright: Copyright &copy; 2020 J. Emmanuel Johnson
 
@@ -85,4 +104,3 @@ extra:
       link: 'https://linkedin.com/in/jejjohnson'
     - icon: fontawesome/solid/globe
       link: 'https://jejjohnson.netlify.com'
-  
